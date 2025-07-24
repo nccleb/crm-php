@@ -305,20 +305,22 @@ order by lcd");
 
 
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+		// $req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+		// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 		
-		$lig12=@mysqli_fetch_assoc($req12);
-		for ($i=1;$i<=$lig12["co"];$i++){
+		// $lig12=@mysqli_fetch_assoc($req12);
+		// for ($i=1;$i<=$lig12["co"];$i++){
 			
-			$lig11=@mysqli_fetch_assoc($req11);
-			   $_SESSION["$i"]= $lig11["name"];
+		// 	$lig11=@mysqli_fetch_assoc($req11);
+		// 	   $_SESSION["$i"]= $lig11["name"];
 			   
 			
-				if($agent==$i){
+		// 		if($agent==$i){
 				
 			  
-			   $driv=$_SESSION["$i"];
+		// 	   $driv=$_SESSION["$i"];
+
+		// 		}}
 		
 			   echo "<tr>";
 			   echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -330,13 +332,13 @@ order by lcd");
 				 echo "<td>".$row['status']."</td>";
 				 echo "<td>".$row['priority']."</td>";
 			   echo"<td>".$row['lcd']."</td>";
-			   echo"<td>".$driv."</td>";
+			   echo"<td>".$agent."</td>";
 			   echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident&priority=$pr '\"></button>"."</td>";
 		   
 			   echo "</tr>";
   
-				}
-			}
+				
+			
 		
 		
 }
@@ -539,23 +541,23 @@ else if($ace=="*#" ){
         $pr=$row['priority'];
     
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	$lig12=@mysqli_fetch_assoc($req12);
-	for ($i=1;$i<=$lig12["co"];$i++){
+	// $lig12=@mysqli_fetch_assoc($req12);
+	// for ($i=1;$i<=$lig12["co"];$i++){
 		
-		$lig11=@mysqli_fetch_assoc($req11);
-		   $_SESSION["$i"]= $lig11["name"];
+	// 	$lig11=@mysqli_fetch_assoc($req11);
+	// 	   $_SESSION["$i"]= $lig11["name"];
 		   
 		
-			if($agent==$i){
+	// 		if($agent==$i){
 			
 		  
-		   $driv=$_SESSION["$i"];
+	// 	   $driv=$_SESSION["$i"];
+	// 		}
 
-
-
+	//}
 		
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -567,17 +569,17 @@ else if($ace=="*#" ){
 	  echo "<td>".$row['status']."</td>";
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
+	echo"<td>".$agent."</td>";
 	//echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident&priority=$pr '\"></button>"."</td>";
 	echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident&priority=$pr '\"></button>"."</td>";
     echo "</tr>";
     
     
 	
-	 }
+	 
 
 		
-	}
+	
 
 		
 		
@@ -650,22 +652,22 @@ else if($ace=="#*" ){
 
 
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	$lig12=@mysqli_fetch_assoc($req12);
-	for ($i=1;$i<=$lig12["co"];$i++){
+	// $lig12=@mysqli_fetch_assoc($req12);
+	// for ($i=1;$i<=$lig12["co"];$i++){
 		
-		$lig11=@mysqli_fetch_assoc($req11);
-		   $_SESSION["$i"]= $lig11["name"];
+	// 	$lig11=@mysqli_fetch_assoc($req11);
+	// 	   $_SESSION["$i"]= $lig11["name"];
 		   
 		
-			if($agent=="$i"){
+	// 		if($agent=="$i"){
 			
 		  
-		   $driv=$_SESSION["$i"];
+	// 	   $driv=$_SESSION["$i"];
 
-
+	// 		}}
 
 		
 		echo "<tr>";
@@ -678,15 +680,15 @@ else if($ace=="#*" ){
 	  echo "<td>".$row['status']."</td>";
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
+	echo"<td>".$agent."</td>";
 	echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident &priority=$pr  '\"></button>"."</td>";
     echo "</tr>";
   
 
 	
-	 }
+	 
 		
-	}
+	
 
 		
 		
@@ -754,24 +756,24 @@ else if($ace=="!"  ){
         $pr=$row['priority'];
     
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	$lig12=@mysqli_fetch_assoc($req12);
-	for ($i=1;$i<=$lig12["co"];$i++){
+	// $lig12=@mysqli_fetch_assoc($req12);
+	// for ($i=1;$i<=$lig12["co"];$i++){
 		
-		$lig11=@mysqli_fetch_assoc($req11);
-		   $_SESSION["$i"]= $lig11["name"];
+	// 	$lig11=@mysqli_fetch_assoc($req11);
+	// 	   $_SESSION["$i"]= $lig11["name"];
 		   
 		
-			if($agent==$i){
+	// 		if($agent==$i){
 			
 		  
-		   $driv=$_SESSION["$i"];
+	// 	   $driv=$_SESSION["$i"];
 
-			}
+	// 		}
 
-	}
+	// }
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
 
@@ -852,22 +854,22 @@ order by lcd");
         $pr=$row['priority'];
 
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	$lig12=@mysqli_fetch_assoc($req12);
-	for ($i=1;$i<=$lig12["co"];$i++){
+	// $lig12=@mysqli_fetch_assoc($req12);
+	// for ($i=1;$i<=$lig12["co"];$i++){
 		
-		$lig11=@mysqli_fetch_assoc($req11);
-		   $_SESSION["$i"]= $lig11["name"];
+	// 	$lig11=@mysqli_fetch_assoc($req11);
+	// 	   $_SESSION["$i"]= $lig11["name"];
 		   
 		
-			if($agent==$i){
+	// 		if($agent==$i){
 			
 		  
-		   $driv=$_SESSION["$i"];
+	// 	   $driv=$_SESSION["$i"];
 
-
+	// 		}}
 
 		
 		echo "<tr>";
@@ -880,15 +882,15 @@ order by lcd");
 	  echo "<td>".$row['status']."</td>";
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
+	echo"<td>".$agent."</td>";
 	echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident &priority=$pr'\"></button>"."</td>";
     echo "</tr>";
   
 
 	
-	 }
+	 
 		
-	}
+	
 
 		
 		
@@ -962,22 +964,22 @@ else if($ace=="@"){
 
 
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	$lig12=@mysqli_fetch_assoc($req12);
-	for ($i=1;$i<=$lig12["co"];$i++){
+	// $lig12=@mysqli_fetch_assoc($req12);
+	// for ($i=1;$i<=$lig12["co"];$i++){
 		
-		$lig11=@mysqli_fetch_assoc($req11);
-		   $_SESSION["$i"]= $lig11["name"];
+	// 	$lig11=@mysqli_fetch_assoc($req11);
+	// 	   $_SESSION["$i"]= $lig11["name"];
 		   
 		
-			if($agent==$i){
+	// 		if($agent==$i){
 			
 		  
-		   $driv=$_SESSION["$i"];
-
-
+	// 	   $driv=$_SESSION["$i"];
+	// 		}
+	// 	}
 
 		
 		echo "<tr>";
@@ -990,15 +992,15 @@ else if($ace=="@"){
 	  echo "<td>".$row['status']."</td>";
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
+	echo"<td>".$agent."</td>";
 	echo "<td>"."<button class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident &priority=$pr '\"></button>"."</td>";
     echo "</tr>";
   
 
 	
-	 }
+	 
 		
-	}
+	
 
 		
 		
@@ -1084,20 +1086,23 @@ else if($ace=="*" ){
  
 
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+		// $req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+		// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 		
-		$lig12=@mysqli_fetch_assoc($req12);
-		for ($i=1;$i<=$lig12["co"];$i++){
+		// $lig12=@mysqli_fetch_assoc($req12);
+		// for ($i=1;$i<=$lig12["co"];$i++){
 			
-			$lig11=@mysqli_fetch_assoc($req11);
-			   $_SESSION["$i"]= $lig11["name"];
+		// 	$lig11=@mysqli_fetch_assoc($req11);
+		// 	   $_SESSION["$i"]= $lig11["name"];
 			   
 			
-				if($agent==$i){
+		// 		if($agent==$i){
 				
 			  
-			   $driv=$_SESSION["$i"];
+		// 	   $driv=$_SESSION["$i"];
+
+
+		// 		}}
 		
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -1109,12 +1114,12 @@ else if($ace=="*" ){
 	  echo "<td>".$row['status']."</td>";
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
+	echo"<td>".$agent."</td>";
 	echo "<td>"."<button class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident &priority=$pr'\"></button>"."</td>";
     echo "</tr>";
   
-				}
-			}
+				
+			
 		
 		
 }
@@ -1128,100 +1133,6 @@ echo "<tr><td style=\"color:blue\">". $count. "</tr>";
 
 
 
-else if($ace=="*" ){
-
-	
-	
-	
-	$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
-   if (mysqli_connect_errno()) {
-	 echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	 exit();
-   }
-   if(isset($_POST['search'])&&isset($_POST['name'])){
-	   $y=$_POST['name'];
-	   $z=$_POST['nam'];
-	   $t=$_POST['task'];
-	  
-	  
-	  
-		  $startdate=$_POST['startdate'];
-		  $enddate=$_POST['enddate'];
-	$req3=mysqli_query($idr,"select * from client c , crm cr  
-   where c.id=cr.id 
-   AND idfc='$y'
-   AND num='$z'
-   and lcd between \"$startdate\" and\"$enddate\" order by lcd	
-   ");
-	 $count=mysqli_num_rows($req3);
-   }
-   
-   
-	
-	
-
-
-
-	while($row=mysqli_fetch_array($req3)){
-		$id=$row['nom'] ;
-		$fid= $row['prenom'];
-		 $lcd=$row['lcd'];
-		 $agent=$row['idfc'];
-		 $number=$row['number'];
-		 $incident=$row['incident'];
-		 //$_SESSION["incident"]=$nam;
-		 $la=$row['la'];
-		  $_SESSION["la"]=$la;
-		 $idc=$row['idc'];
-		 $status=$row['status'];
-		 $task=$row['task'];
-		 $cat=$row['category'];
-		 $opp=$row['opp'];
-         $pr=$row['priority'];
- 
-
-
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
-		
-		$lig12=@mysqli_fetch_assoc($req12);
-		for ($i=1;$i<=$lig12["co"];$i++){
-			
-			$lig11=@mysqli_fetch_assoc($req11);
-			   $_SESSION["$i"]= $lig11["name"];
-			   
-			
-				if($agent==$i){
-				
-			  
-			   $driv=$_SESSION["$i"];
-		
-		echo "<tr>";
-    echo "<td>".$row['nom']." ".$row['prenom']."</td>";
-	
-	echo"<td>".$row['task']."</td>";
-	 echo"<td>".$row['la']."</td>";
-	 
-	 echo"<td>".$row['incident']."</td>";
-	  echo "<td>".$row['status']."</td>";
-	  echo "<td>".$row['priority']."</td>";
-	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
-	echo "<td>"."<button class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident &priority=$pr'\"></button>"."</td>";
-    echo "</tr>";
-  
-				}
-			}
-		
-		
-}
-
-
-$count=mysqli_num_rows($req3);	
-echo "<tr><td style=\"color:blue\">". $count. "</tr>";
-//echo "3";
-
-}
 
 
 
@@ -1280,20 +1191,22 @@ else if($ace=="**" ){
  
 
 
-		$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+		// $req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+		// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 		
-		$lig12=@mysqli_fetch_assoc($req12);
-		for ($i=1;$i<=$lig12["co"];$i++){
+		// $lig12=@mysqli_fetch_assoc($req12);
+		// for ($i=1;$i<=$lig12["co"];$i++){
 			
-			$lig11=@mysqli_fetch_assoc($req11);
-			   $_SESSION["$i"]= $lig11["name"];
+		// 	$lig11=@mysqli_fetch_assoc($req11);
+		// 	   $_SESSION["$i"]= $lig11["name"];
 			   
 			
-				if($agent==$i){
+		// 		if($agent==$i){
 				
 			  
-			   $driv=$_SESSION["$i"];
+		// 	   $driv=$_SESSION["$i"];
+
+		// 		}}
 		
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -1305,12 +1218,12 @@ else if($ace=="**" ){
 	  echo "<td>".$row['status']."</td>";
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
-	echo"<td>".$driv."</td>";
+	echo"<td>".$agent."</td>";
 	echo "<td>"."<button class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident &priority=$pr'\"></button>"."</td>";
     echo "</tr>";
   
-				}
-			}
+				
+			
 		
 		
 }

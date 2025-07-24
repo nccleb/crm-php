@@ -107,30 +107,30 @@ if (mysqli_connect_errno()) {
 			
 			 	   
 
-					$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-$req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
+// 					$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
+// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 
-$lig12=@mysqli_fetch_assoc($req12);
-for ($i=1;$i<=$lig12["co"];$i++){
+// $lig12=@mysqli_fetch_assoc($req12);
+// for ($i=1;$i<=$lig12["co"];$i++){
 	
-	$lig11=@mysqli_fetch_assoc($req11);
-	   $_SESSION["$i"]= $lig11["name"];
+// 	$lig11=@mysqli_fetch_assoc($req11);
+// 	   $_SESSION["$i"]= $lig11["name"];
 	   
 	
-	    if($idf==$i){
+// 	    if($idf==$i){
 		
 	  
-	   $driv=$_SESSION["$i"];
- }
+// 	   $driv=$_SESSION["$i"];
+//  }
 	
-}
+// }
 
 
 
 			 
 			
 		echo	"<tr><td>".$id."</td><td>".$name."</td>"."<td>".$number."</td>"."<td>".$task."</td>"
-		     ."<td>".$lcd."</td>"."<td>".$la."</td>"."<td>". $incident ."</td>"."<td>".$pr."</td>"."<td>".$status."</td>"."<td>".$driv."</td>"."</tr>";
+		     ."<td>".$lcd."</td>"."<td>".$la."</td>"."<td>". $incident ."</td>"."<td>".$pr."</td>"."<td>".$status."</td>"."<td>".$idf."</td>"."</tr>";
 			  
 	          
 	  }

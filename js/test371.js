@@ -21,7 +21,7 @@ function ai(){
    
    function prev(){
      
-   addre()+inc()+tac()+lac()+lcde()+stat()+  comp()+show()+address()+loadDoc();
+    lcdo()+addre()+inc()+tac()+lac()+stat()+  comp()+show()+address()+loadDoc();
    }
    function on(){
      y=setInterval("prev()",1000);
@@ -2281,6 +2281,27 @@ function win() {
 
 
 
+  function lcdo() {
+ 
+  var xhttp;
+  if (window.XMLHttpRequest) {
+    // code for modern browsers
+    xhttp = new XMLHttpRequest();
+    } else {
+    // code for IE6, IE5
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("acdc").value = this.responseText;
+    }
+  };
+  xhttp.open("GET","test396.php", true);
+  xhttp.send();
+}
+
+
+
 
 
 function post12() {
@@ -2364,23 +2385,7 @@ function inc() {
 
 
 
-function lcde() {
-  var xhttp;
-  if (window.XMLHttpRequest) {
-    // code for modern browsers
-    xhttp = new XMLHttpRequest();
-    } else {
-    // code for IE6, IE5
-    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("lc").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET","test396.php", true);
-  xhttp.send();
-}
+
 
 
 function wi() {

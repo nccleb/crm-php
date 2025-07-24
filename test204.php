@@ -230,6 +230,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
 
 
 
+
 <style>
         .jumbotron {
             background: url("7.jpg") center center / cover no-repeat;
@@ -639,6 +640,7 @@ height: 20px;
     <li>   <a href="#" onclick="javascript:search16()">Company</a></li>
     <li> <a href="#" onclick="javascript:search2()">Business</a></li>
     <li>  <a href="#" onclick="javascript:del()">Del</a></li>
+    <li>  <a href="#" onclick="javascript:lcdo()">test</a></li>
     </ul>
 </ul>
   </li> 
@@ -1111,7 +1113,7 @@ if (mysqli_connect_errno()) {
 
    <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Last Contacted</label>
- <p style="font-size:13px;" id="lc" rows="5"  name="lc" ></p>
+ <input style="font-size:13px;" id="acdc" rows="5"  name="acdc" ></input>
 </div>
 
    <div class="mb-3">
@@ -1294,7 +1296,6 @@ $(document).ready(function(){
  <?php include 'footer.php';?>
  
 </body>
-
 
 
 

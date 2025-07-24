@@ -379,14 +379,16 @@ else if($z=="!"  ){
    
    
     
-     $t=test_input($_POST['incident']);
-     $startdate=$_POST['startdate'];
-     $enddate=$_POST['enddate'];
+      $t=test_input($_POST['incident']);
+      $startdate=$_POST['startdate'];
+      $enddate=$_POST['enddate'];
       $idf=$_POST['name'];
-      $req85=mysqli_query($idr,"select incident, name , count(*) AS counter FROM crm c, form_element f
-      where c.idfc = f.idf
+      $req85=mysqli_query($idr,"select incident,count(*) AS counter
+       
+      FROM crm c, form_element f
+      where c.idfc = f.name
       AND lcd between \"$startdate\" and\"$enddate\" 
-       AND name= '$idf'	
+      AND idfc= '$idf'	
       AND incident IN ( select comment_text  FROM comments )
        
       
@@ -462,11 +464,12 @@ if(isset($_POST['search'])){
    $startdate=$_POST['startdate'];
 	 $enddate=$_POST['enddate'];
    $idf=$_POST['name'];
-   $req84=mysqli_query($idr,"select incident, name , count(*) AS counter FROM crm c, form_element f
-   where c.idfc = f.idf
+   $req84=mysqli_query($idr,"select incident, count(*) AS counter 
+   FROM crm c, form_element f
+   where c.idfc = f.name
    AND lcd between \"$startdate\" and\"$enddate\" 
-    AND name= '$idf'	
-   AND incident IN ( select comment_text  FROM comments )
+   AND idfc= '$idf'	
+   AND incident NOT IN ( select comment_text  FROM comments )
     
    
   
@@ -533,7 +536,8 @@ else if($z=="$" ){
     $startdate=$_POST['startdate'];
     $enddate=$_POST['enddate'];
     $idf=$_POST['name'];
-    $req94=mysqli_query($idr,"select incident , count(*) AS counter FROM crm 
+    $req94=mysqli_query($idr,"select incident , count(*) AS counter 
+    FROM crm 
     where  lcd between \"$startdate\" and\"$enddate\" 
      AND incident NOT IN ( select comment_text  FROM comments )
     GROUP BY incident
@@ -674,10 +678,12 @@ if(isset($_POST['search'])){
 	 $startdate=$_POST['startdate'];
 	 $enddate=$_POST['enddate'];
     $idf=$_POST['name'];
-    $req72=mysqli_query($idr,"select incident, name , count(*) AS counter FROM crm c, form_element f
-    where c.idfc = f.idf
+    $req72=mysqli_query($idr,"select incident,count(*) AS counter
+    FROM crm c, form_element f
+    where c.idfc = f.name
     AND lcd between \"$startdate\" and\"$enddate\" 
-     AND name= '$idf'	
+    AND idfc= '$idf'
+    AND incident = '$t'	
     AND incident IN ( select comment_text  FROM comments )
      
     
@@ -820,7 +826,7 @@ function statistics(){
 <select      name="name1">
 
 <option value=""  selected>Select something...</option>
-<option value="q"      >All Tickets(only choose date)</option>
+<option value="q"      >All Tickets(only choose date)(chart)</option>
 <option value="!"      >Choose Agent for All Tickets(Complaints blank)</option>
 <option value="$"      >All Other Tickets(All blank)</option>
 <option value="*"> Choose Agent for Other(Ticket blank)</option>

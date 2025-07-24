@@ -1,0 +1,7 @@
+{
+    "require": {
+        "google/cloud-storage": "^1.29",
+        "php-ai/php-ml": "^0.9.0"
+    }
+    
+}

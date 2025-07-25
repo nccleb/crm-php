@@ -965,16 +965,7 @@ function dialExtension(){
   
 
 
-//      const element = document.getElementById('diex');
 
-    
-// element.addEventListener("click", () => {
-
-//  dialExtension();
-    
-
-
-//   });
 
 
 
@@ -989,12 +980,11 @@ function dialExtension(){
 
 
     var user =document.getElementById('diou').value;
-    //var user = e.options[e.selectedIndex].value;
-    //alert(user);
+    
     
      var xhttp;
      
-         //alert(add);
+        
         
           
       if (window.XMLHttpRequest) {
@@ -1022,7 +1012,7 @@ function dialExtension(){
   
        const elementout = document.getElementById('diou');
   
-       // alert(x);
+      
   
   
   // always checking if the element is clicked, if so, do alert('hello')
@@ -2420,7 +2410,7 @@ function comp() {
   }
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("comp").innerHTML = this.responseText;
+      document.getElementById("comp").value = this.responseText;
     }
   };
   xhttp.open("GET","test368.php", true);

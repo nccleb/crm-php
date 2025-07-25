@@ -267,8 +267,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4m8psyI-0xTfggoKKgdSB9HPfNMxbWBg
-&callback=myMap"  defer     ></script>
+
 
 
 
@@ -292,62 +291,6 @@ const global2 = document.getElementById("demo2").value;
 </script>
 
 
-<script>
-
-	
-function myMap() {
-
-
-var address = '<?php echo $city ?>';
-          geocoder = new google.maps.Geocoder();
-          geocoder.geocode({
-          'address': address
-          }, function(results, status) {      
-              var lat=document.getElementById("lat").innerHTML=results[0].geometry.location.lat();    
-              var lng=document.getElementById("lng").innerHTML=results[0].geometry.location.lng();
-              
-              
-
-
-              var myLatlng = new google.maps.LatLng(lat,lng);
-              var mapProp = {
-              zoom: 15,
-              center: myLatlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-              }
-              
-                
-              var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-              var marker= new google.maps.Marker(
-                    {
-                        position: myLatlng, 
-                        title:"0"
-                    }
-                );
-              
-                marker.setMap(map);
-              
-                
-                google.maps.event.addListener(marker,'click',function() {
-                  map.setZoom(20);
-                  map.setCenter(marker.getPosition());
-                });
-              
-
-              
-             
-          });
-
-          
-
-
-
-};
-  
-
-	
-
-</script>
 
 
 
@@ -364,7 +307,7 @@ var address = '<?php echo $city ?>';
 
 
 
-<script>
+<!--script>
 window.onbeforeunload = 
 function sq(str) {
 	
@@ -393,7 +336,7 @@ function sq(str) {
  
   xhttp.send();
 }
-</script>
+</script-->
 
 
 
@@ -581,21 +524,7 @@ height: 20px;
 
 </ul>
 
-<!--ul class="nav navbar-nav navbar-right">
-  
-  <li class="dropdown">
-  
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span id="count3" class="label label-pill label-info count" style="border-radius:10px;"></span> <span class="" id="bell3" style="font-size:18px;"></span></a>
-   
-   <ul class="dropdown-toggle" id="drop"></ul>
-  
-   
-   
-   
-  </li>
-  
-</ul-->
-  
+
 
 
 
@@ -613,21 +542,6 @@ height: 20px;
       <ul class="nav navbar-nav">
     
      
-      <!-- <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sales
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-		  <ul>
-      <li><a href="#" onclick="javascript:uro3()">Search Last Deal(Number)</a></li>  
-		  <li><a href="#" onclick="javascript:search52()">Search Last Deal(Actual Number)</a></li>
-      <li><a href="#" onclick="javascript:search53()">Create Pipeline</a></li>
-		  <li><a href="#" onclick="javascript:search51()">Create Deal</a></li>
-		  <li><a href="#" onclick="javascript:ai()">AI</a></li>
-		  <li><a href="#" onclick="javascript:brain()">brain</a></li>
-		  </ul>
-          
-        </ul>
-      </li>  -->
       
   
    <li class="dropdown">
@@ -832,7 +746,7 @@ height: 20px;
       <li><a href="#" onclick="javascript:list79()">Simple List(Tickets)</a></li>
       <li><a href="#" onclick="javascript:tick79()">Open Tickets</a></li>
                 
-       <li><a href="#" onclick="javascript:incidents()">Tickets</a></li>
+       <li><a href="#" onclick="javascript:incidents()">Tickets Details</a></li>
        <li><a href="#" onclick="javascript:incidents2()">Statistics(Tickets)</a></li>   
       
        
@@ -1024,35 +938,35 @@ height: 20px;
 
 <?php
     
-	 $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
-if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  exit();
-}
-	  $result=@mysqli_query($idr,"SELECT  * FROM client 
-	  ") ;
+// 	 $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+// if (mysqli_connect_errno()) {
+//   echo "Failed to connect to MySQL: " . mysqli_connect_error();
+//   exit();
+// }
+// 	  $result=@mysqli_query($idr,"SELECT  * FROM client 
+// 	  ") ;
 
- //"this=".$num=$_COOKIE["bta"];
- "this=".$num=$inc;
-   while($lig=@mysqli_fetch_assoc($result)){
+//  //"this=".$num=$_COOKIE["bta"];
+//  "this=".$num=$inc;
+//    while($lig=@mysqli_fetch_assoc($result)){
    
- if( $inc!="" && $num==$lig['number'] ){
-        switch(  $lig['grade']) {
-      case "regular":
-	    $t=1;
-		break;
-	  case "gold":
-	   $t=2;
-		break;
-	  case "platinum":
-	    $t=3;
-		break;
+//  if( $inc!="" && $num==$lig['number'] ){
+//         switch(  $lig['grade']) {
+//       case "regular":
+// 	    $t=1;
+// 		break;
+// 	  case "gold":
+// 	   $t=2;
+// 		break;
+// 	  case "platinum":
+// 	    $t=3;
+// 		break;
 
-		}
+// 		}
  
- }
+//  }
  
-   }
+//    }
  ?>
 
 
@@ -1076,40 +990,8 @@ if (mysqli_connect_errno()) {
   <input type="text" class="form-control" id="ap" placeholder="" name="ap"   >
 </div><br>
 
-<!--div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">ADDESS</label>
-  <textarea   style="  background-color: ;"   class="form-control" id="ft" rows="10"  name="ft"      ></textarea>
-</div><br-->
-  
- <!--div class="mb-3">
-  
-    <?php
-       /*
-                  $stmt = $idr->prepare("select filename from client 
-                  where number = ?") ; 
-                  $stmt->bind_param("i",$inc );
+
         
-                  $stmt->execute();
-
-                  $result = $stmt ->get_result();
-                  
-                  $stmt->close();
-                  $t=0;
-                  while($row=$result->fetch_assoc()){
-         echo" <img src=\"./image/$row[filename]\" onerror=\"this.onerror=null; this.src='./image/default.jpg'\"  class = \"img-circle\"  alt=\"No image\">";
-          $t=1;
-         
-        }
-
-        if($t==0){
-         
-            echo" <img src=\"./image/default.jpg\" onerror=\"this.onerror=null; this.src='./image/default.jpg'\"  class = \"img-circle\"  alt=\"No image\">";
-
-        }
-            */
-    ?>
-   
-   </div><br-->
 
    <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Last Contacted</label>
@@ -1125,7 +1007,7 @@ if (mysqli_connect_errno()) {
 
    <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Complaint </label>
- <p style="font-size:13px;" id="comp" rows="5"  name="comp" ></p>
+ <textarea style="font-size:13px;" id="comp" rows="5"  name="comp" ></textarea>
 </div>
 
 <div class="mb-3">
@@ -1279,7 +1161,7 @@ if (mysqli_connect_errno()) {
 
 
  
- <script>
+ <!--script>
 $(document).ready(function(){
   $('.dropdown-submenu a.test').on("click", function(e){
     $(this).next('ul').toggle();
@@ -1287,7 +1169,7 @@ $(document).ready(function(){
     e.preventDefault();
   });
 });
-</script>
+</script-->
 
  
  <?php include 'footer.php';?>

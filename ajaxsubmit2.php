@@ -1,9 +1,7 @@
 <?php
 session_start();
 $_SESSION["name"]=$name;
-//$C=$_COOKIE["user"];
-//echo $C;
-//echo $s;
+
 $_SESSION["idf"]=$idf;
 
 $sid=$_SESSION["id"]= session_id();
@@ -22,7 +20,7 @@ $sid=$_SESSION["id"]= session_id();
 <!DOCTYPE html>
 <html>
 <head>
-<?php include('head.php'); ?>
+
   <link rel="stylesheet" href="css/stylei.css">
   <link rel="stylesheet" href="css/stylei2.css">
    
@@ -37,13 +35,6 @@ $sid=$_SESSION["id"]= session_id();
 
 
 
-<!--script>
-function crm(){
-	
- window.open("http://192.168.140.232/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>","","menubar=0,resizable=1,width=650,height=950");
-	
-}
-</script-->
 
 
 
@@ -59,10 +50,7 @@ if(isset($_POST['name1'])&&!empty($_POST['name1'])&&isset($_POST['password1'])&&
  $contact=test_input($_POST['contact1']); 
  
 
-//  $cookie_name = "name";
-//  $cookie_value = $name;
-//  setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); 
-//  $nam=$_COOKIE["name"];
+
  
 
 
@@ -115,25 +103,7 @@ if (!preg_match("/^[0-9a-zA-Z.,\s\p{Arabic} ]*$/u",$contact)) {
   exit();  
 }
 
-switch($name){
-	
-	
-	case "george nahed":
-	 //$idf=10;
-	break;
-	
-	case "sam":
-	 //$idf=4;
-	break;
-	
-	case "boula":
-	 //$idf=12;
-	break;
-	
-	
-	
-	
-}
+
 	
 	
 	
@@ -161,15 +131,7 @@ while($lig=@mysqli_fetch_assoc($req)){
 	
 	
 	
-	// if(($name==$_COOKIE["oop"])&&($password=="admin")){
-		
-		
-	// 	$req=@mysqli_query($idr," update   form_element set active=0 where name='$name'    ");
-		
-	// 	echo"<script>location.replace('login20.php?pag=&pag1=')</script>";
 	
-	// $t=1;
-	// }
 		
 	
   else  if(($name==$lig['name'])&&($password==$lig['password']))  {
@@ -198,7 +160,7 @@ while($lig=@mysqli_fetch_assoc($req)){
 	
 	
 	echo"<script>alert('Wrong Entry!')</script>";
-		//echo"<script>location.replace('login20.php')</script>";
+		
 }
 	
   }	
@@ -228,16 +190,7 @@ while($lig=@mysqli_fetch_assoc($req)){
  
  
  
-/*
-$cookie_name = "password";
-$cookie_value = $password;
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); 
- $pas=$_COOKIE[$cookie_name];
-	
-	
- 	$_SESSION["name"]=$nam;
- 	$_SESSION["password"]=$pas;
-	*/
+
 	
 	
 	

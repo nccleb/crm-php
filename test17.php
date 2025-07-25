@@ -44,8 +44,8 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
 
 
  
- 
-$inc = $_SESSION["userinc"];
+ $inc = $_SESSION["userinc"];
+
 
 
 

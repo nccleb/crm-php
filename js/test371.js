@@ -2353,7 +2353,7 @@ function tac() {
   }
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("iss").innerHTML = this.responseText;
+      document.getElementById("iss").value = this.responseText;
     }
   };
   xhttp.open("GET","test406.php", true);

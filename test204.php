@@ -640,7 +640,7 @@ height: 20px;
     <li>   <a href="#" onclick="javascript:search16()">Company</a></li>
     <li> <a href="#" onclick="javascript:search2()">Business</a></li>
     <li>  <a href="#" onclick="javascript:del()">Del</a></li>
-    <li>  <a href="#" onclick="javascript:lcdo()">test</a></li>
+   
     </ul>
 </ul>
   </li> 
@@ -1116,14 +1116,11 @@ if (mysqli_connect_errno()) {
  <input style="font-size:13px;" id="acdc" rows="5"  name="acdc" ></input>
 </div>
 
-   <div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Last Activity</label>
- <p style="font-size:13px;" id="las" rows="5"  name="las" ></p>
-</div>
+  
 
 <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Ticket Name</label>
- <p style="font-size:13px;" id="iss" rows="5"  name="iss" ></p>
+ <input style="font-size:13px;" id="iss" rows="5"  name="iss" ></input>
 </div>
 
    <div class="mb-3">

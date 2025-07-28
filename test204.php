@@ -1005,16 +1005,18 @@ height: 20px;
  <input style="font-size:13px;" id="iss" rows="5"  name="iss" ></input>
 </div>
 
+
+
    <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Complaint </label>
  <textarea style="font-size:13px;" id="comp" rows="5"  name="comp" ></textarea>
 </div>
 
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Status</label>
-  <p  style="font-size:13px;"   id="stat" rows="5"  name="stat" ></p>
-</div>
 
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Status..</label>
+  <input  style="font-size:13px;"   id="stat" rows="5"  name="stat" ></input>
+</div>
 
 
  

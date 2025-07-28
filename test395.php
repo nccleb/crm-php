@@ -47,7 +47,7 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
  fclose($f);
  
  
-
+$inc = $_SESSION["userinc"];
 
 	   $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {

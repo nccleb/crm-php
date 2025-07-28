@@ -2435,7 +2435,7 @@ function stat() {
   }
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("stat").innerHTML = this.responseText;
+      document.getElementById("stat").value = this.responseText;
     }
   };
   xhttp.open("GET","test395.php", true);

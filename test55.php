@@ -188,7 +188,7 @@ function size(){
 function add(){
 	var myw;
 	
-   myw=window.open ("http://192.168.20.109/test275.php?page=<?php echo urlencode($naa) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc) ?>","","menubar=0,resizable=1,width=680,height=950");
+   myw=window.open ("http://192.168.16.102/test275.php?page=<?php echo urlencode($naa) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc) ?>","","menubar=0,resizable=1,width=680,height=950");
 	
 }
 </script>
@@ -289,7 +289,7 @@ if ($uploadOk == 0) {
 <?php
 if(isset($_POST['nu'])&&isset($_POST['na'])&&isset($_POST['lna'])&&isset($_POST['company'])
  &&isset($_POST['inu'])&&isset($_POST['tel'])&&isset($_POST['oth'])&&isset($_POST['ur'])&&isset($_POST['bu'])    &&isset($_POST['ad'])&&isset($_POST['ad2'])&&isset($_POST['em'])
-&&isset($_POST['cit'])&&isset($_POST['str'])&&isset($_POST['flo'])
+&&isset($_POST['cit'])&&isset($_POST['str'])&&isset($_POST['flo'])&&isset($_POST['delti'])
  &&isset($_POST['bui'])&&isset($_POST['zon'])&&isset($_POST['nea'])    &&isset($_POST['rem']) &&isset($_POST['apa'])&&isset($_POST['grad'])&&isset($_POST['driver'])&&isset($_POST['pay'])
  &&isset($_POST['loy'])&&isset($_POST['disa'])&&isset($_POST['job'])&&isset($_POST['cat'])&&isset($_POST['src'])&&isset($_POST['community'])
  
@@ -328,6 +328,7 @@ if(isset($_POST['nu'])&&isset($_POST['na'])&&isset($_POST['lna'])&&isset($_POST[
   $community=test_input($_POST['community']);
    $driv=test_input($_POST['driver']);
    $disa=test_input($_POST['disa']);
+   $delti=test_input($_POST['delti']);
    //$disa2=test_input($_POST['disa2']);
    //$disa3=test_input($_POST['disa3']);
    
@@ -558,7 +559,12 @@ if (!preg_match("/^[0-9a-zA-Z.,\s\p{Arabic} ]*$/u",$driv)) {
   exit();  
 }	 
 
-
+if (!preg_match("/^[0-9a-zA-Z'?!=;~+%`\[\]()$*\"|:.,#&_\s-\p{Arabic} ]*$/u",$delti)) {
+  echo "<p style=\"color:red\">Invalid time!</p>"."<br/>";
+  echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
+  exit();  
+}	
+	 
 	
 
 $cookie_name = "city";
@@ -569,7 +575,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
 
 
 
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -719,7 +725,7 @@ while($lig=mysqli_fetch_assoc($req6)){
 
   <?php
 
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -756,8 +762,8 @@ for ($i=1;$i<=$lig["arr"];$i++){
 
 	if($id == $idt){
 	   	
-     $stmt = $idr->prepare("update client set nom=?,prenom=?,filename=?,category=?,source=?,company=?,job=?, number=?,inumber=?,email=?,business=?,grade=?,payment=?,card=?,community=?,telmobile=?,telother=?,url=?, city=?, street=?,floor=?,apartment=?, building=?,zone=?,near=?,remark=?,address=?,address_two=?,idx=? where id=?");
-	 $stmt->bind_param("ssssssssssssssssssssisssssssii", $na,$lna,$filename,$cat,$src,$company,$jo,$nu,$inu,$em,$bu,$gra,$pay,$loy,$community,$tel,$oth,$ur,$ci,$st,$fl,$apa,$bui,$zo,$ne,$re,$ad,$ad2,$driv,$id);
+     $stmt = $idr->prepare("update client set nom=?,prenom=?,filename=?,category=?,source=?,company=?,job=?, number=?,inumber=?,email=?,business=?,grade=?,payment=?,card=?,community=?,telmobile=?,telother=?,url=?, city=?, street=?,floor=?,apartment=?, building=?,zone=?,near=?,remark=?,address=?,address_two=?,best_delivery_time=?,idx=? where id=?");
+	 $stmt->bind_param("ssssssssssssssssssssissssssssii", $na,$lna,$filename,$cat,$src,$company,$jo,$nu,$inu,$em,$bu,$gra,$pay,$loy,$community,$tel,$oth,$ur,$ci,$st,$fl,$apa,$bui,$zo,$ne,$re,$ad,$ad2,$delti,$driv,$id);
 	 $stmt->execute();
 	  $test=mysqli_affected_rows($idr);
 	 $stmt->close();
@@ -773,7 +779,7 @@ for ($i=1;$i<=$lig["arr"];$i++){
 
   var r = confirm(\"Missing Entry! Press OK to retry \");
   if (r == true) {
-location.replace (\"http://192.168.20.109/test275.php?page=$naa&page1=$idf&page2=$incc\",\"menubar=0,resizable=1,width=1000,height=950\");
+location.replace (\"http://192.168.16.102/test275.php?page=$naa&page1=$idf&page2=$incc\",\"menubar=0,resizable=1,width=1000,height=950\");
   } else {
   window.close()
   }
@@ -823,6 +829,20 @@ location.replace (\"http://192.168.20.109/test275.php?page=$naa&page1=$idf&page2
 
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 

@@ -9,39 +9,7 @@ session_start();
 
 <?php
 
-require "vendor/autoload.php";
 
-//loading data
-//preprocessing data
-//training data
-//evaluating machine learning model
-//making predictions with trained models
-
-
-$data = new \Phpml\Dataset\CsvDataset('./data/iris.csv', 4 ,true);
-
-
-
-$dataset = new  \Phpml\CrossValidation\stratifiedRandomSplit($data, 0.2);
-
-// train group
-$dataset->getTrainSamples();
-$dataset->getTrainLabels();
-
-// test group
-$dataset->getTestSamples();
-$dataset->getTestLabels();
-
-$classification = new  \Phpml\Classification\ KNearestNeighbors($k=3);
-$classification->train($dataset->getTrainSamples(), $dataset->getTrainLabels());
-$predicted = $classification-> predict($dataset->getTestSamples());
-$accuracy = \Phpml\Metric\Accuracy::score($dataset->getTestLabels(), $predicted);
- 
-//echo 'accuracy is'." ".$accuracy;
-//echo "\n";
-$predicted = $classification-> predict([4.3,3.6,1.5,0.6]);
-
-//echo "prediction is"." ".$predicted;
 
 
 
@@ -62,14 +30,14 @@ foreach($xml as $CallRecord){
    
 }  
 
+$inc = "03205818";
 
 
 
 
 
 
-
-
+/*
 $line = '';
 //$f = fopen("c:\MDR\CallerID2022-09.txt", 'r');
 $f = fopen("$opic", 'r');
@@ -97,11 +65,11 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
 
  include('test449.php');
 
+ */
  
  
  
- 
-	$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -184,12 +152,27 @@ while($row=$result->fetch_assoc()){
 	 
 	  
 	  
-	  
+// SIMPLE VERSION - Just add this to your test204.php after the existing client query
+
+// Build full address from existing variables (you already have these)
+ 
+			  
+			 $simple_address = "";
+if(isset($city) && $city) $simple_address .= $city. ", ";
+if(isset($zone) && $zone) $simple_address .="Zone " . $zone. ", ";       
+if(isset($street) && $street) $simple_address .="Street " . $street . ", ";
+if(isset($building) && $building) $simple_address .= "Building " . $building . ", ";
+ if(isset($apartment) && $apartment) $simple_address .="Apartment " . $apartment . ", ";
+if(isset($floor) && $floor) $simple_address .= "Floor " . $floor . ", ";
+if(isset($near) && $near) $simple_address .="Near " . $near. ", ";
+if(isset($address) && $address) $simple_address .= "address1 " . $address . ", ";
+if(isset($address2) && $address2) $simple_address .= "address2 " . $address2;
+?>
 	 
 	
 	  
 	 
-	?> 	  
+		  
  
 
 <?php
@@ -397,75 +380,7 @@ left: auto;
      
  </style>   
 
-<style>
-.a1{
 
-  position: absolute;
-  top: 132px;
-  left: 0px;
-  width: 160px;
-  
-  
-  height: 15px;
-  
-  text-align: center;
-  
-}
-
-.a2{
-
-position: absolute;
-top: 240px;
-right: 50;
-width: 200px;
-height: 20px;
-border: 3px solid #73AD21;
-
-
-}
-
-.drop{
-
-position: absolute;
-top: 0px;
-left: 160px;
-width: 200px;
-height: 20px;
-
-
-
-
-}
-
-.drop a {
-  background-color: white;
- 
-  width: 150px;
-  
-  
-}
-  
-
-
-
- p {
-  display: none;
-  background-color: white;
-  padding: 10px;
-
-}
-
-.a1:hover p {
-  display: block;
-  width: 170px;
-}
-
-.a2:hover p {
-  display: block;
-}
-
-
-</style>
  
   
   
@@ -554,12 +469,27 @@ height: 20px;
     <li>   <a href="#" onclick="javascript:search16()">Company</a></li>
     <li> <a href="#" onclick="javascript:search2()">Business</a></li>
     <li>  <a href="#" onclick="javascript:del()">Del</a></li>
+    
    
     </ul>
 </ul>
   </li> 
 
-
+<li class="dropdown">
+   <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dispatcher
+    <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    <ul>
+    <li> <a href="#" onclick="javascript:dispatch()"        >New Assignment</a></li>
+    <!--li>  <a href="" onclick="javascript:search15()">Last name</a></li>
+    <li>   <a href="#" onclick="javascript:search16()">Company</a></li>
+    <li> <a href="#" onclick="javascript:search2()">Business</a></li>
+    <li>  <a href="#" onclick="javascript:del()">Del</a></li-->
+    
+   
+    </ul>
+</ul>
+  </li> 
 
 
      
@@ -660,7 +590,7 @@ height: 20px;
 
 </li-->  
         
-      <li class="dropdown">
+      <!--li class="dropdown">
         <a              class="dropdown-toggle" data-toggle="dropdown" href="#">Queue Statistics
         <span class="caret"></span></a>
         <ul  class="dropdown-menu">
@@ -697,7 +627,7 @@ height: 20px;
         
         </ul>
       
-      </li>
+      </li-->
            
 
       
@@ -743,11 +673,11 @@ height: 20px;
 		<ul>
     
       <li><a href="#" onclick="javascript:list1()">Simple List(Clients)</a></li>
-      <li><a href="#" onclick="javascript:list79()">Simple List(Tickets)</a></li>
+      <!--li><a href="#" onclick="javascript:list79()">Simple List(Tickets)</a></li>
       <li><a href="#" onclick="javascript:tick79()">Open Tickets</a></li>
                 
        <li><a href="#" onclick="javascript:incidents()">Tickets Details</a></li>
-       <li><a href="#" onclick="javascript:incidents2()">Statistics(Tickets)</a></li>   
+       <li><a href="#" onclick="javascript:incidents2()">Statistics(Tickets)</a></li-->   
       
        
 		  
@@ -777,13 +707,13 @@ height: 20px;
 
 
          
-       <li> <a         href="#"><b style="color:green"    >COMPLAINTS</b></a></li>
+       <!--li> <a         href="#"><b style="color:green"    >COMPLAINTS</b></a></li-->
 		    <ul>  
-			<li> <a href="#" onclick="javascript:add322()">Complaints</a>  </li>
+			<!--li> <a href="#" onclick="javascript:add322()">Complaints</a>  </li>
       <li>  <a href="#" onclick="javascript:add33()">Add-Complaint</a></li>
 		  
       <li>  <a href="#" onclick="javascript:del_ag1()">Delete Complaint</a></li>
-      <li>  <a href="#" onclick="javascript:del_al1()">Delete ALL</a></li>
+      <li>  <a href="#" onclick="javascript:del_al1()">Delete ALL</a></li-->
 </ul>
 		 
 		         
@@ -804,14 +734,14 @@ height: 20px;
 			    
 			  
 			  
-			<li><a           href="#"><b style="color:green"  >USERS</b></a></li>
+			<li><a           href="#"><b style="color:green"  >USERS</b></a></li-->
 		     <ul> 
        <li><a href="#" onclick="javascript:add3()">Add_user</a></li>
 		  
        <li> <a href="#" onclick="javascript:add22()">Users</a> </li>
          
-		   <li><a href="#" onclick="javascript:del_ag()">Del-user</a></li>
-       <li><a href="#" onclick="javascript:del_al()">Del-ALL</a></li>
+		   <!--li><a href="#" onclick="javascript:del_ag()">Del-user</a></li>
+       <li><a href="#" onclick="javascript:del_al()">Del-ALL</a></li-->
        </ul>
 		 
 		         
@@ -821,13 +751,13 @@ height: 20px;
 		      <ul>
         <li> <a href="#" onclick="javascript:search10()">Agent</a> </li>
          <?php
-         if($nam=="202"){
+        // if($nam=="202"){
           
          echo " <li><a href=\"#\" onclick=\"javascript:adag()\">Add_agent</a> </li>";
          echo " <li><a href=\"#\" onclick=\"javascript:delag()\">Del_agent</a> </li>";
          echo " <li><a href=\"#\" onclick=\"javascript:delal()\">Del-ALL</a> </li>";
          
-         }
+        // }
 		 ?>
 		  
         </ul>
@@ -856,7 +786,7 @@ height: 20px;
         <li> <a            href="#" ><b  style="color:green"  >IMPORT</b></a> </li>
           <ul>
          <li> <a href="#" onclick="javascript:Import()">Client</a></li>
-         <li><a href="#" onclick="javascript:Importc1()">Cim</a></li>
+         <!--li><a href="#" onclick="javascript:Importc1()">Cim</a></li-->
         </ul>
 		  
 		  
@@ -865,20 +795,20 @@ height: 20px;
         <li><a  style="color:blue;"         href="#"><b style="color:green"      >EXPORT</b></a></li>
         <ul>
         <li><a href="#" onclick="javascript:Export()">Client(Raw)</a></li>
-        <li><a href="#" onclick="javascript:Exportd()">Client</a></li>
+        <!--li><a href="#" onclick="javascript:Exportd()">Client</a></li>
         <li> <a href="#" onclick="javascript:Exportc1()">Cim(Raw)</a></li>
-        <li> <a href="#" onclick="javascript:Exportd1()">Cim</a></li>
+        <li> <a href="#" onclick="javascript:Exportd1()">Cim</a></li-->
         </ul>
       
 
 		  
 		      
-        <li> <a href="#"          onclick="javascript:apply()"><b  style="color:#6495ED"    >APPLY</b></a></li>
+        <!--li> <a href="#"          onclick="javascript:apply()"><b  style="color:#6495ED"    >APPLY</b></a></li-->
         <li> <a href="#"        onclick="javascript:bb()"><b  style="color:#6495ED"     >BACK-UP</b></a> </li>
         <li><a href="#"           onclick="javascript:ImportSql()"><b style="color:#6495ED"     >RECOVERY</b></a></li>
 		  
 		  <?php
-         if($nam=="202" or $nam=="admin"){
+         if($nam=="admin" or $nam=="admin"){
 
 
 
@@ -888,6 +818,8 @@ height: 20px;
       <ul> 
       <li> <a href=\"#\" onclick=\"javascript:delAll()\">Delete All CLIENT</a></li>
       <li> <a href=\"#\" onclick=\"javascript:delAll2()\">Delete All CIM</a></li>
+      <li> <a href=\"#\" onclick=\"javascript:del483()\">Delete Assignments</a></li>
+       <li> <a href=\"#\" onclick=\"javascript:delAll482()\">Delete All Assignments</a></li>
       <!--li> <a href=\"#\" onclick=\"javascript:delAll6()\">Delete All DEALS</a></li>
       <li> <a href=\"#\" onclick=\"javascript:delAll5()\">Delete All POSTS</a></li-->
       </ul>
@@ -938,7 +870,7 @@ height: 20px;
 
 <?php
     
-// 	 $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+// 	 $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 // if (mysqli_connect_errno()) {
 //   echo "Failed to connect to MySQL: " . mysqli_connect_error();
 //   exit();
@@ -993,9 +925,9 @@ height: 20px;
 
         
 
-   <div class="mb-3">
+   <!--div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Last Contacted</label>
- <input style="font-size:13px;" id="acdc" rows="5"  name="acdc" ></input>
+ <input style="font-size:13px;" id="lc" rows="5"  name="lc" ></input>
 </div>
 
   
@@ -1016,7 +948,7 @@ height: 20px;
 <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Status..</label>
   <input  style="font-size:13px;"   id="stat" rows="5"  name="stat" ></input>
-</div>
+</div-->
 
 
  
@@ -1078,12 +1010,12 @@ height: 20px;
 				    </br>          
 								
 
-            <li class="list-group-item "><a   style="color:black"        href="#" onclick="javascript:add()">Create Ticket</a></li>  
+            <!--li class="list-group-item "><a   style="color:black"        href="#" onclick="javascript:add()">Create Ticket</a></li>  
 				 <li class="list-group-item "><a   style="color:black"      href="#" onclick="javascript:uro1()">Edit Last Ticket(Actual Number)</a></li>
 				   
                 <li class="list-group-item "><a   style="color:black"       href="#" onclick="javascript:uro2()">Search Last Ticket(Number)</a></li>
                 <li class="list-group-item "><a   style="color:black"        href="#" onclick="javascript:uro8()">Search Ticket</a></li>
-                <li class="list-group-item "><a   style="color:black"     href="#" onclick="javascript:tick79()">Open Tickets</a></li>
+                <li class="list-group-item "><a   style="color:black"     href="#" onclick="javascript:tick79()">Open Tickets</a></li-->
                 <!--li class="list-group-item "><a href="#" onclick="javascript:list79()">Simple List </a></li-->
 				</br>  
 
@@ -1172,10 +1104,106 @@ $(document).ready(function(){
   });
 });
 </script-->
+<!-- Add this simple version to your existing test204.php -->
+<div style="padding: 10px; background: lightgreen; margin: 10px;">
+    <h4>📍 Quick Location Send</h4>
+    <?php
+    //$address = ($street ?? '') . ' ' . ($building ?? '') . ' ' . ($city ?? '');
+     $address =  "hazmieh municipality street rahal building floor 3";
+    $link = "https://maps.google.com/maps?q=" . urlencode( $simple_address);
+    ?>
+    <div id="prin">
+    <strong>Address:</strong> <?php echo $simple_address; ?>
+    </div>
+    <input type="text" id="quickLink" value="<?php echo $link; ?>" style="width: 60%;" readonly>
+    
+    <button onclick="
+        document.getElementById('quickLink').select(); 
+        document.execCommand('copy'); 
+        alert('✅ Link copied! Now open WhatsApp on your PHONE and paste it to the driver.');
+        window.open('https://web.whatsapp.com/', '_blank');
+    " style="background: green; color: white; padding: 10px; border: none;">
+        📱 Copy & Open WhatsApp
+    </button>
+</div>
 
- 
- <?php include 'footer.php';?>
- 
+
+
+
+
+
+<script>
+function copyLink() {
+    var linkField = document.getElementById('mapsLink');
+    linkField.select();
+    document.execCommand('copy');
+    alert('Link copied!');
+}
+
+function sendToWhatsApp() {
+    var driverPhone = document.getElementById('driverPhone').value;
+    if (!driverPhone) {
+        alert('Please select a driver first!');
+        return;
+    }
+    
+    // Clean phone number - remove any spaces, dashes, or + signs except leading +
+    driverPhone = driverPhone.replace(/[^\d+]/g, '');
+    if (!driverPhone.startsWith('+')) {
+        // Add Lebanon country code if not present
+        if (driverPhone.length === 8) {
+            driverPhone = '961' + driverPhone;
+        }
+    }
+    
+    var mapsLink = document.getElementById('mapsLink').value;
+    var clientName = '<?php echo isset($name) ? preg_replace("/[^\w\s]/", "", $name) : "Client"; ?>';
+    var clientPhone = '<?php echo isset($num) ? $num : ""; ?>';
+    //var address = '<?php echo isset($simple_address) ? preg_replace("/[^\w\s,.-]/", "", $simple_address) : ""; ?>';
+    var address = '<?php echo "hazmieh municipality "; ?>';
+    // Simple message without emojis
+    var message = 'DELIVERY ORDER\n\n' +
+                 'Client: ' + clientName + ' (' + clientPhone + ')\n\n' +
+                 'LOCATION:\n' + mapsLink + '\n\n' +
+                 'Address: ' + address + '\n\n' +
+                 'Time: ' + new Date().toLocaleString();
+    
+    // Try different WhatsApp URL formats
+    try {
+        // Method 1: Standard WhatsApp Web
+        var whatsappUrl = 'https://wa.me/' + driverPhone + '?text=' + encodeURIComponent(message);
+        window.open(whatsappUrl, '_blank');
+    } catch(e) {
+        // Method 2: Simple fallback
+        var simpleMessage = 'Location: ' + mapsLink;
+        var fallbackUrl = 'https://wa.me/' + driverPhone + '?text=' + encodeURIComponent(simpleMessage);
+        window.open(fallbackUrl, '_blank');
+    }
+}
+
+// Alternative function - just send the Google Maps link
+function sendSimpleLocation() {
+    var driverPhone = document.getElementById('driverPhone').value;
+    if (!driverPhone) {
+        alert('Please select a driver first!');
+        return;
+    }
+    
+    // Clean phone number
+    driverPhone = driverPhone.replace(/[^\d+]/g, '');
+    if (!driverPhone.startsWith('+') && driverPhone.length === 8) {
+        driverPhone = '961' + driverPhone;
+    }
+    
+    var mapsLink = document.getElementById('mapsLink').value;
+    var message = mapsLink; // Just send the link
+    
+    var whatsappUrl = 'https://wa.me/' + driverPhone + '?text=' + encodeURIComponent(message);
+    window.open(whatsappUrl, '_blank');
+}
+</script>
+
+  <?php include 'footer.php';?>
 </body>
 
 

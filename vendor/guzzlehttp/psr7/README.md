@@ -775,10 +775,10 @@ of normalizations to apply. The following normalizations are available:
 - `UriNormalizer::REMOVE_DEFAULT_HOST`
 
     Removes the default host of the given URI scheme from the URI. Only the "file" scheme defines the default host
-    "192.168.20.107". All of `file:/myfile`, `file:///myfile`, and `file://192.168.20.107/myfile` are equivalent according to
+    "192.168.16.102". All of `file:/myfile`, `file:///myfile`, and `file://192.168.16.102/myfile` are equivalent according to
     RFC 3986.
 
-    Example: `file://192.168.20.107/myfile` → `file:///myfile`
+    Example: `file://192.168.16.102/myfile` → `file:///myfile`
 
 - `UriNormalizer::REMOVE_DEFAULT_PORT`
 

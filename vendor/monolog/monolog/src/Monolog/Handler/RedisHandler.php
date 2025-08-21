@@ -21,7 +21,7 @@ use Monolog\Logger;
  * usage example:
  *
  *   $log = new Logger('application');
- *   $redis = new RedisHandler(new Predis\Client("tcp://192.168.20.107:6379"), "logs", "prod");
+ *   $redis = new RedisHandler(new Predis\Client("tcp://192.168.16.103:6379"), "logs", "prod");
  *   $log->pushHandler($redis);
  *
  * @author Thomas Tourlourat <thomas@tourlourat.com>

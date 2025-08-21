@@ -1,19 +1,19 @@
 
 function ai(){
 	
-  window.open ("http://192.168.20.107//ai.html","","menubar=0,resizable=1,width=650,height=680");
+  window.open ("http://192.168.16.102//ai.html","","menubar=0,resizable=1,width=650,height=680");
      
  }
 
  function brain(){
 	
-  window.open ("http://192.168.20.107//brain.html","","menubar=0,resizable=1,width=650,height=680");
+  window.open ("http://192.168.16.102//brain.html","","menubar=0,resizable=1,width=650,height=680");
      
  }
 
   function search110(){
 	
-    window.open ("http://192.168.20.107//test392.php","","menubar=0,resizable=1,width=650,height=680");
+    window.open ("http://192.168.16.102//test392.php","","menubar=0,resizable=1,width=650,height=680");
        
    }
      
@@ -21,7 +21,7 @@ function ai(){
    
    function prev(){
      
-    lcdo()+addre()+inc()+tac()+lac()+stat()+  comp()+show()+address()+loadDoc();
+   addre()+inc()+tac()+lac()+lcde()+stat()+  comp()+show()+address()+loadDoc();
    }
    function on(){
      y=setInterval("prev()",1000);
@@ -209,7 +209,7 @@ function adag(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test400.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test400.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -221,7 +221,7 @@ function delag(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test402.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test402.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -233,11 +233,17 @@ function delal(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test404.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test404.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
-        
+  function del483(){
+  let glob = global;
+  let glob1 = global1;
+  let glob2 = global2;
+ 
+myw=window.open ("http://192.168.16.102/test483.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+}      
 
 
 
@@ -246,7 +252,7 @@ myw=window.open ("http://192.168.20.107/test404.php?page=" + encodeURI(glob)+"&p
 
 function delAll5(){
 	
-  window.open ("http://192.168.20.107//test407.php","","menubar=0,resizable=1,width=480,height=350");
+  window.open ("http://192.168.16.102//test407.php","","menubar=0,resizable=1,width=480,height=350");
    
  }
 
@@ -254,7 +260,7 @@ function delAll5(){
 
  function delAll6(){
 	
-  window.open ("http://192.168.20.107//test416.php","","menubar=0,resizable=1,width=480,height=350");
+  window.open ("http://192.168.16.102//test416.php","","menubar=0,resizable=1,width=480,height=350");
    
  }
 
@@ -461,17 +467,26 @@ function search5(){
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107//search.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102//search.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 
 }
 
+function search5(){
+    let glob = global;
+    let glob1 = global1;
+    let glob2 = global2;
+   
+myw=window.open ("http://192.168.16.102//search.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 
-function search51(){
+}
+
+function newassignment(){
   let glob = global;
-  let glob1 = global1;
-  let glob2 = global2;
- 
-myw=window.open ("http://192.168.20.107//test411.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    let glob1 = global1;
+    let glob2 = global2;
+   
+myw=window.open ("http://192.168.16.102//dispatcher_assignments.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+
 
 }
 
@@ -482,7 +497,7 @@ function search52(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107//test418.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102//test418.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 
 }
 
@@ -493,7 +508,7 @@ function search53(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107//test433.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102//test433.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 
 }
 
@@ -507,7 +522,7 @@ function search15(){
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107//test336.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102//test336.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 
 	
 }
@@ -520,7 +535,7 @@ function search16(){
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107//search3.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102//search3.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 
 	
 }
@@ -533,7 +548,7 @@ function search2(){
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107//search2.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102//search2.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -965,7 +980,16 @@ function dialExtension(){
   
 
 
+//      const element = document.getElementById('diex');
 
+    
+// element.addEventListener("click", () => {
+
+//  dialExtension();
+    
+
+
+//   });
 
 
 
@@ -980,11 +1004,12 @@ function dialExtension(){
 
 
     var user =document.getElementById('diou').value;
-    
+    //var user = e.options[e.selectedIndex].value;
+    //alert(user);
     
      var xhttp;
      
-        
+         //alert(add);
         
           
       if (window.XMLHttpRequest) {
@@ -1012,7 +1037,7 @@ function dialExtension(){
   
        const elementout = document.getElementById('diou');
   
-      
+       // alert(x);
   
   
   // always checking if the element is clicked, if so, do alert('hello')
@@ -1264,7 +1289,7 @@ function dialExtension(){
                             let glob1 = global1;
                             let glob2 = global2;
                            
-                        myw=window.open ("http://192.168.20.107/test470.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+                        myw=window.open ("http://192.168.16.102/test470.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
                         }
                         
 
@@ -1276,7 +1301,7 @@ function dialExtension(){
                           let glob1 = global1;
                           let glob2 = global2;
                          
-                      myw=window.open ("http://192.168.20.107/test472.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+                      myw=window.open ("http://192.168.16.102/test472.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
                       }
                       
                       
@@ -1289,7 +1314,7 @@ function dialExtension(){
                         let glob1 = global1;
                         let glob2 = global2;
                        
-                    myw=window.open ("http://192.168.20.107/test474.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+                    myw=window.open ("http://192.168.16.102/test474.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
                     }
                     
                     
@@ -1302,7 +1327,7 @@ function dialExtension(){
                       let glob1 = global1;
                       let glob2 = global2;
                      
-                  myw=window.open ("http://192.168.20.107/test476.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+                  myw=window.open ("http://192.168.16.102/test476.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
                   }
                   
 
@@ -1314,7 +1339,7 @@ function dialExtension(){
                     let glob1 = global1;
                     let glob2 = global2;
                    
-                myw=window.open ("http://192.168.20.107/test478.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+                myw=window.open ("http://192.168.16.102/test478.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
                 }
                 
 
@@ -1326,7 +1351,7 @@ function dialExtension(){
                   let glob1 = global1;
                   let glob2 = global2;
                  
-              myw=window.open ("http://192.168.20.107/test480.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+              myw=window.open ("http://192.168.16.102/test480.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
               }
               
 
@@ -1518,7 +1543,7 @@ fieldval = document.getElementById("nd").value;
 
 function Import(){
 	
- window.open ("http://192.168.20.107//test31.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test31.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1526,25 +1551,25 @@ function Import(){
 
 function Importc1(){
 	
- window.open ("http://192.168.20.107//test267.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test267.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
 function Importd(){
 	
-  window.open ("http://192.168.20.107//test267.php","","menubar=0,resizable=1,width=480,height=300");
+  window.open ("http://192.168.16.102//test267.php","","menubar=0,resizable=1,width=480,height=300");
    
  }
 
 function Export(){
 	
- window.open ("http://192.168.20.107//test43.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test43.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
 function ExportP(){
 	
-  window.open ("http://192.168.20.107//test409.php","","menubar=0,resizable=1,width=480,height=300");
+  window.open ("http://192.168.16.102//test409.php","","menubar=0,resizable=1,width=480,height=300");
    
  }
 
@@ -1552,7 +1577,7 @@ function ExportP(){
 
 function Exportd(){
 	
- window.open ("http://192.168.20.107//test373.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test373.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1561,7 +1586,7 @@ function Exportd(){
 
 function Exportc1(){
 	
- window.open ("http://192.168.20.107//test269.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test269.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1570,7 +1595,7 @@ function Exportc1(){
 
 function Exportd1(){
 	
- window.open ("http://192.168.20.107//test374.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test374.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1578,7 +1603,7 @@ function Exportd1(){
 
   function subm2(){
 	
-    window.location.replace ("http://192.168.20.107//login200.php","","menubar=0,resizable=1,width=1400,height=680");
+    window.location.replace ("http://192.168.16.102//login200.php","","menubar=0,resizable=1,width=1400,height=680");
  
   }
 
@@ -1591,7 +1616,7 @@ function Exportd1(){
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107//more1.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102//more1.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
 
 
@@ -1602,7 +1627,7 @@ function Exportd1(){
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107//before.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102//before.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
  
     
@@ -1613,7 +1638,7 @@ function Exportd1(){
       let glob1 = global1;
       let glob2 = global2;
      
-  myw=window.open ("http://192.168.20.107//test431.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+  myw=window.open ("http://192.168.16.102//test431.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
   }
 
 
@@ -1624,7 +1649,7 @@ function Exportd1(){
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102//test446.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -1636,7 +1661,7 @@ myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&
       let glob1 = global1;
       let glob2 = global2;
      
-  myw=window.open ("http://192.168.20.107//before2.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+  myw=window.open ("http://192.168.16.102//before2.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
   }
 
 
@@ -1645,17 +1670,17 @@ myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&
     
     function search10(){
             
-     //window.open ("http://192.168.20.107//test242.php","","menubar=0,resizable=1,width=650,height=680");
+     //window.open ("http://192.168.16.102//test242.php","","menubar=0,resizable=1,width=650,height=680");
      
      let glob = global;
      let glob1 = global1;
      let glob2 = global2;
     
- myw=window.open ("http://192.168.20.107//test242.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=650,height=680");	
+ myw=window.open ("http://192.168.16.102//test242.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=650,height=680");	
             
     }
     
-
+  
 
     function incidents(){
 	
@@ -1664,7 +1689,7 @@ myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107//test264.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=700,height=950");	
+    myw=window.open ("http://192.168.16.102//test264.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=700,height=950");	
     }
    
   
@@ -1675,9 +1700,18 @@ myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&
       let glob1 = global1;
       let glob2 = global2;
      
-  myw=window.open ("http://192.168.20.107//test425.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+  myw=window.open ("http://192.168.16.102//test425.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
   }
 
+  function dispatch(){
+	
+ 
+      let glob = global;
+      let glob1 = global1;
+      let glob2 = global2;
+     
+  myw=window.open ("http://192.168.16.102/dispatcher_assignments.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+  }
 
 
     function deals(){
@@ -1687,7 +1721,7 @@ myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&
       let glob1 = global1;
       let glob2 = global2;
      
-  myw=window.open ("http://192.168.20.107//test421.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
+  myw=window.open ("http://192.168.16.102//test421.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
   }
    
 
@@ -1698,7 +1732,7 @@ myw=window.open ("http://192.168.20.107//test446.php?page=" + encodeURI(glob)+"&
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107//test423.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
+myw=window.open ("http://192.168.16.102//test423.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
 }
 
 
@@ -1709,7 +1743,7 @@ function community(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
+myw=window.open ("http://192.168.16.102//test424.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
 }
 
 
@@ -1722,7 +1756,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
       let glob1 = global1;
       let glob2 = global2;
      
-  myw=window.open ("http://192.168.20.107//test376.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+  myw=window.open ("http://192.168.16.102//test376.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
   }
 
 
@@ -1730,7 +1764,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
     
     function list(){
             
-     window.open ("http://192.168.20.107//test265.php","","menubar=0,resizable=1,width=1400,height=680");
+     window.open ("http://192.168.16.102//test265.php","","menubar=0,resizable=1,width=1400,height=680");
             
     }
     
@@ -1738,7 +1772,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
     
     function list1(){
             
-     window.open ("http://192.168.20.107//test321.php","","menubar=0,resizable=1,width=1400,height=680");
+     window.open ("http://192.168.16.102//test321.php","","menubar=0,resizable=1,width=1400,height=680");
             
     }
     
@@ -1747,7 +1781,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
     
     function list79(){
             
-     window.open ("http://192.168.20.107//test266.php","","menubar=0,resizable=1,width=1400,height=680");
+     window.open ("http://192.168.16.102//test266.php","","menubar=0,resizable=1,width=1400,height=680");
             
     }
 
@@ -1755,13 +1789,13 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
 
     function tick79(){
             
-      window.open ("http://192.168.20.107//test430.php","","menubar=0,resizable=1,width=1400,height=680");
+      window.open ("http://192.168.16.102//test430.php","","menubar=0,resizable=1,width=1400,height=680");
              
      }
     
     function list89(){
             
-      window.open ("http://192.168.20.107//test413.php","","menubar=0,resizable=1,width=1400,height=680");
+      window.open ("http://192.168.16.102//test413.php","","menubar=0,resizable=1,width=1400,height=680");
              
      }
 
@@ -1774,7 +1808,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/test240.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102/test240.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
 
 
@@ -1785,7 +1819,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/numbersearch.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102/numbersearch.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
 
 
@@ -1797,7 +1831,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/test275.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102/test275.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
     
    
@@ -1809,7 +1843,7 @@ myw=window.open ("http://192.168.20.107//test424.php?page=" + encodeURI(glob)+"&
 
 function ImportSql(){
 	
- window.open ("http://192.168.20.107//test38.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test38.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
  
@@ -1817,7 +1851,7 @@ function ImportSql(){
 
 function bb(){
 	
- window.open ("http://192.168.20.107//test42.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test42.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1825,7 +1859,7 @@ function bb(){
 
 function ImportC(){
 	
- window.open ("http://192.168.20.107//test73.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test73.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1834,7 +1868,7 @@ function ImportC(){
 
 function ExporCt(){
 	
- window.open ("http://192.168.20.107//test72.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test72.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -1849,7 +1883,7 @@ function number23() {
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/test200.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102/test200.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
     
     
@@ -1862,7 +1896,7 @@ function number23() {
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/test19.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
+    myw=window.open ("http://192.168.16.102/test19.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=900,height=950");	
     }
     
 
@@ -1874,7 +1908,7 @@ function add(){
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/test56.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102/test56.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
     
 
@@ -1890,7 +1924,7 @@ function add22(){
         let glob1 = global1;
         let glob2 = global2;
        
-    myw=window.open ("http://192.168.20.107/test279.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+    myw=window.open ("http://192.168.16.102/test279.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
     }
 
 
@@ -1901,7 +1935,7 @@ function add22(){
       let glob1 = global1;
       let glob2 = global2;
      
-  myw=window.open ("http://192.168.20.107/test377.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+  myw=window.open ("http://192.168.16.102/test377.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
   }
 
 
@@ -1912,7 +1946,7 @@ function add22(){
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107/test435.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test435.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -1924,7 +1958,7 @@ function add334(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test462.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test462.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -1936,7 +1970,7 @@ function add335(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test464.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test464.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -1948,7 +1982,7 @@ function add336(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test466.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test466.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 function add337(){
@@ -1958,7 +1992,7 @@ function add337(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test467.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test467.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -1969,7 +2003,7 @@ function add333(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test436.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=300,height=950");	
+myw=window.open ("http://192.168.16.102/test436.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=300,height=950");	
 }
 
 
@@ -1980,7 +2014,7 @@ myw=window.open ("http://192.168.20.107/test436.php?page=" + encodeURI(glob)+"&p
     let glob1 = global1;
     let glob2 = global2;
    
-myw=window.open ("http://192.168.20.107/test426.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test426.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -1990,7 +2024,7 @@ function add3(){
    let glob1 = global1;
    let glob2 = global2;
   
-myw=window.open ("http://192.168.20.107/test182.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test182.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -2004,7 +2038,7 @@ function add33(){
   let glob1 = global1;
   let glob2 = global2;
  
-myw=window.open ("http://192.168.20.107/test380.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test380.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 function number22(){
@@ -2012,14 +2046,14 @@ let glob = global;
    let glob1 = global1;
    let glob2 = global2;
   
-myw=window.open ("http://192.168.20.107/test275.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test275.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
 
 function search3(){
 	
- window.open ("http://192.168.20.107//test184.php","","menubar=0,resizable=1,width=480,height=620");
+ window.open ("http://192.168.16.102//test184.php","","menubar=0,resizable=1,width=480,height=620");
 	
 }
 
@@ -2031,7 +2065,7 @@ function search3(){
 
 function search4(){
 	
- window.open ("http://192.168.20.107//test189.php","","menubar=0,resizable=1,width=480,height=620");
+ window.open ("http://192.168.16.102//test189.php","","menubar=0,resizable=1,width=480,height=620");
 	
 }
 
@@ -2054,7 +2088,7 @@ function del(){
  let glob1 = global1;
  let glob2 = global2;
 
-myw=window.open ("http://192.168.20.107/test29.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+myw=window.open ("http://192.168.16.102/test29.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
 }
 
 
@@ -2063,7 +2097,7 @@ function delDeal(){
   let glob1 = global1;
   let glob2 = global2;
  
- myw=window.open ("http://192.168.20.107/test419.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+ myw=window.open ("http://192.168.16.102/test419.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
  }
 
 
@@ -2074,7 +2108,7 @@ function delPhoto(){
   let glob1 = global1;
   let glob2 = global2;
  
- myw=window.open ("http://192.168.20.107/test393.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+ myw=window.open ("http://192.168.16.102/test393.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
  }
 
 
@@ -2085,12 +2119,12 @@ function deltest(){
   let glob1 = global1;
   let glob2 = global2;
  
- myw=window.open ("http://192.168.20.107/test387.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+ myw=window.open ("http://192.168.16.102/test387.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
  }
 
 function delAll(){
 	
- window.open ("http://192.168.20.107//test79.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.16.102//test79.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
@@ -2103,7 +2137,7 @@ function delAll(){
 
 function delAll3(){
 	
- window.open ("http://192.168.20.107//test366.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.16.102//test366.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
@@ -2114,7 +2148,7 @@ function delAll3(){
 
 function list81(){
 	
- window.open ("http://192.168.20.107//test360.php","","menubar=0,resizable=1,width=1400,height=680");
+ window.open ("http://192.168.16.102//test360.php","","menubar=0,resizable=1,width=1400,height=680");
 	
 }
 
@@ -2126,7 +2160,7 @@ function list81(){
 
 function del_al(){
 	
- window.open ("http://192.168.20.107//test306.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.16.102//test306.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
@@ -2135,7 +2169,7 @@ function del_al(){
 
 function del_al1(){
 	
-  window.open ("http://192.168.20.107//test384.php","","menubar=0,resizable=1,width=480,height=350");
+  window.open ("http://192.168.16.102//test384.php","","menubar=0,resizable=1,width=480,height=350");
    
  }
 
@@ -2144,28 +2178,28 @@ function del_al1(){
 
 function del_ag(){
 	
- window.open ("http://192.168.20.107//test296.php","","menubar=0,resizable=1,width=450,height=350");
+ window.open ("http://192.168.16.102//test296.php","","menubar=0,resizable=1,width=450,height=350");
 	
 }
 
 
 function del_ag1(){
 	
-  window.open ("http://192.168.20.107//test382.php","","menubar=0,resizable=1,width=450,height=350");
+  window.open ("http://192.168.16.102//test382.php","","menubar=0,resizable=1,width=450,height=350");
    
  }
 
 
  function del_ag12(){
 	
-  window.open ("http://192.168.20.107//test438.php","","menubar=0,resizable=1,width=450,height=350");
+  window.open ("http://192.168.16.102//test438.php","","menubar=0,resizable=1,width=450,height=350");
    
  }
 
 
  function del_ag13(){
 	
-  window.open ("http://192.168.20.107//test440.php","","menubar=0,resizable=1,width=450,height=350");
+  window.open ("http://192.168.16.102//test440.php","","menubar=0,resizable=1,width=450,height=350");
    
  }
 
@@ -2179,7 +2213,7 @@ function addCrm(){
          let glob1 = global1;
          let glob2 = global2;
         
-        myw=window.open ("http://192.168.20.107/test56.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+        myw=window.open ("http://192.168.16.102/test56.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
         }
 
 
@@ -2191,7 +2225,7 @@ function addCrm(){
                 let glob1 = global1;
                 let glob2 = global2;
         
-        myw=window.open ("http://192.168.20.107/before.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
+        myw=window.open ("http://192.168.16.102/before.php?page=" + encodeURI(glob)+"&page1="+ encodeURI(glob1) +"&page2="+ encodeURI(glob2) ,"","menubar=0,resizable=1,width=600,height=950");	
         }
 
 
@@ -2224,10 +2258,15 @@ function size204(){
 
 function delAll2(){
 	
- window.open ("http://192.168.20.107//test77.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.16.102//test77.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
+function delAll482(){
+	
+ window.open ("http://192.168.16.102//test481.php","","menubar=0,resizable=1,width=480,height=350");
+	
+}
 
 
 
@@ -2266,27 +2305,6 @@ function win() {
     }
   };
   xhttp.open("GET","test25.php", true);
-  xhttp.send();
-}
-
-
-
-  function lcdo() {
- 
-  var xhttp;
-  if (window.XMLHttpRequest) {
-    // code for modern browsers
-    xhttp = new XMLHttpRequest();
-    } else {
-    // code for IE6, IE5
-    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("acdc").value = this.responseText;
-    }
-  };
-  xhttp.open("GET","test396.php", true);
   xhttp.send();
 }
 
@@ -2375,7 +2393,23 @@ function inc() {
 
 
 
-
+function lcde() {
+  var xhttp;
+  if (window.XMLHttpRequest) {
+    // code for modern browsers
+    xhttp = new XMLHttpRequest();
+    } else {
+    // code for IE6, IE5
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("lc").value = this.responseText;
+    }
+  };
+  xhttp.open("GET","test396.php", true);
+  xhttp.send();
+}
 
 
 function wi() {
@@ -2410,7 +2444,7 @@ function comp() {
   }
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("comp").value = this.responseText;
+      document.getElementById("comp").innerHTML = this.responseText;
     }
   };
   xhttp.open("GET","test368.php", true);

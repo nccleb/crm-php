@@ -110,7 +110,7 @@ function size(){
 	  if (preg_match("/^[0-9]*$/",$_POST['name']))  {  
 	  $number=$_POST['name'];
 	 
-	  $idr=@mysql_connect("192.168.20.107","root","1Sys9Admeen72")|| ("die connection error");
+	  $idr=@mysql_connect("192.168.16.102","root","1Sys9Admeen72")|| ("die connection error");
       @mysql_select_db("nccleb_test");
 	  $sql="SELECT  * FROM client WHERE number='{$number}'or inumber='{$number}'" ; 
 	  

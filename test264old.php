@@ -18,7 +18,7 @@ $_SESSION["anam"]=$idf;
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -43,7 +43,7 @@ order by lcd");
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -67,7 +67,7 @@ order by lcd");
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -90,7 +90,7 @@ and lcd between \"$startdate\" and\"$enddate\" order by lcd
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -120,7 +120,7 @@ and lcd between \"$startdate\" and\"$enddate\" order by lcd
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -141,7 +141,7 @@ and lcd between \"$startdate\" and\"$enddate\" order by lcd
 ?>
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -168,7 +168,7 @@ and lcd between \"$startdate\" and\"$enddate\" order by lcd
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -211,7 +211,7 @@ if(isset($_POST['search'])&&isset($_POST['name'])){
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -237,7 +237,7 @@ and lcd between \"$startdate\" and\"$enddate\" order by lcd
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -253,7 +253,7 @@ where c.id=cr.id and lcd between \"$startdate\" and\"$enddate\" order by lcd");
 ?>
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -276,7 +276,7 @@ order by lcd");
 
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -300,7 +300,7 @@ order by lcd");
 ?>
 
 <?php
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

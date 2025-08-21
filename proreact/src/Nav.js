@@ -19,7 +19,7 @@ function Nav(){
 	};
     const search3=()=>{
 	
-		window.open ("http://192.168.20.107/test204.php?x=4","","menubar=0,resizable=1,width=480,height=620");
+		window.open ("http://192.168.20.118/test204.php?x=4","","menubar=0,resizable=1,width=480,height=620");
 		   
 	   };
 

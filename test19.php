@@ -23,7 +23,7 @@ foreach($xml as $CallRecord){
     $inc=$CallRecord->CallerID;;
 }
 
-
+/*
 $line = '';
 //$f = fopen("c:\MDR\CallerID2022-04.txt", 'r');
 $f = fopen($opic, 'r');
@@ -46,7 +46,7 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
  fclose($f);
 
  $inc = $_SESSION["userinc"];
-
+*/
 ?>
 
 <!DOCTYPE html>
@@ -305,28 +305,26 @@ function submit() {
 <input type="hidden" id="nd" value="<?php echo $s?>">
 
 
-<p >Specified Salesman  <p>
+<p >Specified Dispatcher  <p>
 
 <select name="driv" id="user"  class="form-control">
- <option   value=""   > </option>
-<?php
+ <option   value=""   ></option>
 
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+
+
+                        <?php
+                        $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
 }
-$req11=@mysqli_query($idr," select * from drivers order by idx asc  ");
-$req12=@mysqli_query($idr," SELECT COUNT(idx) as arr FROM drivers; ");
-$lig=@mysqli_fetch_assoc($req12);
-for ($i=1;$i<=$lig["arr"];$i++){
-	$lig1=@mysqli_fetch_assoc($req11);
-	
-	   $_SESSION["$i"]= $lig1["name_d"];
-	      
-	echo " <option value=".  "$i"."/>" .  $_SESSION[$i]. " </option> "; 
-	   
- }
+                        $drivers_query = mysqli_query($idr, "SELECT idx, name_d, num_d FROM drivers ORDER BY name_d");
+                        while($driver = mysqli_fetch_assoc($drivers_query)) {
+                            echo "<option value='{$driver['idx']}' data-name='{$driver['name_d']}'>{$driver['name_d']} - {$driver['num_d']}</option>";
+                        }
+                        ?>
+                    </select>
+                
 	
 
 
@@ -335,7 +333,7 @@ for ($i=1;$i<=$lig["arr"];$i++){
 
 
 
-?>
+
 
 
 
@@ -355,6 +353,17 @@ for ($i=1;$i<=$lig["arr"];$i++){
 
 
   </select>
+
+<p>Best Delivery Time</p>
+<select class="form-control" name="delti">
+<option></option>
+<option>Morning (8AM-12PM)</option>
+<option>Afternoon (12PM-6PM)</option>
+<option>Evening (6PM-10PM)</option>
+<option>Anytime</option>
+
+
+
 
 
 </td>

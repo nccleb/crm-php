@@ -43,12 +43,12 @@ if (mysqli_connect_errno()) {
   exit();
 }
 $req=@mysqli_query($idr,"set foreign_key_checks=0");
-$req.=@mysqli_query($idr,"truncate table deals");
+$req.=@mysqli_query($idr,"truncate table dispatch_assignments");
 $req.=@mysqli_query($idr,"set foreign_key_checks=1");
-$req.=@mysqli_query($idr,"alter table deals auto_increment=1");
+$req.=@mysqli_query($idr,"alter table dispatch_assignments auto_increment=1");
 
 
-$stmt = $idr->prepare("SELECT  idce FROM deals ");
+$stmt = $idr->prepare("SELECT  id FROM dispatch_assignments ");
 
 	  
  

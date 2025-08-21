@@ -18,7 +18,7 @@ foreach($xml as $CallRecord){
     
 }  
 
-
+/*
 
 $line = '';
 //$f = fopen("c:\MDR\CallerID2022-04.txt", 'r');
@@ -47,8 +47,8 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
  
 $inc = $_SESSION["userinc"];
 
-
- $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+*/
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

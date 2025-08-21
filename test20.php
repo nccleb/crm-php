@@ -13,7 +13,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 3600), "/");
 
 
     $os=$_SESSION["o"];
-    $ps=$_SESSION["p"];
+     $ps=$_SESSION["p"];
  $_SESSION["id"]=$nu;
  
  
@@ -137,7 +137,7 @@ $filename = htmlspecialchars( basename( $_FILES["fileToUpload"]["name"]));
 <?php
 if(isset($_POST['nu'])&&!empty($_POST['nu'])&&isset($_POST['na'])&&!empty($_POST['na'])&&isset($_POST['lna'])&&isset($_POST['co'])
  &&isset($_POST['inu'])&&isset($_POST['ur'])&&isset($_POST['bu'])    &&isset($_POST['ad'])&&isset($_POST['ad2'])&&isset($_POST['em'])
-&&isset($_POST['cit'])&&isset($_POST['str'])&&isset($_POST['flo'])
+&&isset($_POST['cit'])&&isset($_POST['str'])&&isset($_POST['flo'])&&isset($_POST['delti'])
  &&isset($_POST['bui'])&&isset($_POST['zon'])&&isset($_POST['nea'])    &&isset($_POST['rem'])&&isset($_POST['driv'])
 &&isset($_POST['tel'])&&isset($_POST['oth'])&&isset($_POST['apa']) &&isset($_POST['pay'])&&isset($_POST['loy'])&&isset($_POST['job'])&&isset($_POST['com'])
 )
@@ -172,7 +172,7 @@ if(isset($_POST['nu'])&&!empty($_POST['nu'])&&isset($_POST['na'])&&!empty($_POST
   $oth=test_input($_POST['oth']);
  $apa=test_input($_POST['apa']);
   $driv=test_input($_POST['driv']);
-
+  $delti=test_input($_POST['delti']);
 
 
 
@@ -183,7 +183,7 @@ else{
 	
 	
     echo"<script>if (confirm(\"Missing Entry!\") == true) {
-  myw=window.open (\"http://192.168.20.107//test19.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
+  myw=window.open (\"http://192.168.16.102//test19.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
   quit();
 } else {
   quit();
@@ -391,10 +391,16 @@ if (!preg_match("/^[0-9a-zA-Z'?!=;~+%`\[\]()$*\"|:.,#&_\s-\p{Arabic} ]*$/u",$dri
   echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
   exit();  
 }	
+
+if (!preg_match("/^[0-9a-zA-Z'?!=;~+%`\[\]()$*\"|:.,#&_\s-\p{Arabic} ]*$/u",$delti)) {
+  echo "<p style=\"color:red;font-size:28px\">Invalid Time format</p>"."<br/>";
+  echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
+  exit();  
+}	
 	
 
 
-	 $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+	 $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -486,10 +492,10 @@ if($nu!=""){
 
 
 
-    $stmt = $idr->prepare("insert into client (nom,prenom,filename,category,source,company,job,number,inumber,email,url,business,grade,payment,card,community,telmobile,telother,city,street,apartment,building,zone,floor,near,remark,address,address_two,idf,idx) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt = $idr->prepare("insert into client (nom,prenom,filename,category,source,company,job,number,inumber,email,url,business,grade,payment,card,community,telmobile,telother,city,street,apartment,building,zone,floor,near,remark,address,address_two,best_delivery_time,idf,idx) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
   
   
-     $stmt->bind_param("sssssssssssssssssssssssissssii",$na,$lna,$filename,$cat,$source,$co,$jo,$nu,$inu,$em,$ur,$bu,$gra,$pay,$loy,$com,$tel,$oth,$ci,$st,$apa,$bui,$zo,$fl,$ne,$re,$ad,$ad2,$ps,$driv );
+     $stmt->bind_param("sssssssssssssssssssssssisssssii",$na,$lna,$filename,$cat,$source,$co,$jo,$nu,$inu,$em,$ur,$bu,$gra,$pay,$loy,$com,$tel,$oth,$ci,$st,$apa,$bui,$zo,$fl,$ne,$re,$ad,$ad2,$delti,$ps,$driv );
 
      $stmt->execute();
 
@@ -523,7 +529,7 @@ if($nu!=""){
    
 	
 	  echo"<script>if (confirm(\"Missing Entry!\") == true) {
-  //myw=window.open (\"http://192.168.20.107//test19.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
+  //myw=window.open (\"http://192.168.16.102//test19.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
  // quit();
 } else {
  // quit();

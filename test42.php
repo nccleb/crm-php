@@ -19,7 +19,7 @@
 <script>
 function backup(){
 	
- window.open ("http://192.168.20.107//test36.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.16.102//test36.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 </script> 

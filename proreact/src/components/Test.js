@@ -5,7 +5,7 @@ function Test({ita,ite}) {
   
   const search3=()=>{
 	
-		window.open ("http://192.168.20.107/login20.html?x=4","","menubar=0,resizable=1,width=480,height=620");
+		window.open ("http://192.168.20.118/login20.html?x=4","","menubar=0,resizable=1,width=480,height=620");
 		   
 	   };
     

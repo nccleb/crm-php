@@ -21,7 +21,7 @@ $id=$_GET['number'];
 <?php 
 	  
 	 
-	  $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+	  $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -78,7 +78,7 @@ if (mysqli_connect_errno()) {
 			  if(strlen($telother)==7){
               $telother="0".$telother;
 			  }			  
-			  
+			  $delivery_time = $row['best_delivery_time'];
 			 $apartment=$row['apartment'];
 			  $idx=$row['idx'];
 			  
@@ -98,7 +98,7 @@ if (mysqli_connect_errno()) {
 
      <?php
 
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -154,7 +154,7 @@ location.replace('test55.php');
 <script>
 function search(){
 	
- window.open ("http://192.168.20.107//search.php","","menubar=0,resizable=1,width=480,height=620");
+ window.open ("http://192.168.16.102//search.php","","menubar=0,resizable=1,width=480,height=620");
 	
 }
 </script> 
@@ -335,70 +335,140 @@ fieldval = document.getElementById("nea").value;
  <table>
 <form >
 <tr><td  valign="top"   style="align:left"  >  
+  <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">TEL</label>
+  <input type="text" class="form-control" value="<?php echo $num?>"  id="bp" placeholder="" name="nu"  readonly   >
+</div><br>
+   <div class="mb-3 printPageButton"  >
+  <label for="exampleFormControlInput1" class="form-label">Tel(Office)</label>
+  <input type="text"   value="<?php echo $inum?>" class="form-control" id="ibp" placeholder="" name="inu"     >
+</div><br>
+<div class="mb-3 printPageButton"  >
+  <label for="exampleFormControlInput1" class="form-label">Tel(Mobile)</label>
+  <input type="text"  value="<?php echo $telmobile?>"  class="form-control" id="tell" placeholder="" name="tel"     >
+</div><br>
 
-<p >Tel      <input  class="form-control"   type="text" value="<?php echo $num?>" name="nu" id="bp" size="32" onclick="test()"><p><br/> 
- <p >Tel(Office)      <input  class="form-control"       type="text" name="inu" value="<?php echo $inum?>" id="ibp" size="32"><p><br/>
- <p >Tel(Mobile)     <input class="form-control" type="text" name="tel" value="<?php echo $telmobile?>" id="tel" size="32" onclick="test()"><p><br/> 
- <p >Tel(Other)     <input class="form-control" type="text" name="oth" value="<?php echo $telother?>" id="oth" size="32"><p><br/>    
-<p >First name        <input class="form-control" type="text" name="na" id="name" value="<?php echo $name?>" size="32" ><p><br/>
-<p >Last name        <input class="form-control" type="text" name="lna" id="lname" value="<?php echo $lname?>" size="32" ><p><br/>
-<p >Company       <input class="form-control"  type="text" name="co" id="company" value="<?php echo $company?>" size="32" ><p><br/>
-<p >Category       <input class="form-control"  type="text" name="co" id="company" value="<?php echo $category?>" size="32" ><p><br/>
-<p >Source       <input class="form-control"  type="text" name="co" id="source" value="<?php echo $source?>" size="32" ><p><br/>
-<p >E-mail       <input class="form-control" value="<?php echo $email?>" type="text" name="em" id="email" size="32" ><p><br/>
-<p >Url            <input class="form-control" type="text" value="<?php echo $url?>" name="ur" id="url" size="32" ><p><br/>
-<p >Business       <input class="form-control" type="text" name="bu" value="<?php echo $business?>" id="business" size="33" ><p><br/>
-<p >Grade          <input class="form-control" type="text" name="grad"  id="grad" size="33" ><p><br/>
-<p >Payment       <input class="form-control" type="text" name="pay"  id="pay" size="33" ><p><br/>
-<p >Loyalty card        <input class="form-control" type="text" name="loy"  id="loy" size="33" ><p><br/>
-<p >Salesman          <input class="form-control" type="text" name="driver"  id="driver" size="33" ><p><br/>
+ 
+<div class="mb-3 printPageButton"  >
+  <label for="exampleFormControlInput1" class="form-label">Tel(Other)</label>
+  <input type="text"  value="<?php echo $telother?>"  class="form-control" id="othh" placeholder="" name="oth"     >
+</div><br>
+<div class="mb-3 " >
+  <label for="exampleFormControlInput1" class="form-label">First name </label>
+  <input type="text" value="<?php echo $name?>" class="form-control" id="name" placeholder="" name="na"     >
+</div><br>
 
-<p >Cuid        <input class="form-control" type="text" name="bu" value="<?php echo $id?>" id="business" size="33" ><p><br/>
-<p >Account       <input class="form-control" type="text" name="bu" value="<?php echo $op?>" id="business" size="33" ><p><br/>
-<p >Idf           <input class="form-control" type="text" name="bu" value="<?php echo $idf?>" id="business" size="33" ><p><br/>
+
+<div class="mb-3 "  >
+  <label for="exampleFormControlInput1" class="form-label">Last name</label>
+  <input type="text" value="<?php echo $lname?>" class="form-control" id="lname" placeholder="" name="lna"     >
+</div><br>
+<div class="mb-3 "  >
+  <label for="exampleFormControlInput1" class="form-label">Company</label>
+  <input type="text" name="co" id="company" value="<?php echo $company?>"   class="form-control"  placeholder=""      >
+</div><br>
+<div class="mb-3 "  >
+  <label for="exampleFormControlInput1" class="form-label">Category</label>
+  <input type="text" class="form-control"  name="co" id="company" value="<?php echo $category?>" placeholder=""     >
+</div><br>
+<div class="mb-3 "  >
+  <label for="exampleFormControlInput1" class="form-label">Source</label>
+  <input type="text" class="form-control" name="co" id="source" value="<?php echo $source?>"  placeholder=""      >
+</div><br>
+<div class="mb-3 "  >
+  <label for="exampleFormControlInput1" class="form-label">Email</label>
+<input class="form-control" value="<?php echo $email?>" type="text" name="em" id="email" size="32" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">URL</label>
+<input class="form-control" type="text" value="<?php echo $url?>" name="ur" id="url" size="32" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Business</label>
+<input class="form-control" type="text" name="bu" value="<?php echo $business?>" id="business" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Grade</label>
+<input class="form-control" type="text" name="grad"  id="grad" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Payment</label>
+ <input class="form-control" type="text" name="pay"  id="pay" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Loyalty card   </label>
+<input class="form-control" type="text" name="loy"  id="loy" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Dispatcher</label>
+<input class="form-control" type="text" name="driver"  id="driver" size="33" >
+</div><br>
+
+<label for="exampleFormControlInput1" class="form-label">Best Delivery Time  </label>
+<select class="form-control" name="delti" id="delti"   >
+<option ><?php echo $delivery_time ?></option>
+
+</select>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Cuid</label>
+<input class="form-control" type="text" name="bu" value="<?php echo $id?>" id="business" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Account</label>
+ <input class="form-control" type="text" name="bu" value="<?php echo $op?>" id="business" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Idf</label>
+<input class="form-control" type="text" name="bu" value="<?php echo $idf?>" id="business" size="33" >
+</div><br>
+         
 </td>
 <td  valign="top"   style="align:left"    >
-<p >City    <input class="form-control" type="text" name="cit"value="<?php echo $city?>"  id="city" size="33" ><p><br>
-<p >Zone    <input class="form-control" value="<?php echo $zone?>" type="text" name="zon" id="zone" size="33" ><p><br/>
-<p >Street   <input class="form-control" type="text" name="str" value="<?php echo $street?>" id="street" size="32" ><p><br/>
-<p >Building  <input class="form-control" type="text" value="<?php echo $building?>" name="bui" id="building" size="32" ><p><br/>
-<p >Apartment  <input class="form-control" type="text" name="apa" value="<?php echo $apartment?>" id="apa" size="32" ><p><br/>
-<p >Floor   
-<select class="form-control"  name="flo"  id="floor">
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">City</label>
+<input class="form-control" type="text" name="cit"value="<?php echo $city?>"  id="city" size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Zone</label>
+ <input class="form-control" type="text"   value="<?php echo $zone?>" name="zon" id="zone"   size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Street</label>
+<input class="form-control" type="text" name="str" value="<?php echo $street?>" id="street" size="33" >
+</div><br>
 
 
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Building</label>
+ <input class="form-control" type="text"  value="<?php echo $building?>" name="bui" id="building"   size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Apartment</label>
+<input class="form-control" type="text" name="apa" value="<?php echo $apartment?>" id="apa" size="33" >
+</div><br>
 
-<option selected><?php echo $floor?></option>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>11</option>
-<option>12</option>
-<option>13</option>
-<option>14</option>
-<option>15</option>
-<option>16</option>
-<option>17</option>
-<option>18</option>
-<option>19</option>
-<option>20</option>
-</select>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Floor</label>
+<input class="form-control" type="text" name="flo"  id="floor" value="<?php echo $floor?>"  size="33" >
+</div><br>
 
-<p>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Near</label>
+<input class="form-control" type="text" name="flo"  id="floor" value="<?php echo $floor?>"  size="33" >
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Address</label>
+<textarea  class="form-control" name="ad" id="address"  rows="5" cols="34" ></textarea>
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Address</label>
+<textarea  class="form-control" name="ad2" id="address2"  rows="5" cols="34" ></textarea>
+</div><br>
+<div class="mb-3 "  >
+ <label for="exampleFormControlInput1" class="form-label">Request</label>
+<textarea  class="form-control" name="rem"  id="remark"  rows="5" cols="34" ></textarea>
+</div><br>
 
-
-<p >Near     <input   class="form-control" type="text" value="<?php echo $near?>" name="nea" id="nea" size="32" ></p><br/>
-
-<p  >Address  <textarea  class="form-control" name="ad" id="address"  rows="5" cols="34" ></textarea><br>
-<p  >Address  <textarea  class="form-control" name="ad2" id="address2"  rows="5" cols="34" ></textarea><br>
-<p >Request  <textarea  class="form-control" name="rem"  id="remark"  rows="5" cols="34" ></textarea></p><br/><br/><br/>
 
 <input type="hidden" id="nam" value="<?php echo $name?>">
 <input type="hidden" id="lnam" value="<?php echo $lname?>">

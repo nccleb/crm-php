@@ -108,34 +108,26 @@ if (!preg_match("/^[0-9a-zA-Z.,\s\p{Arabic} ]*$/u",$contact)) {
 	
 	
 
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
 }
 $req=@mysqli_query($idr,"select * from form_element");
 
-	$t=0;
 	
 while($lig=@mysqli_fetch_assoc($req)){
 	
-	if(($name== boss )&&($password=="boss")){
-		
-		
-		$req=@mysqli_query($idr," update   form_element set active=0     ");
-		
-		echo"<script>location.replace('login20.php?pag=&pag1=')</script>";
-	
-	$t=1;
-	}
-	
 	
 	
 	
 		
 	
-  else  if(($name==$lig['name'])&&($password==$lig['password']))  {
-		if($lig['active']!=1){
+    if(($name==$lig['name'])&&($password==$lig['password']))  {
+
+     
+
+		//if($lig['active']!=1){
 			
 		
 		
@@ -143,7 +135,7 @@ while($lig=@mysqli_fetch_assoc($req)){
 	 
 	
 	 
-	$req=@mysqli_query($idr," update   form_element set active=1 where name='$name'   ");
+	//$req=@mysqli_query($idr," update   form_element set active=1 where name='$name'   ");
 	
      
 	
@@ -151,42 +143,38 @@ while($lig=@mysqli_fetch_assoc($req)){
 	 echo "<script>location.replace('test204.php?pag=$name&pag1=$idf')</script>";
 	
 	
-	$t=1;
+	//$t=1;
 	}
 	
-  
-	
-	else {
-	
-	
-	echo"<script>alert('Wrong Entry!')</script>";
+  else if(($name=="admin")&&($password=="admin")){
+		 
 		
-}
+		echo"<script>location.replace('test204.php?pag=$name&pag1=$idf')</script>";
+	 }
 	
+	
+	
+
+
+
   }	
 	
 	
 	
 	
+	
+	echo"<script>alert('Wrong Entry!')</script>";
+  echo"<script>location.replace('login20.php')</script>";
+		
+
+	
 		
 		
-		}	
+		
+	
 
 
 		
- if($t==0){
-	 if(($name=="admin")&&($password=="A1A1a1a1")){
-		 
-		
-		echo"<script>location.replace('test204.php?pag=$name&pag1=$idf')</script>";
-	 }
-		else{
-		 
-			echo"<script>alert('Wrong Entry!!')</script>";
-		echo"<script>location.replace('login20.php')</script>";
- 
-
- }}
  
  
  

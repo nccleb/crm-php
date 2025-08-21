@@ -1,6 +1,3 @@
-
-
-
 <?php
 session_start();
 
@@ -30,6 +27,7 @@ $_SESSION["id"]=$number;
    $_SESSION["a1"]=$o;
  $_SESSION["a2"]=$p;
  $_SESSION["a3"]=$n;
+ $_SESSION["simple_address"]=$simple_address;
 ?>
 
 
@@ -47,7 +45,7 @@ foreach($xml as $CallRecord){
     
 } 
 
-
+/*
 
 $line = '';
 //$f = fopen("c:\MDR\CallerID2022-04.txt", 'r');
@@ -75,7 +73,9 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
 //include('test449.php');
 $inc = $_SESSION["userinc"];
 
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+*/
+
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -97,21 +97,6 @@ while($lig=@mysqli_fetch_assoc($req)){
 }
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,29 +108,51 @@ while($lig=@mysqli_fetch_assoc($req)){
 
   <script type="text/javascript" src="js/test371.js"></script>
 
-  
-  
-
-
-	
-	
-
 <style>
   .img-circle{
     width:150px;
     height:150px
    }
-	
-	</style>
 
+/* Print-only styles for address */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    #printableAddress, #printableAddress * {
+        visibility: visible;
+    }
+    
+    #printableAddress {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+    }
+    
+    /* Hide print button and other buttons when printing */
+    .no-print {
+        display: none !important;
+    }
+}
 
+.printable-content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    background: #f9f9f9;
+    display: none; /* Hidden by default, only visible when printing */
+}
 
-
-
-
-
-		
-
+@media print {
+    .printable-content {
+        display: block !important;
+    }
+}
+</style>
 
 <?php 
 
@@ -181,7 +188,7 @@ while($lig=@mysqli_fetch_assoc($req)){
 			  
 	  
 
-         $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+         $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -200,14 +207,7 @@ $result = $stmt ->get_result();
 
 $stmt->close();
 
-
-
-
-
-
 while($row=$result->fetch_assoc()){
-
-
 
 	  
               
@@ -254,8 +254,23 @@ while($row=$result->fetch_assoc()){
 			  
 			 $apartment=$row['apartment'];
 		    $idx=$row['idx'];
+       $delivery_time = $row['best_delivery_time'];
 			 
-			 
+			 $simple_address = "";
+if(isset($city) && $city) $simple_address .= $city. ", ";
+if(isset($zone) && $zone) $simple_address .="Zone " . $zone. ", ";       
+if(isset($street) && $street) $simple_address .="Street " . $street . ", ";
+if(isset($building) && $building) $simple_address .= "Building " . $building . ", ";
+ if(isset($apartment) && $apartment) $simple_address .="Apartment " . $apartment . ", ";
+if(isset($floor) && $floor) $simple_address .= "Floor " . $floor . ", ";
+if(isset($near) && $near) $simple_address .="Near " . $near. ", ";
+if(isset($address) && $address) $simple_address .= "address1 " . $address . ", ";
+if(isset($address2) && $address2) $simple_address .= "address2 " . $address2;
+
+
+
+
+
 			  
 			  
 		}
@@ -266,21 +281,8 @@ while($row=$result->fetch_assoc()){
   	       echo "<button id=\"form\" type=\"button\" onclick=\"quit()\">Quit</button>";
 		  exit();
 	  }
-	  
-	  
-	 
-	  
-	 
-	
-	  
-	 
-	?> 	 
 
-
-
-	<?php
-
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -303,297 +305,185 @@ for ($i=1;$i<=$lig12["co"];$i++){
 	
 }
 
-
-	  
-
-
-
 ?>
 
+<script>
+// Add this before your newassignment function
+var global = "<?php echo $o ?? ''; ?>";    // page parameter
+var global1 = "<?php echo $p ?? ''; ?>";   // page1 parameter  
+var global2 = "<?php echo $n ?? ''; ?>";   // page2 parameter
+
+// Then your original function should work
+function newassignment(){
+    let glob = global;
+    let glob1 = global1;
+    let glob2 = global2;
+   
+    myw = window.open("http://192.168.16.102//dispatcher_assignments.php?page=" + encodeURI(glob) + "&page1=" + encodeURI(glob1) + "&page2=" + encodeURI(glob2), "", "menubar=0,resizable=1,width=600,height=950");
+}
 
 
 
-
-			  
-
-
-
-
-
-
-
-
-
+</script>
 
 </head>
 
-<body     onload="test200()">
+<body onload="test200()">
+
+<!-- Hidden div that will be shown only when printing -->
+<div id="printableAddress" class="printable-content">
+    <h2>Delivery Address</h2>
+    <div style="font-size: 18px; line-height: 1.8; margin: 20px 0;">
+        <strong>Customer:</strong> <?php echo htmlspecialchars($name . ' ' . $lname); ?><br>
+        <strong>Phone:</strong> <?php echo htmlspecialchars($num); ?><br>
+        <?php if($telmobile): ?>
+        <strong>Mobile:</strong> <?php echo htmlspecialchars($telmobile); ?><br>
+        <?php endif; ?>
+        <strong>Address:</strong><br>
+        <div style="margin-left: 20px; font-size: 16px;">
+            <?php echo nl2br(htmlspecialchars($simple_address)); ?>
+        </div>
+        <?php if($near): ?>
+        <strong>Near:</strong> <?php echo htmlspecialchars($near); ?><br>
+        <?php endif; ?>
+        <?php if($remark): ?>
+        <strong>Notes:</strong> <?php echo htmlspecialchars($remark); ?><br>
+        <?php endif; ?>
+        <?php if($delivery_time): ?>
+        <strong>Best Delivery Time:</strong> <?php echo htmlspecialchars($delivery_time); ?><br>
+        <?php endif; ?>
+    </div>
+    <p style="margin-top: 30px; font-size: 12px; color: #666;">
+        Printed on: <?php echo date('Y-m-d H:i:s'); ?>
+    </p>
+</div>
 
 <div class="container text-center"> 
 
-
-
-
-
-
-
-
-
-
-
-   
- 
-<form method="post"   onsubmit="touch() "   action="<?php echo htmlspecialchars("test55.php");?>"   enctype="multipart/form-data"  >
+<form method="post" onsubmit="touch()" action="<?php echo htmlspecialchars("test55.php");?>" enctype="multipart/form-data">
 <table>
 
-<tr><td  valign="top"   style="align: left"  >  
-
-
-
+<tr><td valign="top" style="align: left">  
 
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">TEL</label>
-  <input type="text" class="form-control" id="bp" placeholder="" name="nu"  readonly   >
+  <input type="text" class="form-control" id="bp" placeholder="" name="nu" readonly>
 </div><br>
 
-
- 
-  
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Tel(Office)</label>
-  <input type="text" class="form-control" id="ibp" placeholder="" name="inu"     >
+  <input type="text" class="form-control" id="ibp" placeholder="" name="inu">
 </div><br>
 
-
-
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Tel(Mobile)</label>
-  <input type="text" class="form-control" id="tell" placeholder="" name="tel"     >
+  <input type="text" class="form-control" id="tell" placeholder="" name="tel">
 </div><br>
 
- 
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Tel(Other)</label>
-  <input type="text" class="form-control" id="othh" placeholder="" name="oth"     >
-</div><br>
- 
-
-<div class="mb-3 " >
-  <label for="exampleFormControlInput1" class="form-label">First name </label>
-  <input type="text" class="form-control" id="name" placeholder="" name="na"     >
+  <input type="text" class="form-control" id="othh" placeholder="" name="oth">
 </div><br>
 
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">First name</label>
+  <input type="text" class="form-control" id="name" placeholder="" name="na">
+</div><br>
 
-<div class="mb-3 "  >
+<div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Last name</label>
-  <input type="text" class="form-control" id="lname" placeholder="" name="lna"     >
+  <input type="text" class="form-control" id="lname" placeholder="" name="lna">
 </div><br>
 
-
-<!--div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"></label>
-  <input type="text" class="form-control" id=""   value=" "   placeholder="" name=""     >
-</div><br-->
-
-<!--div class="mb-3 printPageButton" >
-
-
-  
-    <?php
-
- /*
-  
-
-                   
-	 $idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
-   if (mysqli_connect_errno()) {
-     echo "Failed to connect to MySQL: " . mysqli_connect_error();
-     exit();
-   }
-
-              
-       
-                  $stmt = $idr->prepare("select * from client 
-                  where number = ?") ; 
-                  $stmt->bind_param("i",$number );
-        
-                  $stmt->execute();
-
-                  $result = $stmt ->get_result();
-                  
-                  $stmt->close();
- 
-                  while($row=$result->fetch_assoc()){
-         echo" <img src=\"./image/$row[filename]\" onerror=\"this.onerror=null; this.src='./image/default.jpg'\"  class = \"img-circle\"  alt=\"No image\">";
-    
-        }
-
-    */
-      
-    ?>
-   
-   </div><br-->
-
-
-
-<!--div class="mb-3 printPageButton"  >
-       
-            <div class="form-group">
-                <input class="form-control" type="file" name="fileToUpload" value="" />
-            </div>
-  <div-->   
-    
-  
-
-
-
-<p > <label for="exampleFormControlInput1" class="form-label">Category</label>
-
-<select class="form-control"   id="cat"       name="cat">
-
-
+<p><label for="exampleFormControlInput1" class="form-label">Category</label>
+<select class="form-control" id="cat" name="cat">
 <option></option>
-<option  value="Existing Client"   >Existing Client</option>
-<option   value="Ignore Call"     > Ignore Call</option>
-<option   value="Lead"   >Lead</option>
+<option value="Existing Client">Existing Client</option>
+<option value="Ignore Call">Ignore Call</option>
+<option value="Lead">Lead</option>
 </select><p></br>
 
-
-
-
-
-<p ><label for="exampleFormControlInput1" class="form-label">Source</label>
-<select class="form-control" name="src" id="src"  >
-
-
-<option    ><?php echo $source ?></option>
-<option  value="  Blog posts   "   > Blog posts</option>
-<option   value="Landing pages"     > Landing pages</option>
-<option   value="Organic search traffic"   >Organic search traffic</option>
-<option  value="Direct traffic"   >Direct traffic</option>
-<option   value=" PPC ads"     >  PPC ads</option>
-<option   value="Affiliate marketers"   >Affiliate marketers</option>
-<option  value=" Social media channels"   > Social media channels</option>
-
-<option   value="Paid social ads"   >Paid social ads</option>
-<option  value="Voice assistants"   >Voice assistants</option>
-<option   value="Direct marketing"     > Direct marketing</option>
-<option   value="Traditional marketing channels"   >Traditional marketing channels</option>
-<option   value="Tradeshows"     > Tradeshows</option>
-<option   value="Referrals"   >Referrals</option>
+<p><label for="exampleFormControlInput1" class="form-label">Source</label>
+<select class="form-control" name="src" id="src">
+<option><?php echo $source ?></option>
+<option value="Blog posts">Blog posts</option>
+<option value="Landing pages">Landing pages</option>
+<option value="Organic search traffic">Organic search traffic</option>
+<option value="Direct traffic">Direct traffic</option>
+<option value="PPC ads">PPC ads</option>
+<option value="Affiliate marketers">Affiliate marketers</option>
+<option value="Social media channels">Social media channels</option>
+<option value="Paid social ads">Paid social ads</option>
+<option value="Voice assistants">Voice assistants</option>
+<option value="Direct marketing">Direct marketing</option>
+<option value="Traditional marketing channels">Traditional marketing channels</option>
+<option value="Tradeshows">Tradeshows</option>
+<option value="Referrals">Referrals</option>
 </select><p></br>
 
-
-
-
-
-
-<!--p id="form">Company &nbsp &nbsp &nbsp &nbsp   <input class="form"  type="text" name="co" id="company"  size="32" ><p><br/-->
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Company</label>
-  <input type="text" class="form-control" id="company" placeholder="" name="company"     >
+  <input type="text" class="form-control" id="company" placeholder="" name="company">
 </div><br>
 
-
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Job Title</label>
-  <input type="text" class="form-control" id="job" placeholder="" name="job"     >
+  <input type="text" class="form-control" id="job" placeholder="" name="job">
 </div><br>
 
-
-<!--p id="form">E-mail &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input class="form"  type="text" name="em" id="email" size="32" ><p><br/-->
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">E-mail</label>
-  <input type="text" class="form-control" id="email" placeholder="" name="em"     >
+  <input type="text" class="form-control" id="email" placeholder="" name="em">
 </div><br>
 
-
-<!--p id="form">Url &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp   <input class="form" type="text"  name="ur" id="url" size="32" ><p><br/-->
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Url</label>
-  <input type="text" class="form-control" id="url" placeholder="" name="ur"     >
+  <input type="text" class="form-control" id="url" placeholder="" name="ur">
 </div><br>
 
-
-<!--p id="form">Business  &nbsp&nbsp &nbsp &nbsp  &nbsp <input class="form" type="text" name="bu"  id="business" size="33" ><p><br/-->
-<div class="mb-3 printPageButton"  >
+<div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Business</label>
-  <input type="text" class="form-control" id="business" placeholder="" name="bu"     >
+  <input type="text" class="form-control" id="business" placeholder="" name="bu">
 </div><br>
-
-
-
 
 <label for="exampleFormControlInput1" class="form-label">Grade</label>
-
-<select class="form-control" name="grad"  id="grad" >
-
-<option  selected></option>
+<select class="form-control" name="grad" id="grad">
+<option selected></option>
 <option>regular</option>
 <option>gold</option>
 <option>platinum</option>
-
 </select>
 <p></br>
 
-
-
 <label for="exampleFormControlInput1" class="form-label">Type of payment</label>
-<select class="form-control" name="pay"  id="pay"   >
-
-
+<select class="form-control" name="pay" id="pay">
 <option></option>
 <option>Cash</option>
 <option>Visa</option>
-
 </select><p></br>
 
-
-
-
-<!--p id="form">Loyalty card   &nbsp &nbsp &nbsp  &nbsp <input class="form" type="text" name="loy"  id="loy" size="33" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label">Loyalty card </label>
- <select class="form-control" name="loy"  id="loy"  >
-
-
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Loyalty card</label>
+ <select class="form-control" name="loy" id="loy">
 <option></option>
 <option>Yes</option>
 <option>No</option>
-
 </select>
 </div><br>
 
-
-
-
-
 <label for="exampleFormControlInput1" class="form-label">Community</label>
-
-<select class="form-control" name="community"  id="community" >
-
-
+<select class="form-control" name="community" id="community">
 <option></option>
 <option>Yes</option>
 <option>No</option>
-
 </select>
 <p></br>
 
-
-
-
-
-
-
-<label for="exampleFormControlInput1" class="form-label">Salesman  </label>
-
-<select name="driver"   class="form-control">
-<option selected value=" <?php echo  $driv ?>" > <?php echo $driv ?></option>
-
+<label for="exampleFormControlInput1" class="form-label">Dispatcher</label>
+<select name="driver" class="form-control">
+<option selected value="<?php echo $driv ?>"><?php echo $driv ?></option>
 <?php
-
-$idr = mysqli_connect("192.168.20.107", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -603,108 +493,67 @@ $req12=@mysqli_query($idr," SELECT COUNT(idx) as arr FROM drivers; ");
 $lig=@mysqli_fetch_assoc($req12);
 for ($i=1;$i<=$lig["arr"];$i++){
 	$lig1=@mysqli_fetch_assoc($req11);
-	
 	   $_SESSION["$i"]= $lig1["name_d"];
-	 
 	echo " <option value=".  "$i"."/>" .  $_SESSION[$i]. " </option> "; 
-
-
-
-
-	  
  }
-	
-
-
-
-	  
-
-
-
 ?>
+</select>
 
+<label for="exampleFormControlInput1" class="form-label">Best Delivery Time</label>
+<select class="form-control" name="delti" id="delti">
+<option><?php echo $delivery_time ?></option>
+<option value="Morning (8AM-12PM)">Morning (8AM-12PM)</option>
+<option value="Afternoon ((12PM-6PM)">Afternoon (12PM-6PM)</option>
+<option value="Evening (6PM-10PM)">Evening (6PM-10PM)</option>
+<option value="Anytime">Anytime</option>
+</select>
 
-</select><br>
-
-
-
-<!--p id="form">Cuid &nbsp&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp  &nbsp <input class="form" type="text" name="cui"  id="cuid" size="33" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label">Cuid  </label>
-  <input type="text" class="form-control" id="cuid" placeholder="" name="cui"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Cuid</label>
+  <input type="text" class="form-control" id="cuid" placeholder="" name="cui">
 </div><br>
 
-
-
-<!--p id="form">Account  &nbsp&nbsp &nbsp &nbsp  &nbsp <input class="form" type="text" name="acc" value="<?php echo $op ?>" id="acc" size="33" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Account</label>
-  <input type="text" class="form-control" id="acc" value="<?php echo $op ?> " placeholder="" name="acc"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Account</label>
+  <input type="text" class="form-control" id="acc" value="<?php echo $op ?>" placeholder="" name="acc">
 </div><br>
 
-
-
-
-<!--p id="form">Idf &nbsp &nbsp &nbsp &nbsp  &nbsp&nbsp &nbsp &nbsp  &nbsp <input class="form" type="text" name="idf"  id="idf" size="33" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Idf</label>
-  <input type="text" class="form-control" id="idf" placeholder="" name="idf"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Idf</label>
+  <input type="text" class="form-control" id="idf" placeholder="" name="idf">
 </div><br>
-
-
-
 
 </td>
-<td  valign="top"   style="align:left"    >
-<!--p id="form">City &nbsp &nbsp &nbsp <input class="form" type="text" name="cit" id="city" size="33" ><p><br-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> City</label>
-  <input type="text" class="form-control" id="city" placeholder="" name="cit"     >
+<td valign="top" style="align:left">
+
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">City</label>
+  <input type="text" class="form-control" id="city" placeholder="" name="cit">
 </div><br>
 
-
-<!--p id="form">Zone &nbsp &nbsp  <input class="form"  type="text" name="zon" id="zone" size="33" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Zone</label>
-  <input type="text" class="form-control" id="zone" placeholder="" name="zon"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Zone</label>
+  <input type="text" class="form-control" id="zone" placeholder="" name="zon">
 </div><br>
 
-
-<!--p id="form">Street &nbsp &nbsp <input class="form" type="text" name="str"  id="street" size="32" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Street</label>
-  <input type="text" class="form-control" id="street" placeholder="" name="str"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Street</label>
+  <input type="text" class="form-control" id="street" placeholder="" name="str">
 </div><br>
 
-
-
-
-<!--p id="form">Building  <input class="form" type="text"  name="bui" id="building" size="32" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Building</label>
-  <input type="text" class="form-control" id="building" placeholder="" name="bui"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Building</label>
+  <input type="text" class="form-control" id="building" placeholder="" name="bui">
 </div><br>
 
-
-
-
-
-<!--p id="form">Apartment  <input class="form" type="text" name="apa"  id="apa" size="32" ><p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Apartment</label>
-  <input type="text" class="form-control" id="apa" placeholder="" name="apa"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Apartment</label>
+  <input type="text" class="form-control" id="apa" placeholder="" name="apa">
 </div><br>
 
-
-
-
-
-
-<div class="mb-3 printPageButton"  >
-<label for="exampleFormControlInput1" class="form-label"> Floor</label>   
-
-<select class="form-control"  name="flo"  id="">
-
+<div class="mb-3 printPageButton">
+<label for="exampleFormControlInput1" class="form-label">Floor</label>   
+<select class="form-control" name="flo" id="">
 <option selected><?php echo $floor?></option>
 <option>0</option>
 <option>1</option>
@@ -728,77 +577,31 @@ for ($i=1;$i<=$lig["arr"];$i++){
 <option>19</option>
 <option>20</option>
 </select>
-
-
-
-
-
-
-
-
-
 </div><br>
 
-
-
-
-
-
-
-<!--p id="form">Near &nbsp &nbsp &nbsp  <input   class="form" type="text" value="<?php echo $near ?>" name="nea" id="nea" size="32" ></p><br/-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlInput1" class="form-label"> Apartment</label>
-  <input type="text" class="form-control" id="nea" value="<?php echo $near ?>" placeholder="" name="nea"     >
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlInput1" class="form-label">Near</label>
+  <input type="text" class="form-control" id="nea" value="<?php echo $near ?>" placeholder="" name="nea">
 </div><br>
 
-
-
-
-
-<!--p  id="form"> Address  <textarea  class="form" name="ad" id="address"  rows="5" cols="34" ></textarea><br-->
 <div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Address </label>
-  <textarea class="form-control" id="address" rows="10"  name="ad" ></textarea>
+  <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+  <textarea class="form-control" id="address" rows="10" name="ad"></textarea>
 </div><br/>
 
-
-
-
-
-<!--p  id="form"> Address  <textarea  class="form" name="ad2" id="address2"  rows="5" cols="34" ></textarea><br-->
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlTextarea1" class="form-label">Address </label>
-  <textarea class="form-control" id="address2" rows="5"  name="ad2" ></textarea>
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+  <textarea class="form-control" id="address2" rows="5" name="ad2"></textarea>
 </div><br/>
 
-
-
-
-<!--p id="form">Request &nbsp <textarea  class="form" name="rem"  id="remark"  rows="5" cols="34" ></textarea></p><br/><br/><br/-->
-
-<div class="mb-3 printPageButton"  >
-  <label for="exampleFormControlTextarea1" class="form-label">Request </label>
-  <textarea class="form-control" id="remark" rows="5"  name="rem" ></textarea>
+<div class="mb-3 printPageButton">
+  <label for="exampleFormControlTextarea1" class="form-label">Request</label>
+  <textarea class="form-control" id="remark" rows="5" name="rem"></textarea>
 </div><br/>
 
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-
-
-<input type="hidden" id="disa" name="disa"  value="<?php echo $inum?>"           >
-<input type="hidden" id="disa" name="disa1" >
-<input type="hidden" id="disa" name="disa2" >
+<input type="hidden" id="disa" name="disa" value="<?php echo $inum?>">
+<input type="hidden" id="disa" name="disa1">
+<input type="hidden" id="disa" name="disa2">
 <input type="hidden" id="nam" value="<?php echo $name?>">
 <input type="hidden" id="photo" value="<?php echo $pho?>">
 <input type="hidden" id="lnam" value="<?php echo $lname?>">
@@ -832,138 +635,78 @@ for ($i=1;$i<=$lig["arr"];$i++){
 <input type="hidden" id="comm" value="<?php echo $community ?>">
 <input type="hidden" id="nd" value="<?php echo $s?>">
 
-
-
-
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-  
-  
-</select></th>
-
-
-
-
-
 </td>
 </tr>
 <tr>
    <td>
-   
 
 <div id="printDiv">
-
+   <input class="whatsappbutton no-print" name="upload" type="submit" value="U" id="form">
+   <input class="whatsappbutton no-print" name="upload" type="submit" value="Update" id="form">
    
+   <!-- Modified print button that prints only address -->
+   <button type="button" id="form" class="whatsappbutton no-print" onclick="printAddressOnly()">Print Address</button>
+   <button type="button" id="form" class="whatsappbutton no-print" onclick="newassignment()">New Assignment</button>
    
-    <input   class=" whatsappbutton "   name="upload"      type="submit" value="U" id="form">
-   <input   class=" whatsappbutton "   name="upload"      type="submit" value="Update" id="form">
-   <button type="button" id="form" class="whatsappbutton" onclick="printContents(id)">Print</button>
-  
+   <button type="button" id="form" class="whatsappbutton no-print" onclick="quit()">Quit</button>
    
-   
-	
-   
-   
-    <button type="button" id="form"   class="whatsappbutton"  onclick="quit()">Quit</button>
-   
-   </div>
-   </form>
-   </td>
-  <td>
-   </td> 
-   
-   
-   </tr>
-   
-   
-   
-
+</div>
+</form>
+</td>
+<td>
+</td> 
+</tr>
 
 </table>
 
-
-
-
-
 </fieldset>
 
-<!--div class="printPageButton">
-<?php
-/*
-if (!isset($_COOKIE["inu"])){
-	echo "tel(Office) is ready";
-}
-else{
-	echo "tel(Office) is not ready";
-}
+<!-- Your existing WhatsApp section -->
+<div style="padding: 10px; background: lightgreen; margin: 10px;">
+    <h4>📍 Quick Location Send</h4>
+    <?php
+    $link = "https://maps.google.com/maps?q=" . urlencode($simple_address);
+    $fullMessage = $simple_address . "\n---\n" . $link;
+    ?>
+         
+    <p id="addr"><strong>Address:</strong> <?php echo $simple_address; ?></p>
+    <input type="text" id="quickLink" value="<?php echo $fullMessage; ?>" style="width: 60%;" readonly>
+         
+    <button onclick="
+        document.getElementById('quickLink').select();
+        document.execCommand('copy');
+        alert('✅ Link copied! Now open WhatsApp on your PHONE and paste it to the driver.');
+        window.open('https://web.whatsapp.com/', '_blank');
+    " style="background: green; color: white; padding: 10px; border: none;">
+        📱 Copy & Open WhatsApp
+    </button>
+</div>
 
-echo "\r\n"."/"."\r\n";
-
-if (!isset($_COOKIE["tel"])){
-	echo "tel(Mobile) is ready";
-}
-else{
-	echo "tel(Mobile) is not ready";
-}
-
-echo "\r\n"."/"."\r\n";
-if (!isset($_COOKIE["oth"])){
-	echo "tel(Other) is ready";
-}
-else{
-	echo "tel(Other) is not ready";
-}
-*/
-
-?>
-</div-->
-
-<div>
+<?php include 'footer.php';?>
 
 <script>
 
-function sendurl() {
-	
-  var x=document.getElementById("ibp").value;
-  //alert(x);
-  //var x = '03205818';
- //alert(x);
- 
- 
- var xhttp;
- if (window.XMLHttpRequest) {
-   // code for modern browsers
-   xhttp = new XMLHttpRequest();
-   } else {
-   // code for IE6, IE5
-   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
- }
- xhttp.onreadystatechange = function() {
-   if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("").innerHTML = this.responseText;
-   }
- };
- xhttp.open("GET","test55.php?q=" + x, true);
- xhttp.send();
+// Function to print only the address
+function printAddressOnly() {
+    window.print();
 }
 
-
-
-
+function sendurl() {
+    var x=document.getElementById("ibp").value;
+    var xhttp;
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    } else {
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET","test55.php?q=" + x, true);
+    xhttp.send();
+}
 
 var previousValue = $("#ibp").val();
 $("#ibp").keyup(function(e) {
@@ -974,45 +717,22 @@ $("#ibp").keyup(function(e) {
     }
 });
 
-
-
-
-
-</script>
-
-
-
-
-<script>
-
 function sendurl1() {
-	
-  var x=document.getElementById("tell").value;
-  //alert(x);
-  //var x = '03205818';
- //alert(x);
- 
- 
- var xhttp;
- if (window.XMLHttpRequest) {
-   // code for modern browsers
-   xhttp = new XMLHttpRequest();
-   } else {
-   // code for IE6, IE5
-   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
- }
- xhttp.onreadystatechange = function() {
-   if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("").innerHTML = this.responseText;
-   }
- };
- xhttp.open("GET","test55.php?qq=" + x, true);
- xhttp.send();
+    var x=document.getElementById("tell").value;
+    var xhttp;
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    } else {
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET","test55.php?qq=" + x, true);
+    xhttp.send();
 }
-
-
-
-
 
 var previousValue = $("#tell").val();
 $("#tell").keyup(function(e) {
@@ -1023,41 +743,22 @@ $("#tell").keyup(function(e) {
     }
 });
 
-
-
-
-
-</script>
-
-
-<script>
-
 function sendurl2() {
-	
-  var x=document.getElementById("othh").value;
- 
- 
- 
- var xhttp;
- if (window.XMLHttpRequest) {
-   // code for modern browsers
-   xhttp = new XMLHttpRequest();
-   } else {
-   // code for IE6, IE5
-   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
- }
- xhttp.onreadystatechange = function() {
-   if (this.readyState == 4 && this.status == 200) {
-     document.getElementById("").innerHTML = this.responseText;
-   }
- };
- xhttp.open("GET","test55.php?qqq=" + x, true);
- xhttp.send();
+    var x=document.getElementById("othh").value;
+    var xhttp;
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    } else {
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("GET","test55.php?qqq=" + x, true);
+    xhttp.send();
 }
-
-
-
-
 
 var previousValue = $("#othh").val();
 $("#othh").keyup(function(e) {
@@ -1068,159 +769,7 @@ $("#othh").keyup(function(e) {
     }
 });
 
-
-
-
-
 </script>
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
-
-
-
-
-
-
-
- 
-
-   
-        
-   
-       
-   
-   
-   
-   
-   
-    
-
- 
-
-
-
-
-
-
-
-
-
-		
-
-
-		
-
-		
-								
-
-		
-
-		
-
-		
-
-		
-		
-
-		
-		
-
-
-
-
-		
-
-
-	
-
-		
-
-		
-	
-	
-	
-	
-	
-
-		
-
-				
-				
-
-		
-
-		
-
-	
-	
-		
-	
-	
-	
-
-		
-		
-
-
-
-
-		
-		
-		
-		
-
-		
-
-
-		
-
-		
-								
-
-		
-		
-
-
-
-
-		
-
-
-
-
-
-
-
-
-   
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-       
-        
-        
-    

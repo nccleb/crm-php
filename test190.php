@@ -52,7 +52,7 @@ function quit(){
       if(isset($_POST['name'])&&!empty($_POST['name'])){
 	         echo "<h3 id=\"form\">"."Id:".$a =$_POST['name']."</h3>"."<br>"; 
 	  }
-	 $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	 $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

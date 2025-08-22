@@ -75,7 +75,7 @@ $inc = $_SESSION["userinc"];
 
 */
 
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -188,7 +188,7 @@ while($lig=@mysqli_fetch_assoc($req)){
 			  
 	  
 
-         $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+         $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -282,7 +282,7 @@ if(isset($address2) && $address2) $simple_address .= "address2 " . $address2;
 		  exit();
 	  }
 
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -319,7 +319,7 @@ function newassignment(){
     let glob1 = global1;
     let glob2 = global2;
    
-    myw = window.open("http://192.168.16.102//dispatcher_assignments.php?page=" + encodeURI(glob) + "&page1=" + encodeURI(glob1) + "&page2=" + encodeURI(glob2), "", "menubar=0,resizable=1,width=600,height=950");
+    myw = window.open("http://192.168.22.105//dispatcher_assignments.php?page=" + encodeURI(glob) + "&page1=" + encodeURI(glob1) + "&page2=" + encodeURI(glob2), "", "menubar=0,resizable=1,width=600,height=950");
 }
 
 
@@ -483,7 +483,7 @@ function newassignment(){
 <select name="driver" class="form-control">
 <option selected value="<?php echo $driv ?>"><?php echo $driv ?></option>
 <?php
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -595,8 +595,8 @@ for ($i=1;$i<=$lig["arr"];$i++){
 </div><br/>
 
 <div class="mb-3 printPageButton">
-  <label for="exampleFormControlTextarea1" class="form-label">Request</label>
-  <textarea class="form-control" id="remark" rows="5" name="rem"></textarea>
+  <label for="exampleFormControlTextarea1" class="form-label">Notes</label>
+  <textarea class="form-control" id="remark" rows="8" name="rem"></textarea>
 </div><br/>
 
 <input type="hidden" id="disa" name="disa" value="<?php echo $inum?>">

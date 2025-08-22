@@ -188,7 +188,7 @@ function size(){
 function add(){
 	var myw;
 	
-   myw=window.open ("http://192.168.16.102/test275.php?page=<?php echo urlencode($naa) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc) ?>","","menubar=0,resizable=1,width=680,height=950");
+   myw=window.open ("http://192.168.22.105/test275.php?page=<?php echo urlencode($naa) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc) ?>","","menubar=0,resizable=1,width=680,height=950");
 	
 }
 </script>
@@ -575,7 +575,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
 
 
 
- $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -725,7 +725,7 @@ while($lig=mysqli_fetch_assoc($req6)){
 
   <?php
 
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -779,7 +779,7 @@ for ($i=1;$i<=$lig["arr"];$i++){
 
   var r = confirm(\"Missing Entry! Press OK to retry \");
   if (r == true) {
-location.replace (\"http://192.168.16.102/test275.php?page=$naa&page1=$idf&page2=$incc\",\"menubar=0,resizable=1,width=1000,height=950\");
+location.replace (\"http://192.168.22.105/test275.php?page=$naa&page1=$idf&page2=$incc\",\"menubar=0,resizable=1,width=1000,height=950\");
   } else {
   window.close()
   }

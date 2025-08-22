@@ -104,7 +104,7 @@ function refresh(){
 <tr  style="font-size:1vw;background-color:#7ACC72"       ><th>ID</th><th>First name</th><th>Last name</th><th>Company</th><th>Number</th><th>INumber</th><th>Telmobile</th> <th>Telother</th><th>Email</th><th>url</th><th>Business</th> 
     <th>City</th><th>Street</th><th>Floor</th><th>Apartment</th><th>Building</th><th>Zone</th><th>Near</th><th>Remark</th> <th>Address</th><th>Address</th></tr>
 <?php 
-	 $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	 $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

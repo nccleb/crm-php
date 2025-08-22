@@ -98,7 +98,7 @@ tr:nth-child(even) {
 
 	 
 	  //connect  to the database 
-	  $idr=@mysql_connect("192.168.16.102","root","1Sys9Admeen72")|| ("die connection error");
+	  $idr=@mysql_connect("192.168.22.105","root","1Sys9Admeen72")|| ("die connection error");
       @mysql_select_db("nccleb_test");
 	  $sql="SELECT  * FROM internal" ; 
 	  
@@ -126,7 +126,7 @@ tr:nth-child(even) {
 		 
 </table>
 	<?php
-	$idr=@mysql_connect("192.168.16.102","root","1Sys9Admeen72")|| ("die connection error");
+	$idr=@mysql_connect("192.168.22.105","root","1Sys9Admeen72")|| ("die connection error");
 @mysql_select_db("nccleb_test");
 
 

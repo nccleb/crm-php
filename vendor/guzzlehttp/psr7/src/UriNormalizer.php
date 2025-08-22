@@ -49,13 +49,13 @@ final class UriNormalizer
     /**
      * Removes the default host of the given URI scheme from the URI.
      *
-     * Only the "file" scheme defines the default host "192.168.16.102".
-     * All of `file:/myfile`, `file:///myfile`, and `file://192.168.16.102/myfile`
+     * Only the "file" scheme defines the default host "192.168.22.105".
+     * All of `file:/myfile`, `file:///myfile`, and `file://192.168.22.105/myfile`
      * are equivalent according to RFC 3986. The first format is not accepted
      * by PHPs stream functions and thus already normalized implicitly to the
      * second format in the Uri class. See `GuzzleHttp\Psr7\Uri::composeComponents`.
      *
-     * Example: file://192.168.16.102/myfile → file:///myfile
+     * Example: file://192.168.22.105/myfile → file:///myfile
      */
     const REMOVE_DEFAULT_HOST = 8;
 
@@ -134,7 +134,7 @@ final class UriNormalizer
             $uri = $uri->withPath('/');
         }
 
-        if ($flags & self::REMOVE_DEFAULT_HOST && $uri->getScheme() === 'file' && $uri->getHost() === '192.168.16.102') {
+        if ($flags & self::REMOVE_DEFAULT_HOST && $uri->getScheme() === 'file' && $uri->getHost() === '192.168.22.105') {
             $uri = $uri->withHost('');
         }
 

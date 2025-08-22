@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-   $num=$_GET["page"];
+   $num=$_GET["page2"];
    $idf=$_GET["page1"];
  
 
@@ -20,7 +20,7 @@ $_SESSION["anam"]=$idf;
 <?php
 
 
- $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -269,7 +269,7 @@ if($idf=="1" OR $idf=="2"){
 
  if($ace=="##"){
 	
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -305,22 +305,7 @@ order by lcd");
 
 
 
-		// $req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 		
-		// $lig12=@mysqli_fetch_assoc($req12);
-		// for ($i=1;$i<=$lig12["co"];$i++){
-			
-		// 	$lig11=@mysqli_fetch_assoc($req11);
-		// 	   $_SESSION["$i"]= $lig11["name"];
-			   
-			
-		// 		if($agent==$i){
-				
-			  
-		// 	   $driv=$_SESSION["$i"];
-
-		// 		}}
 		
 			   echo "<tr>";
 			   echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -361,7 +346,7 @@ else if($ace=="#" ){
 	echo "req33";
 	
 	
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
    if (mysqli_connect_errno()) {
 	 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	 exit();
@@ -489,7 +474,7 @@ echo "<tr><td style=\"color:blue\">". $count. "</tr>";
 else if($ace=="*#" ){
 
 
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 	if (mysqli_connect_errno()) {
 	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	  exit();
@@ -530,7 +515,7 @@ else if($ace=="*#" ){
 		$agent=$row['idfc'];
 		$number=$row['number'];
 		$incident=$row['incident'];
-		//$_SESSION["incident"]=$nam;
+		
 		$la=$row['la'];
 		 $_SESSION["la"]=$la;
 		$idc=$row['idc'];
@@ -541,23 +526,7 @@ else if($ace=="*#" ){
         $pr=$row['priority'];
     
 
-	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	// $lig12=@mysqli_fetch_assoc($req12);
-	// for ($i=1;$i<=$lig12["co"];$i++){
-		
-	// 	$lig11=@mysqli_fetch_assoc($req11);
-	// 	   $_SESSION["$i"]= $lig11["name"];
-		   
-		
-	// 		if($agent==$i){
-			
-		  
-	// 	   $driv=$_SESSION["$i"];
-	// 		}
-
-	//}
 		
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -570,7 +539,7 @@ else if($ace=="*#" ){
 	  echo "<td>".$row['priority']."</td>";
 	echo"<td>".$row['lcd']."</td>";
 	echo"<td>".$agent."</td>";
-	//echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident&priority=$pr '\"></button>"."</td>";
+	
 	echo "<td>"."<button  class=\"printPageButton\" onclick=\"window.location='test343.php?id=$id&fid=$fid&lcd=$lcd&agent=$agent&status=$status&idc=$idc&tas=$task&la=$la&incident=$incident&priority=$pr '\"></button>"."</td>";
     echo "</tr>";
     
@@ -600,7 +569,7 @@ else if($ace=="#*" ){
 	
 
 
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 	if (mysqli_connect_errno()) {
 	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	  exit();
@@ -640,7 +609,7 @@ else if($ace=="#*" ){
 		$agent=$row['idfc'];
 		$number=$row['number'];
 		$incident=$row['incident'];
-		//$_SESSION["incident"]=$nam;
+		
 		$la=$row['la'];
 		 $_SESSION["la"]=$la;
 		$idc=$row['idc'];
@@ -651,23 +620,6 @@ else if($ace=="#*" ){
         $pr=$row['priority'];
 
 
-
-	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
-	
-	// $lig12=@mysqli_fetch_assoc($req12);
-	// for ($i=1;$i<=$lig12["co"];$i++){
-		
-	// 	$lig11=@mysqli_fetch_assoc($req11);
-	// 	   $_SESSION["$i"]= $lig11["name"];
-		   
-		
-	// 		if($agent=="$i"){
-			
-		  
-	// 	   $driv=$_SESSION["$i"];
-
-	// 		}}
 
 		
 		echo "<tr>";
@@ -707,7 +659,7 @@ else if($ace=="!"  ){
 	
 
 
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 	if (mysqli_connect_errno()) {
 	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	  exit();
@@ -811,7 +763,7 @@ echo "<tr><td style=\"color:blue\">". $count. "</tr>";
 else if($ace=="!!"){
 	
 	
-    $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+    $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -854,22 +806,7 @@ order by lcd");
         $pr=$row['priority'];
 
 
-	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	// $lig12=@mysqli_fetch_assoc($req12);
-	// for ($i=1;$i<=$lig12["co"];$i++){
-		
-	// 	$lig11=@mysqli_fetch_assoc($req11);
-	// 	   $_SESSION["$i"]= $lig11["name"];
-		   
-		
-	// 		if($agent==$i){
-			
-		  
-	// 	   $driv=$_SESSION["$i"];
-
-	// 		}}
 
 		
 		echo "<tr>";
@@ -906,7 +843,7 @@ else if($ace=="@"){
 	
 	
 	
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
    if (mysqli_connect_errno()) {
 	 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	 exit();
@@ -964,22 +901,7 @@ else if($ace=="@"){
 
 
 
-	// 	$req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-	// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 	
-	// $lig12=@mysqli_fetch_assoc($req12);
-	// for ($i=1;$i<=$lig12["co"];$i++){
-		
-	// 	$lig11=@mysqli_fetch_assoc($req11);
-	// 	   $_SESSION["$i"]= $lig11["name"];
-		   
-		
-	// 		if($agent==$i){
-			
-		  
-	// 	   $driv=$_SESSION["$i"];
-	// 		}
-	// 	}
 
 		
 		echo "<tr>";
@@ -1008,7 +930,7 @@ else if($ace=="@"){
 
 $count=mysqli_num_rows($req19);	
 echo  "<tr><td style=\"color:blue\">". $count. "</tr>";
-//echo "19";
+
 }
 
 
@@ -1040,7 +962,7 @@ else if($ace=="*" ){
 	
 	
 	
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
    if (mysqli_connect_errno()) {
 	 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	 exit();
@@ -1074,7 +996,7 @@ else if($ace=="*" ){
 		 $agent=$row['idfc'];
 		 $number=$row['number'];
 		 $incident=$row['incident'];
-		 //$_SESSION["incident"]=$nam;
+		 
 		 $la=$row['la'];
 		  $_SESSION["la"]=$la;
 		 $idc=$row['idc'];
@@ -1086,23 +1008,6 @@ else if($ace=="*" ){
  
 
 
-		// $req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
-		
-		// $lig12=@mysqli_fetch_assoc($req12);
-		// for ($i=1;$i<=$lig12["co"];$i++){
-			
-		// 	$lig11=@mysqli_fetch_assoc($req11);
-		// 	   $_SESSION["$i"]= $lig11["name"];
-			   
-			
-		// 		if($agent==$i){
-				
-			  
-		// 	   $driv=$_SESSION["$i"];
-
-
-		// 		}}
 		
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -1127,7 +1032,6 @@ else if($ace=="*" ){
 
 $count=mysqli_num_rows($req3);	
 echo "<tr><td style=\"color:blue\">". $count. "</tr>";
-//echo "3";
 
 }
 
@@ -1142,7 +1046,7 @@ else if($ace=="**" ){
 	
 	
 	
-	$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
    if (mysqli_connect_errno()) {
 	 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	 exit();
@@ -1179,7 +1083,7 @@ else if($ace=="**" ){
 		 $agent=$row['idfc'];
 		 $number=$row['number'];
 		 $incident=$row['incident'];
-		 //$_SESSION["incident"]=$nam;
+		 
 		 $la=$row['la'];
 		  $_SESSION["la"]=$la;
 		 $idc=$row['idc'];
@@ -1191,22 +1095,7 @@ else if($ace=="**" ){
  
 
 
-		// $req11=@mysqli_query($idr," select * from form_element order by idf asc  ");
-		// $req12=@mysqli_query($idr," SELECT COUNT(idf) as co  FROM form_element; ");
 		
-		// $lig12=@mysqli_fetch_assoc($req12);
-		// for ($i=1;$i<=$lig12["co"];$i++){
-			
-		// 	$lig11=@mysqli_fetch_assoc($req11);
-		// 	   $_SESSION["$i"]= $lig11["name"];
-			   
-			
-		// 		if($agent==$i){
-				
-			  
-		// 	   $driv=$_SESSION["$i"];
-
-		// 		}}
 		
 		echo "<tr>";
     echo "<td>".$row['nom']." ".$row['prenom']."</td>";
@@ -1231,7 +1120,7 @@ else if($ace=="**" ){
 
 $count=mysqli_num_rows($req33);	
 echo "<tr><td style=\"color:blue\">". $count. "</tr>";
-//echo "3";
+
 
 }
 
@@ -1299,9 +1188,9 @@ echo "<tr><td style=\"color:blue\">". $count. "</tr>";
 
 <option value=""  selected>Select something...</option>
 <option value="*#"      >All </option>
-<option value="@"      >All->Caller</option>
+<option value="@"      >Caller</option>
 
-<option value="!!">All Agents->Ticket</option>
+<option value="!!">Ticket</option>
 <option value="!"> Agent->Ticket</option>
 <option value="#*"> Caller->Ticket</option>
 <option value="*"> Agent->Caller</option>
@@ -1344,10 +1233,11 @@ while($row=$result->fetch_assoc()){
 
 
  $y = $row[name];
+ $z = $row[idf];
 
  
  
-echo " <option value=\"$y\">".$y. " </option> "; 
+echo " <option value=\"$z\">".$y."  </option> "; 
 
 
 

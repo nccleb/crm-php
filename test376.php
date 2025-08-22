@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-   $num=$_GET["page"];
+   $num=$_GET["page2"];
    $idf=$_GET["page1"];
  
 
@@ -270,7 +270,7 @@ if($idf=="1" OR $idf=="2"){
 	
 
   
-  $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+  $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
  if (mysqli_connect_errno()) {
    echo "Failed to connect to MySQL: " . mysqli_connect_error();
    exit();
@@ -366,7 +366,7 @@ else if($z=="!"  ){
 	
 	
   
-  $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+  $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
  if (mysqli_connect_errno()) {
    echo "Failed to connect to MySQL: " . mysqli_connect_error();
    exit();
@@ -386,7 +386,7 @@ else if($z=="!"  ){
       $req85=mysqli_query($idr,"select incident,count(*) AS counter
        
       FROM crm c, form_element f
-      where c.idfc = f.name
+      where c.idfc = f.idf
       AND lcd between \"$startdate\" and\"$enddate\" 
       AND idfc= '$idf'	
       AND incident IN ( select comment_text  FROM comments )
@@ -454,7 +454,7 @@ else if($z=="!"  ){
 else if($z=="*" ){
 	
 	
- $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -466,7 +466,7 @@ if(isset($_POST['search'])){
    $idf=$_POST['name'];
    $req84=mysqli_query($idr,"select incident, count(*) AS counter 
    FROM crm c, form_element f
-   where c.idfc = f.name
+   where c.idfc = f.idf
    AND lcd between \"$startdate\" and\"$enddate\" 
    AND idfc= '$idf'	
    AND incident NOT IN ( select comment_text  FROM comments )
@@ -526,7 +526,7 @@ if($count4=="0"  )
 else if($z=="$" ){
 	
 	
-  $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+  $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
  if (mysqli_connect_errno()) {
    echo "Failed to connect to MySQL: " . mysqli_connect_error();
    exit();
@@ -602,7 +602,7 @@ else if($z=="**" ){
 	
 	
 
-  $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+  $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
  if (mysqli_connect_errno()) {
    echo "Failed to connect to MySQL: " . mysqli_connect_error();
    exit();
@@ -667,7 +667,7 @@ else if($z=="**" ){
 else if($z=="@" ){
 	
 	
- $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -680,7 +680,7 @@ if(isset($_POST['search'])){
     $idf=$_POST['name'];
     $req72=mysqli_query($idr,"select incident,count(*) AS counter
     FROM crm c, form_element f
-    where c.idfc = f.name
+    where c.idfc = f.idf
     AND lcd between \"$startdate\" and\"$enddate\" 
     AND idfc= '$idf'
     AND incident = '$t'	
@@ -847,11 +847,14 @@ Agent
 
 <option value=""  selected>Select something...</option>
 <?php
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
 }
+
+
+
 
 
 $stmt = $idr->prepare("SELECT * from form_element ") ; 
@@ -875,18 +878,20 @@ while($row=$result->fetch_assoc()){
 
 
  $y = $row[name];
+ $z = $row[idf];
+
  
  
-echo " <option value=\"$y\">".$y. " </option> "; 
+echo " <option value=\"$z\">".$y."  </option> "; 
 
 
 
    
 }
 
-?>
+?> 
 
-
+ 
 </select>
 
 
@@ -898,7 +903,7 @@ Complaints
  <option   value=" "   >Select something... </option>
 <?php
 
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

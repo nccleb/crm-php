@@ -118,7 +118,7 @@ else{
 	
 	
     echo"<script>if (confirm(\"Missing-Entry!\") == true) {
-  myw=window.open (\"http://192.168.16.102//test411.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
+  myw=window.open (\"http://192.168.22.105//test411.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
   quit();
 } else {
   quit();
@@ -241,7 +241,7 @@ if (!preg_match("/^[0-9a-zA-Z'?!=;~+%`\[\]()$*\"|:.,#&_\s-\p{Arabic} ]*$/u",$dat
 <?php
 
 	
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -279,7 +279,7 @@ $stmt = $idr->prepare("select id  from client where number=? or inumber=? or tel
 
 <?php
 
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -335,7 +335,7 @@ if (mysqli_connect_errno()) {
 }
 else{
 	  echo"<script>if (confirm(\"Missing Entry!\") == true) {
-  myw=window.open (\"http://192.168.16.102//test411.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
+  myw=window.open (\"http://192.168.22.105//test411.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
  
 } else {
   quit();

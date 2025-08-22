@@ -30,7 +30,7 @@ $id=$_GET['id'];
 <?php 
 	  
 	 
-	  $idr=@mysql_connect("192.168.16.102","root","1Sys9Admeen72")|| ("die connection error");
+	  $idr=@mysql_connect("192.168.22.105","root","1Sys9Admeen72")|| ("die connection error");
       @mysql_select_db("nccleb_test");
 	  $sql=("SELECT  * FROM client c,address a
       where c.id=a.id

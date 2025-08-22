@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-    $os=$_SESSION["o"];
-   $ps=$_SESSION["p"];
+  "os=".  $os=$_SESSION["o"];
+ "ps=" .  $ps=$_SESSION["p"];
    
-   echo  $_SESSION["sun"];
+     $_SESSION["sun"];
 ?>
 
 
@@ -34,7 +34,7 @@ session_start();
 
 <?php
 if (isset($_POST['ta'])&&!empty($_POST['id'])&&isset($_POST['id'])&&isset($_POST['la'])&&isset($_POST['in'])&&!empty($_POST['in'])&&isset($_POST['pr'])   ){
- $id=test_input($_POST['id']);
+  $id=test_input($_POST['id']);
   $ca=test_input($_POST['ca']);
   $ba=test_input($_POST['ba']);
   $lc=test_input($_POST['lc']); 
@@ -115,95 +115,59 @@ if (!preg_match("/^[0-9.,\s- ]*$/",$id)) {
   exit();  
 }
 
-
-
-
-
-
-
-
-	
-$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
 }
 
-
-$stmt = $idr->prepare("select id  from client where number=? or inumber=? or telmobile=? or telother=? ");
-
-   $stmt->bind_param("iiii",$id,$id,$id,$id );
-   $stmt->execute();
-
-     $req2= $stmt ->get_result();
-
-     $stmt->close();
-
-					
-	while($lig=@mysqli_fetch_assoc($req2)){
-  $id1=$lig['id'];
- 
- 
-	}
-	 $stmt->close();
-  
-	
-
-	
- 
- 
-   $stmt = $idr->prepare("insert into crm (task,la,incident,status,num,priority,id,idfc) VALUES (?, ?,?,?,?,?,?,?)");
-
-$stmt->bind_param("ssssssss",$ta,$la,$in,$st,$id,$pr,$id1,$ps);
-
-
+// First, find the client ID
+$stmt = $idr->prepare("SELECT id FROM client WHERE number=? OR inumber=? OR telmobile=? OR telother=?");
+$stmt->bind_param("iiii", $id, $id, $id, $id);
 $stmt->execute();
- $req3 = $stmt ->get_result();
-
+$req2 = $stmt->get_result();
 $stmt->close();
- 
-	
-   
- if($id1){
-   $to = "nccleb@gmail.com";
-   $subject = "My subject";
-   $txt = "Your ticket Name is:"." ".$ta."\r\n".
-    "Your Complaint is:"." ".$in;
-   $headers = "From: nccleb@gmail.com" . "\r\n" .
-   "CC: info@nccleb.com";
-   
-   mail($to,$subject,$txt,$headers);
 
-
-	 echo "<p id=\"p\">Data is well inserted!</p>";
-	 echo "<a href=\"test56.php?page=$os & page1=$ps\">INSERT AGAIN</a>"."<br/>";
-	 
-	 echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-
-   
-   
-   
-
-
-
+$id1 = null;
+while($lig = @mysqli_fetch_assoc($req2)) {
+    $id1 = $lig['id'];
+    break; // Just get the first match
 }
-else{
-	echo"<script>alert('Incorrect Entry!')</script>";
-	
-	echo"<script> quit();</script>";
-  
- 
-	}	
 
- mysqli_close($idr); 
+// If client not found, show error
+if (!$id1) {
+    echo "<script>alert('Client not found!')</script>";
+    echo "<script>quit();</script>";
+    mysqli_close($idr);
+    exit();
+}
 
-?>
- 
- </body>
- </html>
- 
+// Insert into CRM
+$stmt = $idr->prepare("INSERT INTO crm (task, la, incident, status, num, priority, id, idfc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssss", $ta, $la, $in, $st, $id, $pr, $id1, $os);
 
-        
-        
-        
+$insertSuccess = $stmt->execute();
+$stmt->close();
+
+if ($insertSuccess) {
+    // Send email only if insert was successful
+    $to = "nccleb@gmail.com";
+    $subject = "My subject";
+    $txt = "Your ticket Name is: " . $ta . "\r\n" .
+           "Your Complaint is: " . $in;
+    $headers = "From: nccleb@gmail.com" . "\r\n" .
+               "CC: info@nccleb.com";
     
+    mail($to, $subject, $txt, $headers);
+
+    echo "<p id=\"p\">Data is well inserted!</p>";
+    echo "<a href=\"test56.php?page=$os&page1=$ps\">INSERT AGAIN</a>" . "<br/>";
+    echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
+} else {
+    echo "<script>alert('Failed to insert data into CRM!')</script>";
+    echo "<script>quit();</script>";
+}
+
+mysqli_close($idr);
+?>
+

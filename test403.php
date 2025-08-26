@@ -18,15 +18,15 @@
 
 <body>
 <?php
-if(isset($_POST['nu'])&&!empty($_POST['nu'])&&isset($_POST['pa'])&&!empty($_POST['pa'])){
+if(isset($_POST['nu'])&&!empty($_POST['nu'])){
   $nu=test_input($_POST['nu']);
 
-   $pa=test_input($_POST['pa']);
+  
 	}
 else{
 	
 	echo"<script>alert('Missing Entry!')</script>";
-	echo"<script>location.replace('test296.php')</script>";
+	echo"<script>location.replace('test402.php')</script>";
     }
 	function test_input($data) {
 		
@@ -43,11 +43,6 @@ if (!preg_match("/^[0-9a-zA-Z.,\s\p{Arabic} ]*$/u",$nu)) {
   exit();  
 }
 
-if (!preg_match("/^[0-9a-zA-Z.,\s\p{Arabic} ]*$/u",$pa)) {
-   echo "<p style=\"color:red;font-size:28px\">Invalid Password format!</p>"."<br/>";
-  echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
 
 
 
@@ -57,7 +52,7 @@ if (!preg_match("/^[0-9a-zA-Z.,\s\p{Arabic} ]*$/u",$pa)) {
 	
 	
 	
-$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -66,8 +61,8 @@ $req=@mysqli_query($idr,"select * from form_element");
 
 while($lig=@mysqli_fetch_assoc($req)){
 	$t=0;
-    if(($nu==$lig['name'])&&($pa==$lig['password'])){
-	$req1=@mysqli_query($idr,"delete from form_element  where name='{$nu}' and password='{$pa}'");
+    if(($nu==$lig['idf'])){
+$req1=@mysqli_query($idr,"delete from form_element  where idf='{$nu}' ");
 	$t=1;
 	break;
 	}	

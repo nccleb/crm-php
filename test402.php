@@ -30,8 +30,8 @@
 
 <tr><td  valign="top"   style="align:left"  >  
 <form method="post" action="<?php echo htmlspecialchars("test403.php");?>" >
-<p >Username  <input class="form-control" type="text" name="nu" id="bp" ><p><br/>   
-<p >Password      <input class="form-control"  name="pa" id="bp" ><p><br/>   
+<p >ID  <input class="form-control" type="text" name="nu" id="bp" ><p><br/>   
+
 
 <input type="submit"  class="whatsappbutton"   value="Delete" >
 

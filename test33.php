@@ -4,400 +4,164 @@
 <?php include('head.php'); ?>
   <link rel="stylesheet" href="css/stylei.css">
   <link rel="stylesheet" href="css/stylei2.css">
-   
   <link rel="stylesheet" href="css/whatsappButton.css" />
   <script src="js/test371.js"></script>
-
-
-
-
-
-
-
-<title></title>
+  <title>CSV Import</title>
 </head>
 <body>
+<div class="jumbotron">
 <?php
-$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
-if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  exit();
-}
-if(isset($_FILES['csv_file'])&&($_FILES['csv_file']['error']==0)){
-	if($_FILES['csv_file']['size']<=8000000){
-
-		$info=pathinfo($_FILES['csv_file']['name']);
-		$target=$info['basename'];
-		
-		$extensionU=$info['extension'];
-        $extensionA=array("csv");
-		if(in_array($extensionU,$extensionA)){
-			move_uploaded_file($_FILES['csv_file']['tmp_name'],"upload/$target");
-			
-		}
-		else{
-	echo "<p style=\"color:red;font-size:28px\">Invalid file type!</p>";
-	 echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();
-}
-		
-		
-	}
-	else{
-	echo "<p style=\"color:red;font-size:28px\">Invalid file size!</p>";
-	 echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();
-}
-}
-else{
-	echo "<p style=\"color:red;font-size:28px\">Error! Please choose a correct file!</p>";
-	 echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csv_file'])) {
+    processCSV();
+} else {
+    displayForm();
 }
 
-
-
-$handle = fopen("upload/$target", "r");
-$t=0;
-   while($file=fgetcsv($handle,",")){
-      
-	$id=$file[0];
-	$nom=$file[2];
-	$prenom=$file[3];
-  $filename=$file[4];
-  $category=$file[5];
-  $source=$file[6];
-	$company=$file[7];
-  $job=$file[8];
-  
-	$number=$file[9];
-	$inumber=$file[10];
-	$email=$file[11];
-	$url=$file[12];
-	$business=$file[13];  
-  $grade=$file[14];
-	$payment=$file[15];
-	$card=$file[16]; 
-  $community=$file[17];
-  $telmobile=$file[18];
-  $telother=$file[19];
-  $city=$file[20];
-	$street=$file[21];
-	
-	$apartment=$file[22];
-	$building=$file[23];
-	$zone=$file[24];
-  $floor=$file[25];
-  $near=$file[26];
-	$remark=$file[27];
-	$address=$file[28];
-	$address2=$file[29];
-	
-  $idf=$file[30];
-	$idx=$file[31];
-	
-  
-	
-	
-	
-	  
-	
-	
-
-
-	
-
-	
-	 if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$id)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Id format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-	   
-	   
-	   
-   
-   
-   
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$nom)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Name format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
+function displayForm() {
+    echo '
+    <form method="POST" enctype="multipart/form-data">
+        <h2>Upload CSV File</h2>
+        <input type="file" name="csv_file" accept=".csv" required>
+        <button type="submit">Upload and Import</button>
+    </form>';
 }
 
- if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$prenom)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Name format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
+function processCSV() {
+    // Database connection
+    $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+    if (mysqli_connect_errno()) {
+        echo "<p style='color:red;font-size:28px'>Failed to connect to MySQL: " . mysqli_connect_error() . "</p>";
+        echo "<button type='button' onclick='quit()'>Quit</button>";
+        exit();
+    }
 
-if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$filename)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Filename format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$category)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Company format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$source)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Company format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-
-
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$company)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Company format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$job)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Company format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-
-
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$number)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Number format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$inumber)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid INumber format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-
-
-if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$email)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid email format!</p>"."<br/>";
-  echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-
-
-if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$url)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid email format!</p>"."<br/>";
-  echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$business)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid business format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }
-
-
-   if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$grade)) {
-    echo "<p style=\"color:red;font-size:28px\">Invalid grade format!</p>"."<br/>";
-    echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-    exit();  
-
-   }
-
-
-   if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$payment)) {
-    echo "<p style=\"color:red;font-size:28px\">Invalid payment format!</p>"."<br/>";
-    echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-    exit();  
-     }
-
-   if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$card)) {
-      echo "<p style=\"color:red;font-size:28px\">Invalid card format!</p>"."<br/>";
-      echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-      exit();  
-       }
-
-
-       if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$community)) {
-        echo "<p style=\"color:red;font-size:28px\">Invalid card format!</p>"."<br/>";
-        echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-        exit();  
-         }
-          
+    // File validation
+    if ($_FILES['csv_file']['error'] != 0) {
+        showError("File upload error: " . $_FILES['csv_file']['error']);
+    }
     
-
-     if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$telmobile)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Telmobile format !</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }
-   
-	   
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$telother)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Telother format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }
-
-  
-	  	
-   
-   
-   
-
-
-
-  
-
+    if ($_FILES['csv_file']['size'] > 8000000) {
+        showError("File size too large! Maximum size is 8MB.");
+    }
     
-  
-
-
-     
-
-
-
-
-   
+    $info = pathinfo($_FILES['csv_file']['name']);
+    $extension = strtolower($info['extension']);
     
-   
+    if ($extension !== 'csv') {
+        showError("Invalid file type! Only CSV files are allowed.");
+    }
     
-   
-   
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$city)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid City format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
+    // Move uploaded file
+    $targetDir = "upload/";
+    if (!file_exists($targetDir)) {
+        mkdir($targetDir, 0777, true);
+    }
+    
+    $targetFile = $targetDir . basename($_FILES['csv_file']['name']);
+    if (!move_uploaded_file($_FILES['csv_file']['tmp_name'], $targetFile)) {
+        showError("Failed to move uploaded file.");
+    }
+    
+    // Process CSV file
+    $handle = fopen($targetFile, "r");
+    if (!$handle) {
+        showError("Cannot open CSV file.");
+    }
+    
+    $successCount = 0;
+    $errorCount = 0;
+    $rowNumber = 0;
+    
+    // Read and process each row
+    while (($file = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        $rowNumber++;
+        
+        // Skip header row
+        if ($rowNumber == 1) {
+            continue;
+        }
+        
+        // Skip empty rows or rows with insufficient data
+        if (count($file) < 38) {
+            $errorCount++;
+            echo "<p style='color:orange'>Row $rowNumber skipped: insufficient columns (" . count($file) . " found, 38 expected)</p>";
+            continue;
+        }
+        
+        // Map CSV columns to database fields (based on your export structure)
+        $id = mysqli_real_escape_string($idr, $file[0]);
+        $con_date = mysqli_real_escape_string($idr, $file[1]);
+        $nom = mysqli_real_escape_string($idr, $file[2]);
+        $prenom = mysqli_real_escape_string($idr, $file[3]);
+        $filename = mysqli_real_escape_string($idr, $file[4]);
+        $category = mysqli_real_escape_string($idr, $file[5]);
+        $source = mysqli_real_escape_string($idr, $file[6]);
+        $company = mysqli_real_escape_string($idr, $file[7]);
+        $job = mysqli_real_escape_string($idr, $file[8]);
+        $number = mysqli_real_escape_string($idr, $file[9]);
+        $inumber = mysqli_real_escape_string($idr, $file[10]);
+        $email = mysqli_real_escape_string($idr, $file[11]);
+        $url = mysqli_real_escape_string($idr, $file[12]);
+        $business = mysqli_real_escape_string($idr, $file[13]);
+        $grade = mysqli_real_escape_string($idr, $file[14]);
+        $payment = mysqli_real_escape_string($idr, $file[15]);
+        $card = mysqli_real_escape_string($idr, $file[16]);
+        $community = mysqli_real_escape_string($idr, $file[17]);
+        $telmobile = mysqli_real_escape_string($idr, $file[18]);
+        $telother = mysqli_real_escape_string($idr, $file[19]);
+        $city = mysqli_real_escape_string($idr, $file[20]);
+        $street = mysqli_real_escape_string($idr, $file[21]);
+        $apartment = mysqli_real_escape_string($idr, $file[22]);
+        $building = mysqli_real_escape_string($idr, $file[23]);
+        $zone = mysqli_real_escape_string($idr, $file[24]);
+        $floor = is_numeric($file[25]) ? intval($file[25]) : 0;
+        $near = mysqli_real_escape_string($idr, $file[26]);
+        $remark = mysqli_real_escape_string($idr, $file[27]);
+        $address = mysqli_real_escape_string($idr, $file[28]);
+        $address_two = mysqli_real_escape_string($idr, $file[29]);
+        $idf = is_numeric($file[30]) ? intval($file[30]) : 0;
+        $idx = is_numeric($file[31]) ? intval($file[31]) : 0;
+        $delivery_instructions = mysqli_real_escape_string($idr, $file[32]);
+        $access_code = mysqli_real_escape_string($idr, $file[33]);
+        $best_delivery_time = mysqli_real_escape_string($idr, $file[34]);
+        $location_type = mysqli_real_escape_string($idr, $file[35]);
+        $parking_notes = mysqli_real_escape_string($idr, $file[36]);
+        $delivery_contact = mysqli_real_escape_string($idr, $file[37]);
+        
+        // Use INSERT IGNORE to avoid errors on duplicate IDs, or use ON DUPLICATE KEY UPDATE
+        $sql = "INSERT IGNORE INTO client (id, con_date, nom, prenom, filename, category, source, company, job, number, inumber, email, url, business, grade, payment, card, community, telmobile, telother, city, street, apartment, building, zone, floor, near, remark, address, address_two, idf, idx, delivery_instructions, access_code, best_delivery_time, location_type, parking_notes, delivery_contact) 
+                VALUES ('$id', '$con_date', '$nom', '$prenom', '$filename', '$category', '$source', '$company', '$job', '$number', '$inumber', '$email', '$url', '$business', '$grade', '$payment', '$card', '$community', '$telmobile', '$telother', '$city', '$street', '$apartment', '$building', '$zone', '$floor', '$near', '$remark', '$address', '$address_two', '$idf', '$idx', '$delivery_instructions', '$access_code', '$best_delivery_time', '$location_type', '$parking_notes', '$delivery_contact')";
+        
+        if (mysqli_query($idr, $sql)) {
+            $successCount++;
+        } else {
+            $errorCount++;
+            echo "<p style='color:red'>Row $rowNumber error: " . mysqli_error($idr) . "</p>";
+        }
+    }
+    
+    fclose($handle);
+    mysqli_close($idr);
+    
+    // Clean up uploaded file
+    unlink($targetFile);
+    
+    // Show results
+    echo "<p style='color:green;font-size:28px'>Import completed!</p>";
+    echo "<p>Successfully imported: $successCount records</p>";
+    if ($errorCount > 0) {
+        echo "<p style='color:orange'>Failed to import: $errorCount records</p>";
+    }
+    echo "<button type='button' onclick='quit()'>Quit</button>";
 }
 
-
-
-    if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$street)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid street format!</p>"."<br/>";
-  echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
+function showError($message) {
+    echo "<p style='color:red;font-size:28px'>$message</p>";
+    echo "<button type='button' onclick='quit()'>Quit</button>";
+    exit();
 }
-
-   
-
-
-    if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$apartment)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Apartment format!</p>"."<br/>";
-  echo "<button type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-}
-
-    if (!preg_match("/^[0-9a-zA-Z'?;~+%`\[\]()$*|:.,#&_\s- ]*$/",$building)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Building format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }
-	   	   
-    if (!preg_match("/^[0-9a-zA-Z'?;~+%`\[\]()$*|:.,#&_\s- ]*$/",$zone)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Zone format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }
-
-
-   if (!preg_match("/^[0-9a-zA-Z()=%`#_?*;\[\]~&'+-\.\p{Arabic} ]*$/u",$floor)) {
-    echo "<p style=\"color:red;font-size:28px\">Invalid Floor format!</p>"."<br/>";
-    echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-    exit();  
-  }
-   
-    if (!preg_match("/^[0-9a-zA-Z'?;~+%`\[\]()$*|:.,#&_\s- ]*$/",$near)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Near format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }  
-   
-   if (!preg_match("/^[0-9a-zA-Z'?;~+%`\[\]()$*|:.,#&_\s- ]*$/",$remark)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Remark format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }  
-    
-    if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$address)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Address format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }  
-   
-   
-   if (!preg_match("/^[0-9a-zA-Z'?!=@;~+%`\[\]()$*|:.,#&_\s-\p{Arabic} ]*$/u",$address2)) {
-  echo "<p style=\"color:red;font-size:28px\">Invalid Address2 format!</p>"."<br/>";
-  echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-  exit();  
-   }  
-   
-   
-   if (!preg_match("/^[0-9a-zA-Z'?;~+%`\[\]()$*|:.,#&_\s- ]*$/",$idf)) {
-    echo "<p style=\"color:red;font-size:28px\">Invalid idf format!</p>"."<br/>";
-    echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-    exit();  
-     } 
-     
-     if (!preg_match("/^[0-9a-zA-Z'?;~+%`\[\]()$*|:.,#&_\s- ]*$/",$idx)) {
-      echo "<p style=\"color:red;font-size:28px\">Invalid idx format!</p>"."<br/>";
-      echo "<button  id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-      exit();  
-       } 
-     
-   
-   
-   
-   $req = $idr->prepare("INSERT INTO client (id ,nom,prenom,filename,category,source,company,job,number,inumber,email,url,business,grade,payment,card,community,telmobile,telother,city,street,apartment,building,zone,floor,near,remark,address,address_two,idf,idx) VALUES (?,?,?,?,?,?,?,?,?,?,?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
-   $req->bind_param("isssssssssssssssssssssssissssii", $id, $nom,$prenom,$filename,$category,$source,$company,$job,$number,$inumber,$email,$url,$business,$grade,$payment,$card,$community,$telmobile,$telother,$city,$street,$apartment,$building,$zone,$floor,$near,$remark,$address,$address2,$idf,$idx);
-
-
-   $req->execute();
-
-
-   $req->close();
-   
-   
-   
-   
-
-
-
-    
- 
-
-   
-	
-	
-   }
-   
-    $req1=mysqli_query($idr,"select * from client");
-	
-	
-	
-	   if(mysqli_num_rows($req1)>0){
-		   echo "<p style=\"color:red;font-size:28px\">data is well inserted</p>";
-		   echo "<button id=\"id\"   type=\"button\" onclick=\"quit()\">Quit</button>";
-		   fclose($handle);
-		   mysqli_close($idr);
-	   }
-	   else{
-		   
-		   echo "<p style=\"color:red;font-size:28px\">data was not inserted</p>";
-		   echo "<button id=\"id\" type=\"button\" onclick=\"quit()\">Quit</button>";
-   }
-   
-      
-	
-
-
-	
-
-?>	
+?>
+</div>
 </body>
-</html>			
-			
-	
+</html>

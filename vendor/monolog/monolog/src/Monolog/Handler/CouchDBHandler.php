@@ -31,7 +31,7 @@ class CouchDBHandler extends AbstractProcessingHandler
     public function __construct(array $options = [], $level = Logger::DEBUG, bool $bubble = true)
     {
         $this->options = array_merge([
-            'host'     => '192.168.22.105',
+            'host'     => '192.168.16.102',
             'port'     => 5984,
             'dbname'   => 'logger',
             'username' => null,

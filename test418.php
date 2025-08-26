@@ -78,7 +78,7 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
 
 <?php
 
- $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -155,7 +155,7 @@ location.replace('test55.php');
 <script>
 function search(){
 	
- window.open ("http://192.168.22.105//search.php","","menubar=0,resizable=1,width=480,height=620");
+ window.open ("http://192.168.16.102//search.php","","menubar=0,resizable=1,width=480,height=620");
 	
 }
 </script> 

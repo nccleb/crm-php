@@ -4,85 +4,71 @@
 <?php include('head.php'); ?>
   <link rel="stylesheet" href="css/stylei.css">
   <link rel="stylesheet" href="css/stylei2.css">
-   
   <link rel="stylesheet" href="css/whatsappButton.css" />
-
   <script type="text/javascript" src="js/test371.js"></script>
-
-
-
-
-<title></title>
+  <title>CRM Data Export</title>
 </head>
 <body>
-
-
 <div class="jumbotron">
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
-backup_tables('192.168.22.105','username','password','blog');
-
-
-function backup_tables($host,$user,$pass,$name,$tables = '*')
+// Function to export CRM table to CSV
+function backup_tables($host, $user, $pass, $name, $tables = '*')
 {
-	
-	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
-if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  exit();
+    // Connect to database using provided credentials
+    $idr = mysqli_connect($host, $user, $pass, $name);
+    if (mysqli_connect_errno()) {
+        return "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    
+    // Fetch data from crm table
+    $result = mysqli_query($idr, 'SELECT * FROM crm');
+    if (!$result) {
+        return "Error in query: " . mysqli_error($idr);
+    }
+    
+    $num_fields = mysqli_num_fields($result);
+    $return = '';
+    
+    // Add headers (only once, before the loop)
+    $return .= "Id, Ticket, Date, Last Activity, Complaints, Status, Number, Priority, Complaint_Status, Number_Id, Agent\n";
+    
+    // Add data rows
+    while ($row = mysqli_fetch_row($result)) {
+        for ($j = 0; $j < $num_fields; $j++) {
+            if (isset($row[$j])) { 
+                $return .= '"' . str_replace('"', '""', $row[$j]) . '"'; 
+            } else { 
+                $return .= '""'; 
+            }
+            if ($j < ($num_fields - 1)) { 
+                $return .= ','; 
+            }
+        }
+        $return .= "\n";
+    }
+    
+    // Generate filename
+    $filename = 'crm-csv-backup-' . time() . '.csv';
+    
+    // Save to file
+    $handle = fopen($filename, 'w+');
+    if (!$handle) {
+        return "Cannot open file for writing: " . $filename;
+    }
+    
+    fwrite($handle, $return);
+    fclose($handle);
+    
+    mysqli_close($idr);
+    
+    return "Export completed successfully! File: " . $filename;
 }
-	
-		$result = mysqli_query($idr,'SELECT * FROM crm ');
-        $return.= "Id, Ticket, Date, Last Activity, Complaints , Status,Number,Priority,Complaint_Status,Number_Id,Agent"."\n";
-		$num_fields = mysqli_num_fields($result);
-		for ($i = 0; $i < $num_fields; $i++) 
-		{
-			while($row = mysqli_fetch_row($result))
-			{
-				
-				
-				for($j=0; $j < $num_fields; $j++) 
-				{
-					
-					
-					
-					if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } else { $return.= '""'; }
-					if ($j < ($num_fields-1)) { $return.= ','; }
-				}
-				$return.= "\n";
-			}
-		}
-		
-		$return= rtrim($return);
-		
-	
-	 $handle = fopen('cim-csv-backup-'.time().'-'.(md5(implode(',',$tables))).'.csv','w+');
-	
-	fwrite($handle,$return);
-	fclose($handle);
-}
-     echo "<p id=\"form\">Export is completed!</p>";
-	 
-	 echo "<button class=\"whatsappbutton\" type=\"button\" onclick=\"quit()\">Quit</button>";
 
-
-
-
-
-
-
-
+// Call the function with your credentials
+$result = backup_tables('192.168.16.102', 'root', '1Sys9Admeen72', 'nccleb_test');
+echo "<p id=\"form\">$result</p>";
+echo "<button class=\"whatsappbutton\" type=\"button\" onclick=\"quit()\">Quit</button>";
 ?>
+</div>
 </body>
 </html>

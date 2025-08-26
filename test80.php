@@ -30,7 +30,7 @@
 	
 	
 	
-$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -42,14 +42,11 @@ $req.=@mysqli_query($idr,"alter table client auto_increment=1");
 
 
 
-$req1=@mysqli_query($idr,"set foreign_key_checks=0");
-$req1.=@mysqli_query($idr,"truncate table address");
-$req1.=@mysqli_query($idr,"set foreign_key_checks=1");
-$req1.=@mysqli_query($idr,"alter table address auto_increment=1");
 
 
 
- if($req&&$req1){
+
+ if($req){
 
 
 	 echo "<p id=\"form\">Table is well deleted!</p>";

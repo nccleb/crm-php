@@ -1,5 +1,9 @@
+
 <?php
 session_start();
+
+
+
 $s=$_SESSION["ses"];
 $C=$_COOKIE["user"];
 //echo $C;
@@ -9,9 +13,8 @@ $_SESSION["o"]=$o;
  $p=$_GET['page'];
 $_SESSION["p"]=$p;
 
- $num9=urldecode($_GET['page2']);
-
-
+ $num9 = urldecode($_GET['page2']);
+    $contact=urldecode($_GET['page3']);
 ?>
 
 <!DOCTYPE html>
@@ -79,9 +82,9 @@ $_SESSION["p"]=$p;
 <form method="post" action="<?php echo htmlspecialchars("test57.php");?>" id="form1">
 
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Contact Number
+  <label for="exampleFormControlInput1" class="form-label">Contact 
   </label>
-  <input type="text" class="form-control" id="bp" placeholder=""  value="<?php echo $num9?>" name="id" id="id"    >
+  <input type="text" class="form-control" id="bp" placeholder=""  value="<?php echo $contact ?>" name="id" id="id"    >
 </div><br>
 
 
@@ -115,7 +118,7 @@ $_SESSION["p"]=$p;
 
 <?php
 
-$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

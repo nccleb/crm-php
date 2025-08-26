@@ -67,7 +67,7 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
  */
 
 
-$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -153,7 +153,7 @@ $_SESSION["id"]=$id;
 			  
 	  
 
-         $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+         $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -247,7 +247,7 @@ while($row=$result->fetch_assoc()){
 
 	<?php
 
-$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -372,7 +372,7 @@ for ($i=1;$i<=$lig12["co"];$i++){
   
 
                    
-	 $idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+	 $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
    if (mysqli_connect_errno()) {
      echo "Failed to connect to MySQL: " . mysqli_connect_error();
      exit();

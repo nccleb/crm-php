@@ -1,26 +1,11 @@
 <?php
 session_start();
- $mapo=$_SESSION["mapi"];
-
+$mapo=$_SESSION["mapi"];
 ?>
 
 <?php $opic=   "c".":"."\\"."Mdr"."\\"."CallerID".date("Y")."-". date("m")."."."txt" ?>
 
-
 <?php
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 $fichier="CaCallStatus.dat";
 $xml=simplexml_load_file($fichier);
@@ -32,190 +17,143 @@ foreach($xml as $CallRecord){
 
 $inc = "81721326";
 
-
-
-
-
-
-/*
-$line = '';
-//$f = fopen("c:\MDR\CallerID2022-09.txt", 'r');
-$f = fopen("$opic", 'r');
-$cursor = -1;
-fseek($f, $cursor, SEEK_END);
-$char = fgetc($f);
-//Trim trailing newline characters in the file
-while ($char === "\n" || $char === "\r") {
-   fseek($f, $cursor--, SEEK_END);
-   $char = fgetc($f);
-}
-//Read until the next line of the file begins or the first newline char
-while ($char !== false && $char !== "\n" && $char !== "\r") {
-   //Prepend the new character
-   $line = $char . $line;
-   fseek($f, $cursor--, SEEK_END);
-   $char = fgetc($f);
-}
-  $inc= substr($line,49,8);
- $inc = trim($inc);
- fclose($f);
- 
-
- 
-
- include('test449.php');
-
- */
- 
- 
- 
-	$idr = mysqli_connect("192.168.22.105", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
 }
 
-
-
-
-	
-	          
-		$stmt = $idr->prepare("SELECT  * FROM client 
+$stmt = $idr->prepare("SELECT  * FROM client 
       
        	where (number=? or inumber=? or telmobile=? or telother=? )   ");
 	  
- 
 $stmt->bind_param("iiii",$inc,$inc,$inc,$inc );
-
 $stmt->execute();
-
 $result = $stmt ->get_result();
-
 $stmt->close();
 
-
-
-
-
+// Initialize variables with default values
+$contact = "No contact found";
+$name = "";
+$lname = "";
+$num = "";
+$inum = "";
+$id = "";
+$company = "";
+$email = "";
+$business = "";
+$grade = "";
+$address = "";
+$url = "";
+$idf = "";
+$city = "";
+$street = "";
+$floor = "";
+$building = "";
+$zone = "";
+$near = "";
+$remark = "";
+$telmobile = "";
+$telother = "";
+$apartment = "";
+$address2 = "";
 
 while($row=$result->fetch_assoc()){
+    $num=$row['number'];
+    if(strlen($num)==7){
+        $num="0".$num;
+    }			  
+    
+    $inum=$row['inumber'];
+    if(strlen($inum)==7){
+        $inum="0".$inum;
+    }			  
+    
+    $name=$row['nom']; 
+    $lname=$row['prenom']; 
+     $contact= $name." ".$lname." ".$num;
+    $id=$row['id'];
+    $_SESSION["id"]=$id;
+    $company=$row['company'];
+    $email=$row['email'];
+    $business=$row['business'];
+    $grade=$row['grade'];
+    $address=$row['address'];
+    $url=$row['url'];
+    if($url) {
+        $url = substr($url, 7);
+    }
+    $idf=$row['idf'];
+    $city=$row['city'];
+    $street=$row['street'];
+    $floor=$row['floor'];
+    $building=$row['building'];
+    $zone=$row['zone'];
+    $near=$row['near'];
+    $remark=$row['remark'];
+    $telmobile=$row['telmobile'];
+    if(strlen($telmobile)==7){
+        $telmobile="0".$telmobile;
+    }			  
+    
+    $telother=$row['telother'];
+    if(strlen($telother)==7){
+        $telother="0".$telother;
+    }			  
+    
+    $apartment=$row['apartment'];
+}
 
-	  
-	          
-			  
-	         
-              $num=$row['number'];
-			  
-              if(strlen($num)==7){
-              $num="0".$num;
-			  }			  
-			  
-			  
-			  $inum=$row['inumber'];
-			  
-              if(strlen($inum)==7){
-              $inum="0".$inum;
-			  }			  
-             $name=$row['nom']; 
-			  $id=$row['id'];
-		      $_SESSION["id"]=$id;
-              $company=$row['company'];
-			  $email=$row['email'];
-			  $business=$row['business'];
-			  $grade=$row['grade'];
-			  $address=$row['address'];
-			  $url=$row['url'];
-			  $url = substr($url, 7);
-			  $idf=$row['idf'];
-			  $city=$row['city'];
-			  $street=$row['street'];
-			  $floor=$row['floor'];
-			  $building=$row['building'];
-			  $zone=$row['zone'];
-			  $near=$row['near'];
-			  $remark=$row['remark'];
-			  $idf=$row['idf'];
-			  $telmobile=$row['telmobile'];
-			  if(strlen($telmobile)==7){
-              $telmobile="0".$telmobile;
-			  }			  
-			  
-			  $telother=$row['telother'];
-			  if(strlen($telother)==7){
-              $telother="0".$telother;
-			  }			  
-			  
-			 $apartment=$row['apartment'];
-			  
-			  
-		}
-	 
-	  
-	  
-// SIMPLE VERSION - Just add this to your test204.php after the existing client query
+// Set session contact after processing
+$_SESSION["contact"] = $contact;
 
-// Build full address from existing variables (you already have these)
- 
-			  
-			 $simple_address = "";
+// Build full address from existing variables
+$simple_address = "";
 if(isset($city) && $city) $simple_address .= $city. ", ";
 if(isset($zone) && $zone) $simple_address .="Zone " . $zone. ", ";       
 if(isset($street) && $street) $simple_address .="Street " . $street . ", ";
 if(isset($building) && $building) $simple_address .= "Building " . $building . ", ";
- if(isset($apartment) && $apartment) $simple_address .="Apartment " . $apartment . ", ";
+if(isset($apartment) && $apartment) $simple_address .="Apartment " . $apartment . ", ";
 if(isset($floor) && $floor) $simple_address .= "Floor " . $floor . ", ";
 if(isset($near) && $near) $simple_address .="Near " . $near. ", ";
 if(isset($address) && $address) $simple_address .= "address1 " . $address . ", ";
 if(isset($address2) && $address2) $simple_address .= "address2 " . $address2;
+
 ?>
-	 
-	
-	  
-	 
-		  
- 
 
 <?php
- $_SESSION["ses"]=$_POST['bp'];
-  $s=$_SESSION["ses"];
+$_SESSION["ses"]=$_POST['bp'];
+$s=$_SESSION["ses"];
 $cookie_name = "user";
 $cookie_value = $_POST['bp'];
 setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/"); 
   
-    $nam=$_GET['pag'];
-   if($nam == ""){
+$nam=$_GET['pag'];
+if($nam == ""){
     exit( "sorry! You have to login first in mypwca!"    );
-    
-   }
-  $idf=$_GET['pag1'];
+}
+$idf=$_GET['pag1'];
 
 $_SESSION["oop"]=$nam;
 $_SESSION["ooq"]=$idf;
 
-
 $cookie_name = "oop";
- $cookie_value =$nam;
+$cookie_value =$nam;
 setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/"); 
 
- 
 $cookie_name = "ooq";
 $cookie_value = $idf;
 setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/"); 
 
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-
 <style>
         body {
             background-color: #f8f9fa;
-            /*padding: 20px;*/
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
@@ -308,7 +246,6 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
             margin-top: 5px;
         }
         
-        /* Animation for focus */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(33, 150, 243, 0); }
@@ -319,7 +256,6 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
             animation: pulse 1.5s infinite;
         }
         
-        /* Responsive adjustments */
         @media (max-width: 576px) {
             .form-container {
                 padding: 20px 15px;
@@ -329,13 +265,9 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
                 padding: 12px 14px;
             }
         }
-    </style>
+</style>
 
-
-
-
- <style>
-        /* Add these styles to your existing CSS */
+<style>
         .save-status {
             padding: 8px 12px;
             border-radius: 5px;
@@ -386,53 +318,32 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/");
             margin-top: 5px;
             display: none;
         }
-    </style>
+</style>
 
-
-
-
-
-
-
-
-   
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-
-
-
-
-
-
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/test371.js"></script>
-		
 
 <link rel="stylesheet" href="css/stylei.css">
 <link rel="stylesheet" href="css/stylei2.css">
 
-
 <input type="hidden" id="demo" value="<?php echo $nam ?>"></input>
 <input type="hidden" id="demo1" value="<?php echo $idf ?>"></input>
 <input type="hidden" id="demo2" value="<?php echo $inc ?>"></input>
-
+<input type="hidden" id="demo3" value="<?php echo $contact ?>"></input>
 
 <script>
 const global = document.getElementById("demo").value;
 const global1 = document.getElementById("demo1").value;
 const global2 = document.getElementById("demo2").value;
-
+const global3 = document.getElementById("demo3").value;
 </script>
 
-
 <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        /* Blue navbar styling */
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
         .navbar-blue {
             background: linear-gradient(135deg, #1976D2 0%, #0D47A1 100%);
             border: none;
@@ -509,7 +420,6 @@ const global2 = document.getElementById("demo2").value;
             padding: 15px 15px;
         }
         
-        /* Special styling for the login info */
         .login-info {
             background-color: rgba(255, 255, 255, 0.15);
             border-radius: 4px;
@@ -519,7 +429,6 @@ const global2 = document.getElementById("demo2").value;
             font-weight: 500;
         }
         
-        /* Blue submenu headers */
         .blue-subheader {
             background-color: #1976D2;
             color: white !important;
@@ -536,12 +445,10 @@ const global2 = document.getElementById("demo2").value;
             padding-left: 20px !important;
         }
         
-        /* Add some spacing improvements */
         .navbar-blue .dropdown-menu {
             min-width: 220px;
         }
         
-        /* Responsive adjustments */
         @media (max-width: 767px) {
             .navbar-blue .navbar-nav .open .dropdown-menu > li > a {
                 color: #333;
@@ -558,27 +465,9 @@ const global2 = document.getElementById("demo2").value;
                 display: inline-block;
             }
         }
-    </style>
+</style>
 
-
-
-
-
-
-
-
-
- 
-
-	
-
-
-
-
-
-      <style>
-
-
+<style>
         .btn-modern {
             border-radius: 10px;
             padding: 12px 25px;
@@ -606,599 +495,337 @@ const global2 = document.getElementById("demo2").value;
             background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
         }
 
-        
-
-
         .action-buttons {
             background: var(--light-bg);
             border-radius: 15px;
             padding: 20px;
         }
-
         
-    </style>
- 
-  
-  
-  
+       
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+</style>
+<style>
+/* Footer spacing fix */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+footer.container-fluid {
+    margin: 0 !important;
+    padding: 20px 0 0 0 !important;
+    background: #343a40;
+    color: white;
+}
+
+footer.container-fluid p {
+    margin: 5px 0;
+    color: white !important;
+}
+</style>
+
 </head>
 <body onload="on(); loadSavedNotes();">
-    <!-- Your existing navbar and other content -->
 
-    
-   
- <!-- Blue Navigation Bar -->
-    <nav class="navbar navbar-blue">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>   
-                    <span class="icon-bar"></span>       
-                </button>
-                <a class="navbar-brand" href="#">
-                    <i class="fas fa-headset"></i> NCC
-                </a>
-            </div>
+<!-- Blue Navigation Bar -->
+<nav class="navbar navbar-blue">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>   
+                <span class="icon-bar"></span>       
+            </button>
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-headset"></i> NCC 
+            </a>
+        </div>
 
-            <div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <span class="login-info">
-                            <i class="fas fa-user"></i> Login as <?php echo $nam ?>
-                        </span>
-                        <li><a href="login200.php">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a></li>
-                    </li>
-                </ul>
-            </div>
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <span class="login-info">
+                        <i class="fas fa-user"></i> Login as <?php echo htmlspecialchars($nam) ?>
+                    </span>
+                    <li><a href="login200.php">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a></li>
+                </li>
+            </ul>
+        </div>
 
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fas fa-ellipsis-h"></i> More <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" onclick="javascript:search5()">First name</a></li>
-                            <li><a href="#" onclick="javascript:search15()">Last name</a></li>
-                            <li><a href="#" onclick="javascript:search16()">Company</a></li>
-                            <li><a href="#" onclick="javascript:search2()">Business</a></li>
-                            <li><a href="#" onclick="javascript:del()">Del</a></li>
-                        </ul>
-                    </li>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fas fa-ellipsis-h"></i> More <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="javascript:search5()"><i class="fas fa-user"></i> First name</a></li>
+                        <li><a href="#" onclick="javascript:search15()"><i class="fas fa-user-tag"></i> Last name</a></li>
+                        <li><a href="#" onclick="javascript:search16()"><i class="fas fa-building"></i> Company</a></li>
+                        <li><a href="#" onclick="javascript:search2()"><i class="fas fa-briefcase"></i> Business</a></li>
+                        <li><a href="#" onclick="javascript:del()"><i class="fas fa-trash"></i> Delete</a></li>
+                    </ul>
+                </li>
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fas fa-tasks"></i> Dispatcher <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" onclick="javascript:dispatch()">New Assignment</a></li>
-                        </ul>
-                    </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fas fa-tasks"></i> Dispatcher <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="javascript:dispatch()"><i class="fas fa-plus-circle"></i> New Assignment</a></li>
+                    </ul>
+                </li>
 
-                    
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fas fa-chart-bar"></i> Reports <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="javascript:list1()"><i class="fas fa-list"></i> Simple List(Clients)</a></li>
+                        <li class="blue-subheader">Tickets</li>  
+                        <li><a href="#" onclick="javascript:list79()"><i class="fas fa-ticket-alt"></i> Simple List(Tickets)</a></li>
+                        <li><a href="#" onclick="javascript:tick79()"><i class="fas fa-folder-open"></i> Open Tickets</a></li>
+                        <li><a href="#" onclick="javascript:incidents()"><i class="fas fa-info-circle"></i> Tickets Details</a></li>
+                        <li><a href="#" onclick="javascript:incidents2()"><i class="fas fa-chart-pie"></i> Statistics(Tickets)</a></li> 
+                    </ul>
+                </li>
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fas fa-chart-bar"></i> Reports <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" onclick="javascript:list1()">Simple List(Clients)</a></li>
-                            <li class="blue-subheader">Tickets</li>  
-                            <li><a href="#" onclick="javascript:list79()">Simple List(Tickets)</a></li>
-                            <li><a href="#" onclick="javascript:tick79()">Open Tickets</a></li>
-                                   
-                            <li><a href="#" onclick="javascript:incidents()">Tickets Details</a></li>
-                            <li><a href="#" onclick="javascript:incidents2()">Statistics(Tickets)</a></li> 
-                        </ul>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fas fa-cog"></i> System <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="blue-subheader">Users</li>
+                        <li><a href="#" onclick="javascript:add3()"><i class="fas fa-user-plus"></i> Add User</a></li>
+                        <li><a href="#" onclick="javascript:add22()"><i class="fas fa-users"></i> Users</a></li>
                         
-                    </li>
+                        <li class="blue-subheader">Agents</li>
+                        <li><a href="#" onclick="javascript:search10()"><i class="fas fa-user-tie"></i> Agent</a></li>
+                        <?php if($nam=="user"): ?>
+                            <!--li><a href="#" onclick="javascript:adag()"><i class="fas fa-user-plus"></i> Add Agent</a></li-->
+                            <li><a href="#" onclick="javascript:delag()"><i class="fas fa-user-minus"></i> Delete Agent</a></li>
+                            <li><a href="#" onclick="javascript:delal()"><i class="fas fa-users-slash"></i> Delete All</a></li>
+                        <?php endif; ?>
+                        
+                        <li class="blue-subheader">Complaints</li>
+                        <li><a href="#" onclick="javascript:add322()"><i class="fas fa-exclamation-triangle"></i> Complaints</a></li>
+                        <li><a href="#" onclick="javascript:add33()"><i class="fas fa-plus"></i> Add Complaint</a></li>
+                        <li><a href="#" onclick="javascript:del_ag1()"><i class="fas fa-trash-alt"></i> Delete Complaint</a></li>
+                        <li><a href="#" onclick="javascript:del_al1()"><i class="fas fa-trash"></i> Delete All</a></li>
+                    </ul>
+                </li>
 
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fas fa-cog"></i> System <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="blue-subheader">Users</li>
-                            <li><a href="#" onclick="javascript:add3()">Add_user</a></li>
-                            <li><a href="#" onclick="javascript:add22()">Users</a></li>
-                            
-                            <li class="blue-subheader">AGENTS</li>
-                            <li><a href="#" onclick="javascript:search10()">Agent</a></li>
-                            <?php if($nam=="admin"): ?>
-                                <li><a href="#" onclick="javascript:adag()">Add_agent</a></li>
-                                <li><a href="#" onclick="javascript:delag()">Del_agent</a></li>
-                                <li><a href="#" onclick="javascript:delal()">Del-ALL</a></li>
-                            <?php endif; ?>
-                            <li class="blue-subheader">Complaints</li>
-                            <li> <a href="#" onclick="javascript:add322()">Complaints</a>  </li>
-                            <li>  <a href="#" onclick="javascript:add33()">Add-Complaint</a></li>
-                            
-                            <li>  <a href="#" onclick="javascript:del_ag1()">Delete Complaint</a></li>
-                            <li>  <a href="#" onclick="javascript:del_al1()">Delete ALL</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fas fa-database"></i> Data <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="blue-subheader">Import</li>
-                            <li><a href="#" onclick="javascript:Import()">Client</a></li>
-                            
-                            <li class="blue-subheader">Export</li>
-                            <li><a href="#" onclick="javascript:Export()">Client(Raw)</a></li>
-                            
-                            <li class="blue-subheader">Operations</li>
-                            <li><a href="#" onclick="javascript:bb()">BACK-UP</a></li>
-                            <li><a href="#" onclick="javascript:ImportSql()">RECOVERY</a></li>
-                             <?php
-         if( $nam=="user"){
-
-
-
-         echo " 
-        
-         <li class=\"blue-subheader\" >DELETE</li>
-  
-      <li> <a href=\"#\" onclick=\"javascript:delAll()\">Delete All CLIENT</a></li>
-      <li> <a href=\"#\" onclick=\"javascript:delAll2()\">Delete All COMPLAINTS</a></li>
-      <!--li> <a href=\"#\" onclick=\"javascript:delAll6()\">Delete All DEALS</a></li>
-      <li> <a href=\"#\" onclick=\"javascript:delAll5()\">Delete All POSTS</a></li-->
-     
-              ";
-		
-	
-		  
-		  
-         }
-         ?>
-          
-                           
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fas fa-database"></i> Data <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="blue-subheader">Import</li>
+                        <li><a href="#" onclick="javascript:Import()"><i class="fas fa-file-import"></i> Import Client</a></li>
+                        <li><a href="#" onclick="javascript:Importc1()"><i class="fas fa-file-import"></i> Import Complaints</a></li>
+                        
+                        <li class="blue-subheader">Export</li>
+                        <li><a href="#" onclick="javascript:Exportd()"><i class="fas fa-file-export"></i> Export Client</a></li>
+                        <li><a href="#" onclick="javascript:Exportc1()"><i class="fas fa-file-export"></i> Export Complaints</a></li>
+                        
+                        <li class="blue-subheader">Operations</li>
+                        <li><a href="#" onclick="javascript:bb()"><i class="fas fa-save"></i> Backup</a></li>
+                        <li><a href="#" onclick="javascript:ImportSql()"><i class="fas fa-undo"></i> Recovery</a></li>
+                        
+                        <?php if($nam=="user"): ?>
+                            <li class="blue-subheader">Danger Zone</li>
+                            <li><a href="#" onclick="javascript:delAll()" style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> Delete All Clients</a></li>
+                            <li><a href="#" onclick="javascript:delAll2()" style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> Delete All Complaints</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div >
-
-
-  <table  style="background:#f8f8f8"  class="table"    id="comment_form"  >
-  <tr >
- 
-  <th style="width:20%;background:lightgrey "    >
-
-  <div class="form-container">
-
-        
-        <div class="form-group-enhanced">
-            <label for="bp" class="form-label-enhanced">
-                <i class="fas fa-phone"></i> INCOMING CALL
-            </label>
-            <input type="text" class="form-control-enhanced" id="bp" placeholder="" name="bp">
-            <span class="input-icon"><i class="fas fa-phone-volume"></i></span>
-            
-           
-        </div>
-        
-        <div class="form-group-enhanced">
-            <label for="ap" class="form-label-enhanced">
-                <i class="fas fa-user"></i> CUSTOMER NAME
-            </label>
-            <input type="text" class="form-control-enhanced" id="ap" placeholder="" name="ap">
-            <span class="input-icon"><i class="fas fa-user-circle"></i></span>
-            
-        </div>
-        
-        
-
-
-        
-
-   <!--div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Last Contacted</label>
- <input style="font-size:13px;" id="lc" rows="5"  name="lc" ></input>
-</div>
-
-  
-
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Ticket Name</label>
- <input style="font-size:13px;" id="iss" rows="5"  name="iss" ></input>
-</div>
-
-
-
-   <div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Complaint </label>
- <textarea style="font-size:13px;" id="comp" rows="5"  name="comp" ></textarea>
-</div>
-
-
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">Status..</label>
-  <input  style="font-size:13px;"   id="stat" rows="5"  name="stat" ></input>
-</div-->
-
-
- 
-      </th>
-
-      <th>
-
-   
-  
-      
-   
-  
-  
-   
-  
-   
-  
-   
-
-  
-  
-  
-  
-  
-	  
-	    
-		
-
-
- 
-
-
-
-
-<div class="mb-3">
- 
-
-  <textarea   style="background: #f1f5f9;"    class="form-control" id="cp" rows="38"  name="cp"      ></textarea>
-</div>
-
-
-
-
-</th>
-
-<th  style="width:30%"        >
-
-
-<!--button   style="color:black"           class="btn btn-success   btn-block "      type="button" id="form" onclick="refresh()">R</button> 
-           
-              <ul   class="list-group">
-              <li      class="list-group-item "><a   style="color:black"       href="#" onclick="javascript:add110()">Add Client</a></li>
-                  
-			    <li class="list-group-item "><a  style="color:black"     href="#" onclick="javascript:number23()">Edit Client(Actual)</a></li>
-               
-				<li class="list-group-item "><a  style="color:black"         href="#" onclick="javascript:number22()">Search Client(Number) </a></li-->
- <div class="row">
-            <div class="col-lg-8">
-        <div class="mb-3">
-            <textarea class="form-control form-control-modern" id="notesArea" rows="2" 
-                      placeholder="Notes and comments..." style="background: #f1f5f9;"></textarea>
-            <div class="autosave-indicator" id="autosaveIndicator">Auto-saved</div>
-        </div>
-        
-        <!-- Add this button below your textarea -->
-        <button class="save-button" onclick="saveNotes()">
-            <i class="fas fa-save me-2"></i>Save Notes
-        </button>
-        
-        <div class="save-status" id="saveStatus"></div>
     </div>
+</nav>
 
-    <!-- Your existing content -->
 
-    <script>
-        // Add this script to handle saving notes
-        let notesSaveTimeout;
-        let currentClientId = "<?php echo isset($id) ? $id : 'default'; ?>";
-        let currentAgent = "<?php echo $nam; ?>";
-        
-        // Function to save notes
-        function saveNotes() {
-            const notesText = document.getElementById('notesArea').value;
-            
-            // Create form data
-            const formData = new FormData();
-            formData.append('client_id', currentClientId);
-            formData.append('agent', currentAgent);
-            formData.append('notes', notesText);
-            formData.append('action', 'save_notes');
-            
-            // Send AJAX request
-            fetch('save_notes.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const statusElement = document.getElementById('saveStatus');
-                if (data.success) {
-                    statusElement.className = 'save-status save-success';
-                    statusElement.innerHTML = '<i class="fas fa-check-circle"></i> Notes saved successfully!';
-                    statusElement.style.display = 'block';
+<div style="margin-bottom: 0; padding-bottom: 0;">
+    <table style="background:#f8f8f8; margin-bottom: 0;" class="table" id="comment_form">
+        <tr>
+            <th style="width:20%;background:lightgrey">
+                <div class="form-container">
+                    <div class="form-group-enhanced">
+                        <label for="bp" class="form-label-enhanced">
+                            <i class="fas fa-phone"></i> INCOMING CALL
+                        </label>
+                        <input type="text" class="form-control-enhanced" id="bp" placeholder="" name="bp">
+                        <span class="input-icon"><i class="fas fa-phone-volume"></i></span>
+                    </div>
                     
-                    // Hide status after 3 seconds
-                    setTimeout(() => {
-                        statusElement.style.display = 'none';
-                    }, 3000);
-                } else {
-                    statusElement.className = 'save-status save-error';
-                    statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error saving notes: ' + data.message;
-                    statusElement.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                const statusElement = document.getElementById('saveStatus');
-                statusElement.className = 'save-status save-error';
-                statusElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> Network error saving notes';
-                statusElement.style.display = 'block';
-                console.error('Error:', error);
-            });
-        }
-        
-        // Function to load saved notes
-        function loadSavedNotes() {
-            // Create form data
-            const formData = new FormData();
-            formData.append('client_id', currentClientId);
-            formData.append('action', 'load_notes');
-            
-            // Send AJAX request
-            fetch('save_notes.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.notes) {
-                    document.getElementById('notesArea').value = data.notes;
-                }
-            })
-            .catch(error => {
-                console.error('Error loading notes:', error);
-            });
-        }
-        
-        // Auto-save functionality (optional)
-        function setupAutoSave() {
-            const notesArea = document.getElementById('notesArea');
-            const autosaveIndicator = document.getElementById('autosaveIndicator');
-            
-            notesArea.addEventListener('input', function() {
-                // Clear previous timeout
-                clearTimeout(notesSaveTimeout);
-                
-                // Set new timeout for auto-save (5 seconds after typing stops)
-                notesSaveTimeout = setTimeout(function() {
-                    saveNotes();
-                    
-                    // Show auto-save indicator
-                    autosaveIndicator.style.display = 'block';
-                    setTimeout(() => {
-                        autosaveIndicator.style.display = 'none';
-                    }, 2000);
-                }, 5000);
-            });
-        }
-        
-        // Initialize auto-save when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            setupAutoSave();
-        });
-        
-        // Also save notes when leaving the page
-        window.addEventListener('beforeunload', function() {
-            const notesText = document.getElementById('notesArea').value;
-            if (notesText.trim() !== '') {
-                // Use synchronous AJAX to ensure data is saved before leaving
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', 'save_notes.php', false);
-                
-                const formData = new FormData();
-                formData.append('client_id', currentClientId);
-                formData.append('agent', currentAgent);
-                formData.append('notes', notesText);
-                formData.append('action', 'save_notes');
-                
-                xhr.send(formData);
-            }
-        });
-    </script>
+                    <div class="form-group-enhanced">
+                        <label for="ap" class="form-label-enhanced">
+                            <i class="fas fa-user"></i> CUSTOMER NAME
+                        </label>
+                        <input type="text" class="form-control-enhanced" id="ap" placeholder="" name="ap">
+                        <span class="input-icon"><i class="fas fa-user-circle"></i></span>
+                    </div>
+                </div>
+            </th>
 
+            <td style="vertical-align: top; width: 45%;">
+                <div style="margin: 10px;">
+                    <label for="cp" style="font-weight: bold; color: #1976D2; display: block; margin-bottom: 10px;">
+                        <i class="fas fa-comments"></i> Customer Details
+                    </label>
+                    <textarea style="background: #f1f5f9; border: 2px solid #e3f2fd; border-radius: 8px; padding: 15px; font-size: 14px; line-height: 1.5;" 
+                              class="form-control" id="cp" rows="35" name="cp" 
+                              placeholder="Enter call details, customer concerns, resolution steps, follow-up actions..."></textarea>
+                </div>
+            </td>
 
+            <td style="width:30%; vertical-align: top;">
+                <div style="margin: 10px;">
+                    <!-- Notes Section -->
+                    <div style="margin-bottom: 20px;">
+                        <label for="notesArea" style="font-weight: bold; color: #1976D2; display: block; margin-bottom: 8px;">
+                            <i class="fas fa-sticky-note"></i> Agent Notes
+                        </label>
+                        <textarea class="form-control" id="notesArea" rows="4" 
+                                  placeholder="Quick notes, reminders, follow-up tasks..." 
+                                  style="background: #f1f5f9; border: 2px solid #e3f2fd; border-radius: 8px; padding: 12px; font-size: 13px;"></textarea>
+                        <div class="autosave-indicator" id="autosaveIndicator">Auto-saved</div>
+                        
+                        <button class="save-button" onclick="saveNotes()">
+                            <i class="fas fa-save"></i> Save Notes
+                        </button>
+                        
+                        <div class="save-status" id="saveStatus"></div>
+                    </div>
 
+                    <!-- Action Buttons -->
+                    <div class="action-buttons" style="background: #f8f9fa; border-radius: 12px; padding: 15px; margin-bottom: 20px;">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success btn-modern" style="width:100%; margin-bottom: 8px;" onclick="refresh()">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
 
+                            <button class="btn btn-primary btn-modern" style="width:100%; margin-bottom: 8px;" onclick="javascript:add110()">
+                                <i class="fas fa-user-plus"></i> New Client
+                            </button>
 
-   
-<div class="col-lg-4">
-  <div class="action-buttons">
-    <div class="d-grid gap-2">
-      <button class="btn btn-success btn-modern" style="width:100%" onclick="refresh()">
-        <i class="fas fa-sync-alt me-2"></i>R
-      </button>
-
-      <button class="btn btn-primary btn-modern" style="width:100%" onclick="javascript:add110()">
-        <i class="fas fa-user-plus me-2"></i>Add Client
-      </button>
-
-
-      <button class="btn btn-warning btn-modern" style="width:100%" onclick="javascript:number22()">
-        <i class="fas fa-search me-2"></i>Search Client
-      </button>
-       <button class="btn btn-primary btn-modern" style="width:100%"onclick="javascript:add()">
-        <i class="fas fa-ticket me-2"></i>Complaints
-      </button>
-      
-      <button class="btn btn-warning btn-modern" style="width:100%" onclick="javascript:uro2()">
-        <i class="fas fa-search me-2"></i>Search Ticket(Number)
-      </button>
-      <button class="btn btn-primary btn-modern" style="width:100%" onclick="javascript:uro8()">
-        <i class="fas fa-search me-2"></i>Search Ticket
-      </button>
-       <button class="btn btn-info btn-modern" style="width:100%" onclick="javascript:tick79()">
-        <i class="fas fa-search me-2"></i>Open Tickets
-      </button>
-    </div>
-  </div>
+                            <button class="btn btn-warning btn-modern" style="width:100%; margin-bottom: 8px;" onclick="javascript:number22()">
+                                <i class="fas fa-search"></i> Search Client
+                            </button>
+                            
+                            <button class="btn btn-primary btn-modern" style="width:100%; margin-bottom: 8px;" onclick="javascript:add()">
+                                <i class="fas fa-ticket-alt"></i> New Complaint
+                            </button>
+                            
+                            <button class="btn btn-warning btn-modern" style="width:100%; margin-bottom: 8px;" onclick="javascript:uro2()">
+                                <i class="fas fa-search"></i> Search Ticket (Number)
+                            </button>
+                            
+                            <button class="btn btn-primary btn-modern" style="width:100%; margin-bottom: 8px;" onclick="javascript:uro8()">
+                                <i class="fas fa-search"></i> Search Ticket
+                            </button>
+                            
+                            <button class="btn btn-info btn-modern" style="width:100%;" onclick="javascript:tick79()">
+                                <i class="fas fa-folder-open"></i> Open Tickets
+                            </button>
+                        </div>
+                    </div>
+            </th>
+        </tr>
+    </table>
 </div>
-
-
-
-        <!--li class="list-group-item "><a href="#" onclick="javascript:list1()">Simple List </a></li-->
-
-				    </br>          
-								
-
-            <!--li class="list-group-item "><a   style="color:black"        href="#" onclick="javascript:add()">Create Ticket</a></li>  
-				 <li class="list-group-item "><a   style="color:black"      href="#" onclick="javascript:uro1()">Edit Last Ticket(Actual Number)</a></li>
-				   
-                <li class="list-group-item "><a   style="color:black"       href="#" onclick="javascript:uro2()">Search Last Ticket(Number)</a></li>
-                <li class="list-group-item "><a   style="color:black"        href="#" onclick="javascript:uro8()">Search Ticket</a></li>
-                <li class="list-group-item "><a   style="color:black"     href="#" onclick="javascript:tick79()">Open Tickets</a></li-->
-                <!--li class="list-group-item "><a href="#" onclick="javascript:list79()">Simple List </a></li-->
-				</br>  
-
-        <!--li class="list-group-item "><a href="#" onclick="javascript:search51()">Create Deal</a></li> 
-        <li class="list-group-item "><a href="#" onclick="javascript:search52()">Search Last Deal(Actual Number)</a></li> 
-        <li class="list-group-item "><a href="#" onclick="javascript:uro3()">Search Last Deal(Number)</a></li> 
-        <li class="list-group-item "><a href="#" onclick="javascript:uro9()">Search Deal</a></li--> 
-      </br>
- 
-
-
-
-
-  
-
- 
-
-  
-          
-       
-
- </th>
-
-  </tr>
-
-
-
- 
-   
- </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
- </div>
-
-
- 
- <!--script>
-$(document).ready(function(){
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
-});
-</script-->
-<!-- Add this simple version to your existing test204.php -->
-<div style="padding: 10px; background: lightgreen; margin: 10px;">
-    <h4>📍 Quick Location Send</h4>
-    <?php
-    //$address = ($street ?? '') . ' ' . ($building ?? '') . ' ' . ($city ?? '');
-     $address =  "hazmieh municipality street rahal building floor 3";
-    $link = "https://maps.google.com/maps?q=" . urlencode( $simple_address);
-    ?>
-    <div id="prin">
-    <strong>Address:</strong> <?php echo $simple_address; ?>
-    </div>
-    <input type="text" id="quickLink" value="<?php echo $link; ?>" style="width: 60%;" readonly>
-    
-    <button onclick="
-        document.getElementById('quickLink').select(); 
-        document.execCommand('copy'); 
-        alert('✅ Link copied! Now open WhatsApp on your PHONE and paste it to the driver.');
-        window.open('https://web.whatsapp.com/', '_blank');
-    " style="background: green; color: white; padding: 10px; border: none;">
-        📱 Copy & Open WhatsApp
-    </button>
-</div>
-
-
-
-
 
 
 <script>
+// Notes functionality
+let notesSaveTimeout;
+let currentClientId = "<?php echo isset($id) ? $id : 'default'; ?>";
+let currentAgent = "<?php echo $nam; ?>";
+
+function saveNotes() {
+    const notesText = document.getElementById('notesArea').value;
+    
+    const formData = new FormData();
+    formData.append('client_id', currentClientId);
+    formData.append('agent', currentAgent);
+    formData.append('notes', notesText);
+    formData.append('action', 'save_notes');
+    
+    fetch('save_notes.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.notes) {
+            document.getElementById('notesArea').value = data.notes;
+        }
+    })
+    .catch(error => {
+        console.error('Error loading notes:', error);
+    });
+}
+
+function setupAutoSave() {
+    const notesArea = document.getElementById('notesArea');
+    const autosaveIndicator = document.getElementById('autosaveIndicator');
+    
+    notesArea.addEventListener('input', function() {
+        clearTimeout(notesSaveTimeout);
+        
+        notesSaveTimeout = setTimeout(function() {
+            saveNotes();
+            
+            autosaveIndicator.style.display = 'block';
+            setTimeout(() => {
+                autosaveIndicator.style.display = 'none';
+            }, 2000);
+        }, 5000);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupAutoSave();
+});
+
+window.addEventListener('beforeunload', function() {
+    const notesText = document.getElementById('notesArea').value;
+    if (notesText.trim() !== '') {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'save_notes.php', false);
+        
+        const formData = new FormData();
+        formData.append('client_id', currentClientId);
+        formData.append('agent', currentAgent);
+        formData.append('notes', notesText);
+        formData.append('action', 'save_notes');
+        
+        xhr.send(formData);
+    }
+});
+
 function copyLink() {
     var linkField = document.getElementById('mapsLink');
     linkField.select();
@@ -1213,10 +840,8 @@ function sendToWhatsApp() {
         return;
     }
     
-    // Clean phone number - remove any spaces, dashes, or + signs except leading +
     driverPhone = driverPhone.replace(/[^\d+]/g, '');
     if (!driverPhone.startsWith('+')) {
-        // Add Lebanon country code if not present
         if (driverPhone.length === 8) {
             driverPhone = '961' + driverPhone;
         }
@@ -1225,29 +850,24 @@ function sendToWhatsApp() {
     var mapsLink = document.getElementById('mapsLink').value;
     var clientName = '<?php echo isset($name) ? preg_replace("/[^\w\s]/", "", $name) : "Client"; ?>';
     var clientPhone = '<?php echo isset($num) ? $num : ""; ?>';
-    //var address = '<?php echo isset($simple_address) ? preg_replace("/[^\w\s,.-]/", "", $simple_address) : ""; ?>';
     var address = '<?php echo "hazmieh municipality "; ?>';
-    // Simple message without emojis
+    
     var message = 'DELIVERY ORDER\n\n' +
                  'Client: ' + clientName + ' (' + clientPhone + ')\n\n' +
                  'LOCATION:\n' + mapsLink + '\n\n' +
                  'Address: ' + address + '\n\n' +
                  'Time: ' + new Date().toLocaleString();
     
-    // Try different WhatsApp URL formats
     try {
-        // Method 1: Standard WhatsApp Web
         var whatsappUrl = 'https://wa.me/' + driverPhone + '?text=' + encodeURIComponent(message);
         window.open(whatsappUrl, '_blank');
     } catch(e) {
-        // Method 2: Simple fallback
         var simpleMessage = 'Location: ' + mapsLink;
         var fallbackUrl = 'https://wa.me/' + driverPhone + '?text=' + encodeURIComponent(simpleMessage);
         window.open(fallbackUrl, '_blank');
     }
 }
 
-// Alternative function - just send the Google Maps link
 function sendSimpleLocation() {
     var driverPhone = document.getElementById('driverPhone').value;
     if (!driverPhone) {
@@ -1255,338 +875,51 @@ function sendSimpleLocation() {
         return;
     }
     
-    // Clean phone number
     driverPhone = driverPhone.replace(/[^\d+]/g, '');
     if (!driverPhone.startsWith('+') && driverPhone.length === 8) {
         driverPhone = '961' + driverPhone;
     }
     
     var mapsLink = document.getElementById('mapsLink').value;
-    var message = mapsLink; // Just send the link
+    var message = mapsLink;
     
     var whatsappUrl = 'https://wa.me/' + driverPhone + '?text=' + encodeURIComponent(message);
     window.open(whatsappUrl, '_blank');
 }
 </script>
 
-  <?php include 'footer.php';?>
 
+
+<?php include 'footer.php';?>
 
 <!-- jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    <script>
-        // Add slight animation to dropdowns
-        $(document).ready(function() {
-            $('.dropdown').on('show.bs.dropdown', function() {
-                $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
-            });
-            
-            $('.dropdown').on('hide.bs.dropdown', function() {
-                $(this).find('.dropdown-menu').first().stop(true, true).slideUp(200);
-            });
-        });
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+
+
+<script>
+$(document).ready(function() {
+    // Enhanced dropdown animations
+    $('.dropdown').on('show.bs.dropdown', function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(200);
+    });
     
+    $('.dropdown').on('hide.bs.dropdown', function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(200);
+    });
+    
+    // Add tooltips to buttons
+    $('[title]').tooltip();
+    
+    // Focus on phone number field when page loads
+    $('#bp').focus();
+    
+    console.log('jQuery initialized - Bootstrap dropdowns enhanced');
+});
+</script>
 
 </body>
-
-
-
-          
-    
-
-        
-      
-
-
-       
-
-       
-     
-
-
-	  
-		  
-        
-      
-	
-
-
-
-
-
-
-	
-	  
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
- 
- 
- 
- 
- 
- 
-
- 
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
-
- 
- 
-
-
-
-
-
-
-
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   

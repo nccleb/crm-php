@@ -4,7 +4,7 @@
 if(isset($_POST['submit_email']) )
 {
     echo "hello";
-  mysql_connect('192.168.16.102','root','');
+  mysql_connect('192.168.16.103','root','');
   mysql_select_db('sample');
   $select=mysql_query("select email,password from user where email='$email'");
   if(mysql_num_rows($select)==1)

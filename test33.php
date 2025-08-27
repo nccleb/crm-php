@@ -29,7 +29,7 @@ function displayForm() {
 
 function processCSV() {
     // Database connection
-    $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+    $idr = mysqli_connect("192.168.16.103", "root", "1Sys9Admeen72", "nccleb_test");
     if (mysqli_connect_errno()) {
         echo "<p style='color:red;font-size:28px'>Failed to connect to MySQL: " . mysqli_connect_error() . "</p>";
         echo "<button type='button' onclick='quit()'>Quit</button>";

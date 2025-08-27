@@ -72,7 +72,7 @@ function backup_tables($host, $user, $pass, $name, $tables = '*')
 }
 
 // Call the function with your credentials
-$result = backup_tables('192.168.16.102', 'root', '1Sys9Admeen72', 'nccleb_test');
+$result = backup_tables('192.168.16.103', 'root', '1Sys9Admeen72', 'nccleb_test');
 echo "<p id=\"form\">$result</p>";
 echo "<button class=\"whatsappbutton\" type=\"button\" onclick=\"quit()\">Quit</button>";
 ?>

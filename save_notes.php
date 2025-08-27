@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // Database connection
-$servername = "192.168.16.102";
+$servername = "192.168.16.103";
 $username = "root";
 $password = "1Sys9Admeen72";
 $dbname = "nccleb_test";

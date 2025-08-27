@@ -125,7 +125,7 @@ function size(){
 
 function add(){
 	var myw;
-	myw=window.open ("http://192.168.16.102/test275.php?page=<?php echo urlencode($naa) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc) ?>","","menubar=0,resizable=1,width=680,height=950");
+	myw=window.open ("http://192.168.16.103/test275.php?page=<?php echo urlencode($naa) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc) ?>","","menubar=0,resizable=1,width=680,height=950");
 }
 </script>
 </head>
@@ -323,7 +323,7 @@ if ($all_fields_present) {
     }
 
     // Database connection
-    $idr = mysqli_connect("192.168.16.102", "root", "1Sys9Admeen72", "nccleb_test");
+    $idr = mysqli_connect("192.168.16.103", "root", "1Sys9Admeen72", "nccleb_test");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
@@ -443,7 +443,7 @@ if ($all_fields_present) {
         echo "<script>
         var r = confirm('Missing Entry! Press OK to retry');
         if (r == true) {
-            location.replace('http://192.168.16.102/test275.php?page=" . urlencode($naa) . "&page1=" . urlencode($idf) . "&page2=" . urlencode($incc) . "');
+            location.replace('http://192.168.16.103/test275.php?page=" . urlencode($naa) . "&page1=" . urlencode($idf) . "&page2=" . urlencode($incc) . "');
         } else {
             window.close();
         }

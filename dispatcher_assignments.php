@@ -283,6 +283,111 @@ if (count($params) > 0) {
         $delete_stmt->close();
     }
 
+// NEW: Analytics Calculations
+function getAnalyticsData($idr) {
+    $analytics = [];
+    
+    // Today's metrics
+    $today = date('Y-m-d');
+    $yesterday = date('Y-m-d', strtotime('-1 day'));
+    
+    // Total assignments today
+    $result = mysqli_query($idr, "SELECT COUNT(*) as count FROM dispatch_assignments WHERE DATE(created_at) = '$today'");
+    $analytics['today_total'] = mysqli_fetch_assoc($result)['count'];
+    
+    // Yesterday's total for comparison
+    $result = mysqli_query($idr, "SELECT COUNT(*) as count FROM dispatch_assignments WHERE DATE(created_at) = '$yesterday'");
+    $analytics['yesterday_total'] = mysqli_fetch_assoc($result)['count'];
+    
+    // Success rate (last 30 days)
+    $result = mysqli_query($idr, "SELECT 
+        SUM(CASE WHEN status = 'delivered' THEN 1 ELSE 0 END) as delivered,
+        COUNT(*) as total 
+        FROM dispatch_assignments 
+        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)");
+    $row = mysqli_fetch_assoc($result);
+    $analytics['success_rate'] = $row['total'] > 0 ? round(($row['delivered'] / $row['total']) * 100, 1) : 0;
+    
+    // Active dispatchers today
+    $result = mysqli_query($idr, "SELECT COUNT(DISTINCT dispatcher_id) as count FROM dispatch_assignments WHERE DATE(created_at) = '$today'");
+    $analytics['active_dispatchers'] = mysqli_fetch_assoc($result)['count'];
+    
+    // Status breakdown (last 7 days)
+    $result = mysqli_query($idr, "SELECT status, COUNT(*) as count FROM dispatch_assignments 
+        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY) 
+        GROUP BY status");
+    $analytics['status_breakdown'] = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $analytics['status_breakdown'][$row['status']] = $row['count'];
+    }
+    
+    // Top dispatchers (last 30 days)
+    $result = mysqli_query($idr, "SELECT d.name_d, 
+        COUNT(*) as total_assignments,
+        SUM(CASE WHEN da.status = 'delivered' THEN 1 ELSE 0 END) as successful,
+        ROUND(AVG(CASE WHEN da.actual_arrival IS NOT NULL AND da.estimated_arrival IS NOT NULL 
+                      THEN TIMESTAMPDIFF(MINUTE, da.estimated_arrival, da.actual_arrival) 
+                      ELSE NULL END), 1) as avg_delay_minutes
+        FROM dispatch_assignments da
+        LEFT JOIN drivers d ON da.dispatcher_id = d.idx
+        WHERE da.created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+        GROUP BY da.dispatcher_id, d.name_d
+        HAVING total_assignments > 0
+        ORDER BY successful DESC, total_assignments DESC
+        LIMIT 5");
+    $analytics['top_dispatchers'] = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $success_rate = $row['total_assignments'] > 0 ? round(($row['successful'] / $row['total_assignments']) * 100, 1) : 0;
+        $analytics['top_dispatchers'][] = [
+            'name' => $row['name_d'],
+            'total' => $row['total_assignments'],
+            'successful' => $row['successful'],
+            'success_rate' => $success_rate,
+            'avg_delay' => $row['avg_delay_minutes']
+        ];
+    }
+    
+    // Hourly distribution (last 7 days)
+    $result = mysqli_query($idr, "SELECT HOUR(created_at) as hour, COUNT(*) as count 
+        FROM dispatch_assignments 
+        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY) 
+        GROUP BY HOUR(created_at) 
+        ORDER BY hour");
+    $analytics['hourly_distribution'] = array_fill(0, 24, 0);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $analytics['hourly_distribution'][$row['hour']] = $row['count'];
+    }
+    
+    // Daily trend (last 14 days)
+    $result = mysqli_query($idr, "SELECT DATE(created_at) as date, 
+        COUNT(*) as total,
+        SUM(CASE WHEN status = 'delivered' THEN 1 ELSE 0 END) as delivered
+        FROM dispatch_assignments 
+        WHERE created_at >= DATE_SUB(NOW(), INTERVAL 14 DAY) 
+        GROUP BY DATE(created_at) 
+        ORDER BY date");
+    $analytics['daily_trend'] = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $analytics['daily_trend'][] = [
+            'date' => $row['date'],
+            'total' => $row['total'],
+            'delivered' => $row['delivered']
+        ];
+    }
+    
+    // Average delivery time
+    $result = mysqli_query($idr, "SELECT 
+        AVG(TIMESTAMPDIFF(MINUTE, created_at, actual_arrival)) as avg_delivery_time
+        FROM dispatch_assignments 
+        WHERE status = 'delivered' AND actual_arrival IS NOT NULL
+        AND created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)");
+    $row = mysqli_fetch_assoc($result);
+    $analytics['avg_delivery_time'] = round($row['avg_delivery_time'] ?? 0, 1);
+    
+    return $analytics;
+}
+
+$analytics = getAnalyticsData($idr);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -291,6 +396,7 @@ if (count($params) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dispatcher Assignment Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .status-pending { background-color: #fff3cd; }
         .status-assigned { background-color: #d1ecf1; }
@@ -299,28 +405,49 @@ if (count($params) > 0) {
         .status-failed { background-color: #f5c6cb; }
         .card { margin-bottom: 20px; }
         .table { font-size: 0.9em; }
+        .analytics-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        .metric-card {
+            border-left: 4px solid;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .metric-change {
+            font-size: 0.9em;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        .delete-section {
+            background-color: #ffe6e6;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .danger-zone {
+            border: 2px dashed #dc3545;
+            background-color: #ffeaea;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
     </style>
-    <!--script type="text/javascript" src="js/test371.js"></script-->
+
    <script>
     function quit(){
     window.close();
  }
-
    </script>
-
-<style>
-    /* Add these new styles to your existing CSS */
-    .delete-section {
-        background-color: #ffe6e6;
-        border-left: 4px solid #dc3545;
-        padding: 15px;
-        margin: 10px 0;
-    }
-    .danger-zone {
-        border: 2px dashed #dc3545;
-        background-color: #ffeaea;
-    }
-</style>
 
 </head>
 <body>
@@ -340,6 +467,148 @@ if (count($params) > 0) {
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
+
+    <!-- NEW: Analytics Dashboard -->
+    <div class="card analytics-card">
+        <div class="card-header">
+            <h4 class="mb-0">📊 Business Analytics Dashboard</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Key Metrics -->
+                <div class="col-md-3">
+                    <div class="metric-card p-3 mb-3" style="border-left-color: #28a745;">
+                        <div class="metric-value text-success"><?php echo $analytics['today_total']; ?></div>
+                        <div>Today's Assignments</div>
+                        <div class="metric-change">
+                            <?php 
+                            $change = $analytics['today_total'] - $analytics['yesterday_total'];
+                            $change_class = $change >= 0 ? 'text-success' : 'text-danger';
+                            $change_icon = $change >= 0 ? '▲' : '▼';
+                            echo "<span class='$change_class'>$change_icon " . abs($change) . " from yesterday</span>";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-card p-3 mb-3" style="border-left-color: #17a2b8;">
+                        <div class="metric-value text-info"><?php echo $analytics['success_rate']; ?>%</div>
+                        <div>Success Rate (30 days)</div>
+                        <div class="metric-change text-muted">Delivered assignments</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-card p-3 mb-3" style="border-left-color: #ffc107;">
+                        <div class="metric-value text-warning"><?php echo $analytics['active_dispatchers']; ?></div>
+                        <div>Active Dispatchers</div>
+                        <div class="metric-change text-muted">Working today</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-card p-3 mb-3" style="border-left-color: #6f42c1;">
+                        <div class="metric-value text-primary"><?php echo $analytics['avg_delivery_time']; ?> min</div>
+                        <div>Avg Delivery Time</div>
+                        <div class="metric-change text-muted">Last 30 days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Tabs -->
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="analyticsTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="performance-tab" data-bs-toggle="tab" data-bs-target="#performance" type="button">Performance</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="trends-tab" data-bs-toggle="tab" data-bs-target="#trends" type="button">Trends</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="dispatchers-tab" data-bs-toggle="tab" data-bs-target="#dispatchers" type="button">Dispatchers</button>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="analyticsTabContent">
+                <!-- Performance Tab -->
+                <div class="tab-pane fade show active" id="performance" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Status Distribution (Last 7 Days)</h6>
+                            <div class="chart-container">
+                                <canvas id="statusChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Hourly Activity (Last 7 Days)</h6>
+                            <div class="chart-container">
+                                <canvas id="hourlyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trends Tab -->
+                <div class="tab-pane fade" id="trends" role="tabpanel">
+                    <div class="row">
+                        <div class="col-12">
+                            <h6>Daily Assignment Trend (Last 14 Days)</h6>
+                            <div class="chart-container">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dispatchers Tab -->
+                <div class="tab-pane fade" id="dispatchers" role="tabpanel">
+                    <h6>Top Performing Dispatchers (Last 30 Days)</h6>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Dispatcher</th>
+                                    <th>Total Assignments</th>
+                                    <th>Successful</th>
+                                    <th>Success Rate</th>
+                                    <th>Avg Delay</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($analytics['top_dispatchers'] as $dispatcher): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($dispatcher['name']); ?></td>
+                                    <td><?php echo $dispatcher['total']; ?></td>
+                                    <td><?php echo $dispatcher['successful']; ?></td>
+                                    <td>
+                                        <?php
+                                        $rate = $dispatcher['success_rate'];
+                                        $badge_class = $rate >= 90 ? 'success' : ($rate >= 70 ? 'warning' : 'danger');
+                                        echo "<span class='badge bg-$badge_class'>{$rate}%</span>";
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php 
+                                        $delay = $dispatcher['avg_delay'];
+                                        if ($delay !== null) {
+                                            $delay_class = $delay <= 0 ? 'text-success' : ($delay <= 15 ? 'text-warning' : 'text-danger');
+                                            echo "<span class='$delay_class'>" . ($delay > 0 ? '+' : '') . $delay . " min</span>";
+                                        } else {
+                                            echo '<span class="text-muted">N/A</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Create New Assignment -->
     <div class="card">
@@ -424,7 +693,7 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
 // Your existing WhatsApp section - UPDATED
 ?>
 <div style="padding: 10px; background: lightgreen; margin: 10px;">
-    <h4>📍 Quick Location Send</h4>
+    <h4>📱 Quick Location Send</h4>
     <?php
     $link = "https://maps.google.com/maps?q=" . urlencode($simple_address);
     
@@ -510,8 +779,9 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
                 </div>
             </form>
         </div>
-    
-<!-- Preview Results Modal -->
+    </div>
+
+    <!-- Preview Results Modal -->
     <div class="modal fade" id="previewDeleteModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -530,9 +800,6 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
             </div>
         </div>
     </div>
-
-
-     
 
     <!-- Filters -->
     <div class="card">
@@ -591,15 +858,9 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
                         <button type="submit" class="btn btn-info me-2">Filter</button>
                          <button class="btn btn-info me-2" onclick="quit()">Quit</button>
                         <a href="dispatcher_assignments.php" class="btn btn-secondary">Clear</a>
-                       
                     </div>
-                    
-                    
-                       
                 </div>
             </form>
-
-           
         </div>
     </div>
 
@@ -635,27 +896,26 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
                             <td><?php echo htmlspecialchars($row['client_phone']); ?></td>
                             <td><?php echo htmlspecialchars($row['dispatcher_name']); ?></td>
                             <td title="<?php echo htmlspecialchars($row['delivery_address']); ?>">
-    <?php echo htmlspecialchars(substr($row['delivery_address'], 0, 50) . '...'); ?>
-</td>
-<td title="<?php echo htmlspecialchars($row['delivery_instructions']); ?>">
-    <?php echo htmlspecialchars(substr($row['delivery_instructions'], 0, 30) . '...'); ?>
-</td>
+                                <?php echo htmlspecialchars(substr($row['delivery_address'], 0, 50) . '...'); ?>
+                            </td>
+                            <td title="<?php echo htmlspecialchars($row['delivery_instructions']); ?>">
+                                <?php echo htmlspecialchars(substr($row['delivery_instructions'], 0, 30) . '...'); ?>
+                            </td>
                             <td>
                                <?php
-$status_classes = [
-    'pending'    => 'warning',
-    'assigned'   => 'info',
-    'in_transit' => 'primary',
-    'delivered'  => 'success',
-    'failed'     => 'danger'
-];
+                                $status_classes = [
+                                    'pending'    => 'warning',
+                                    'assigned'   => 'info',
+                                    'in_transit' => 'primary',
+                                    'delivered'  => 'success',
+                                    'failed'     => 'danger'
+                                ];
 
-$badge_class = isset($status_classes[$row['status']]) ? $status_classes[$row['status']] : 'secondary';
-?>
-<span class="badge bg-<?php echo $badge_class; ?>">
-    <?php echo ucfirst(str_replace('_', ' ', $row['status'])); ?>
-</span>
-
+                                $badge_class = isset($status_classes[$row['status']]) ? $status_classes[$row['status']] : 'secondary';
+                                ?>
+                                <span class="badge bg-<?php echo $badge_class; ?>">
+                                    <?php echo ucfirst(str_replace('_', ' ', $row['status'])); ?>
+                                </span>
                             </td>
                             <td><?php echo $row['estimated_arrival'] ? date('M j, g:i A', strtotime($row['estimated_arrival'])) : '-'; ?></td>
                             <td><?php echo $row['actual_arrival'] ? date('M j, g:i A', strtotime($row['actual_arrival'])) : '-'; ?></td>
@@ -711,6 +971,7 @@ $badge_class = isset($status_classes[$row['status']]) ? $status_classes[$row['st
         </div>
     </div>
 </div>
+
 <!-- Delete Single Assignment Modal -->
 <div class="modal fade" id="deleteSingleModal" tabindex="-1">
     <div class="modal-dialog">
@@ -738,6 +999,110 @@ $badge_class = isset($status_classes[$row['status']]) ? $status_classes[$row['st
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// Initialize Charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCharts();
+});
+
+function initializeCharts() {
+    // Status Distribution Chart
+    const statusData = <?php echo json_encode($analytics['status_breakdown']); ?>;
+    const statusLabels = Object.keys(statusData).map(status => status.charAt(0).toUpperCase() + status.slice(1).replace('_', ' '));
+    const statusValues = Object.values(statusData);
+    
+    new Chart(document.getElementById('statusChart'), {
+        type: 'doughnut',
+        data: {
+            labels: statusLabels,
+            datasets: [{
+                data: statusValues,
+                backgroundColor: ['#ffc107', '#17a2b8', '#007bff', '#28a745', '#dc3545'],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // Hourly Distribution Chart
+    const hourlyData = <?php echo json_encode($analytics['hourly_distribution']); ?>;
+    const hourLabels = Array.from({length: 24}, (_, i) => i + ':00');
+    
+    new Chart(document.getElementById('hourlyChart'), {
+        type: 'bar',
+        data: {
+            labels: hourLabels,
+            datasets: [{
+                label: 'Assignments',
+                data: hourlyData,
+                backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                borderColor: 'rgba(102, 126, 234, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+
+    // Daily Trend Chart
+    const trendData = <?php echo json_encode($analytics['daily_trend']); ?>;
+    const trendLabels = trendData.map(item => {
+        const date = new Date(item.date);
+        return (date.getMonth() + 1) + '/' + date.getDate();
+    });
+    const totalData = trendData.map(item => item.total);
+    const deliveredData = trendData.map(item => item.delivered);
+    
+    new Chart(document.getElementById('trendChart'), {
+        type: 'line',
+        data: {
+            labels: trendLabels,
+            datasets: [{
+                label: 'Total Assignments',
+                data: totalData,
+                borderColor: 'rgba(102, 126, 234, 1)',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                tension: 0.4
+            }, {
+                label: 'Delivered',
+                data: deliveredData,
+                borderColor: 'rgba(40, 167, 69, 1)',
+                backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+}
+
 function updateStatus(assignmentId, currentStatus) {
     document.getElementById('modal_assignment_id').value = assignmentId;
     document.getElementById('modal_status').value = currentStatus;
@@ -777,40 +1142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// CSV Export function
-function exportToCSV() {
-    const table = document.getElementById('assignmentsTable');
-    const rows = table.querySelectorAll('tr');
-    
-    let csvContent = '';
-    
-    // Headers
-    const headers = Array.from(rows[0].querySelectorAll('th')).slice(0, -1);
-    csvContent += headers.map(h => h.textContent).join(',') + '\n';
-    
-    // Data rows
-    for (let i = 1; i < rows.length; i++) {
-        const cells = Array.from(rows[i].querySelectorAll('td')).slice(0, -1);
-        csvContent += cells.map(c => {
-            // Use title attribute if available, otherwise use displayed text
-            const text = c.title || c.textContent;
-            return '"' + text.replace(/"/g, '""') + '"';
-        }).join(',') + '\n';
-    }
-    
-    // Download
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'dispatcher_assignments_' + new Date().toISOString().slice(0,10) + '.csv';
-    a.click();
-    window.URL.revokeObjectURL(url);
-}
-</script>
-
-<script>
-// FIXED: Delete single assignment function - corrected function call
+// Delete single assignment function
 function deleteSingleAssignment(assignmentId) {
     // Get client name from the table row
     const row = event.target.closest('tr');
@@ -825,7 +1157,7 @@ function deleteSingleAssignment(assignmentId) {
     deleteModal.show();
 }
 
-// FIXED: Preview delete function with better date parsing
+// Preview delete function
 function previewDelete() {
     const fromDate = document.querySelector('input[name="delete_from_date"]').value;
     const toDate = document.querySelector('input[name="delete_to_date"]').value;
@@ -852,13 +1184,10 @@ function loadPreviewData(fromDate, toDate) {
     const filterToDate = new Date(toDate);
     filterToDate.setHours(23, 59, 59, 999); // Include full end date
     
-    console.log('Filter range:', filterFromDate, 'to', filterToDate);
-    
     tableRows.forEach(row => {
         const cells = row.querySelectorAll('td');
         if (cells.length > 0) {
             const createdDateText = cells[9].textContent.trim(); // Created date column
-            console.log('Original date text:', createdDateText);
             
             // Parse the date - handle format like "Aug 25, 12:20 AM" or "Dec 31, 11:45 PM"
             let createdDate;
@@ -879,15 +1208,12 @@ function loadPreviewData(fromDate, toDate) {
                 }
                 
                 createdDate = new Date(dateWithYear);
-                console.log('Parsed date:', createdDate);
                 
                 if (!isNaN(createdDate.getTime())) {
                     // Compare dates (only date part, not time)
                     const createdDateOnly = new Date(createdDate.getFullYear(), createdDate.getMonth(), createdDate.getDate());
                     const filterFromDateOnly = new Date(filterFromDate.getFullYear(), filterFromDate.getMonth(), filterFromDate.getDate());
                     const filterToDateOnly = new Date(filterToDate.getFullYear(), filterToDate.getMonth(), filterToDate.getDate());
-                    
-                    console.log('Date comparison:', createdDateOnly, '>=', filterFromDateOnly, '&&', createdDateOnly, '<=', filterToDateOnly);
                     
                     if (createdDateOnly >= filterFromDateOnly && createdDateOnly <= filterToDateOnly) {
                         matchingRows++;
@@ -937,27 +1263,7 @@ function confirmBulkDelete() {
     return confirm(`⚠️ FINAL CONFIRMATION ⚠️\n\nAre you absolutely sure you want to delete ALL assignments from ${fromDate} to ${toDate}?\n\nThis action cannot be undone!`);
 }
 
-// Update status function (keeping existing functionality)
-function updateStatus(assignmentId, currentStatus) {
-    document.getElementById('modal_assignment_id').value = assignmentId;
-    document.getElementById('modal_status').value = currentStatus;
-    
-    // Clear the actual arrival field first
-    document.getElementById('modal_actual_arrival').value = '';
-    
-    // Auto-fill time if status is delivered or failed
-    if (currentStatus === 'delivered' || currentStatus === 'failed') {
-        const now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('modal_actual_arrival').value = now.toISOString().slice(0,16);
-    }
-    
-    // Show the modal
-    var updateModal = new bootstrap.Modal(document.getElementById('updateStatusModal'));
-    updateModal.show();
-}
-
-// CSV Export function (keeping existing functionality)
+// CSV Export function
 function exportToCSV() {
     const table = document.getElementById('assignmentsTable');
     const rows = table.querySelectorAll('tr');
@@ -987,29 +1293,6 @@ function exportToCSV() {
     a.click();
     window.URL.revokeObjectURL(url);
 }
-
-// DOM Ready event listener for status change functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const statusSelect = document.getElementById('modal_status');
-    const actualArrivalInput = document.getElementById('modal_actual_arrival');
-    
-    if (statusSelect && actualArrivalInput) {
-        statusSelect.addEventListener('change', function() {
-            if (this.value === 'delivered' || this.value === 'failed') {
-                // Set current time
-                const now = new Date();
-                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                actualArrivalInput.value = now.toISOString().slice(0,16);
-            } else {
-                // Clear the field for other statuses
-                actualArrivalInput.value = '';
-            }
-        });
-    }
-});
-
-
-
 </script>
 </body>
 </html>

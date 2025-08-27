@@ -390,7 +390,7 @@ if (isset($_POST['search'])) {
       </select>
       </p>
       
-      <p>Caller <input placeholder="Enter caller..." type="text" name="nam" size="8" value="<?php echo htmlspecialchars($z); ?>"></p>
+      <p>Caller <input placeholder="Enter caller..." type="text" name="nam" size="8" value="" ?></p>
       
       <p>Priority
       <select name="pr">

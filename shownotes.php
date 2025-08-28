@@ -1,15 +1,8 @@
-
 <?php
+// shownotes.php
 session_start();
-?>
-<?php
-  $inc2=$_GET["number"];
- 
-$inc="0";
-?>
-<?php $opic=   "c".":"."\\"."Mdr"."\\"."CallerID".date("Y")."-". date("m")."."."txt" ?>
 
-<?php
+
 // Initialize variables for the form
 $inc = ""; // Initialize caller ID variable
 
@@ -23,6 +16,7 @@ if (file_exists($fichier)) {
             }
             if (isset($CallRecord->CallerID)) {
                 $inc = (string)$CallRecord->CallerID;
+                
             }
         }
     }
@@ -32,35 +26,6 @@ if (file_exists($fichier)) {
 if (empty($inc) && isset($_SESSION["userinc"])) {
     $inc = $_SESSION["userinc"];
 }
-
-/*
-
-$line = '';
-//$f = fopen("c:\MDR\CallerID2022-04.txt", 'r');
-$f = fopen($opic, 'r');
-$cursor = -1;
-fseek($f, $cursor, SEEK_END);
-$char = fgetc($f);
-//Trim trailing newline characters in the file
-while ($char === "\n" || $char === "\r") {
-   fseek($f, $cursor--, SEEK_END);
-   $char = fgetc($f);
-}
-//Read until the next line of the file begins or the first newline char
-while ($char !== false && $char !== "\n" && $char !== "\r") {
-   //Prepend the new character
-   $line = $char . $line;
-   fseek($f, $cursor--, SEEK_END);
-   $char = fgetc($f);
-}
-   $inc= substr($line,49,8);
-   $inc = trim($inc);
- fclose($f);
- 
- 
- include('test449.php');
- */
-
 
 
  $idr = mysqli_connect("192.168.16.103", "root", "1Sys9Admeen72", "nccleb_test");
@@ -78,28 +43,26 @@ if (mysqli_connect_errno()) {
       
       
       if( $inc!="" AND $inc==$lig['number'] ){
-        echo $lig['nom']." ".$lig['prenom'];
+        echo $lig['remark'];
         
 		exit();
     }
 	else if( $inc!="" AND  $inc==$lig['inumber']) {
-        echo $lig['nom']." ".$lig['prenom'];
+       echo $lig['remark'];
 		exit();
     }
 	else if( $inc!="" AND  $inc==$lig['telother']) {
-        echo $lig['nom']." ".$lig['prenom'];
+        echo $lig['remark'];
 		exit();
     }
 	
 	else if( $inc!="" AND  $inc==$lig['telmobile']) {
-        echo $lig['nom']." ".$lig['prenom'];
+        echo $lig['remark'];
 		exit();
     }
 	
 }
  
 
-        
-        
-     ?>  
-    
+
+?>

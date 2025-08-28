@@ -7,15 +7,29 @@ $mapo=$_SESSION["mapi"];
 
 <?php
 
-$fichier="CaCallStatus.dat";
-$xml=simplexml_load_file($fichier);
-foreach($xml as $CallRecord){
-    $ext=$show->ext;
-   $inc=$CallRecord->CallerID;;
-   
-}  
+// Initialize variables for the form
+$inc = ""; // Initialize caller ID variable
 
-$inc = "81721326";
+$fichier = "CaCallStatus.dat";
+if (file_exists($fichier)) {
+    $xml = simplexml_load_file($fichier);
+    if ($xml) {
+        foreach ($xml as $CallRecord) {
+            if (isset($CallRecord->ext)) {
+                $ext = $CallRecord->ext;
+            }
+            if (isset($CallRecord->CallerID)) {
+                $inc = (string)$CallRecord->CallerID;
+            }
+        }
+    }
+}
+
+// If no caller ID from XML, try to get from session
+if (empty($inc) && isset($_SESSION["userinc"])) {
+    $inc = $_SESSION["userinc"];
+}
+//$inc = "81721326";
 
 $idr = mysqli_connect("192.168.16.103", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
@@ -146,6 +160,8 @@ $cookie_value = $idf;
 setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/"); 
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -617,9 +633,9 @@ footer.container-fluid p {
                         <i class="fas fa-cog"></i> System <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="blue-subheader">Users</li>
-                        <li><a href="#" onclick="javascript:add3()"><i class="fas fa-user-plus"></i> Add User</a></li>
-                        <li><a href="#" onclick="javascript:add22()"><i class="fas fa-users"></i> Users</a></li>
+                        <li class="blue-subheader">Drivers</li>
+                        <li><a href="#" onclick="javascript:add3()"><i class="fas fa-user-plus"></i> Add Driver</a></li>
+                        <li><a href="#" onclick="javascript:add22()"><i class="fas fa-users"></i> Drivers</a></li>
                         
                         <li class="blue-subheader">Agents</li>
                         <li><a href="#" onclick="javascript:search10()"><i class="fas fa-user-tie"></i> Agent</a></li>
@@ -680,22 +696,22 @@ footer.container-fluid p {
                         <span class="input-icon"><i class="fas fa-phone-volume"></i></span>
                     </div>
                     
-                    <div class="form-group-enhanced">
+                     <div class="form-group-enhanced">
                         <label for="ap" class="form-label-enhanced">
                             <i class="fas fa-user"></i> CUSTOMER NAME
                         </label>
-                        <input type="text" class="form-control-enhanced" id="ap" placeholder="" name="ap">
+                        <input type="text" style="background: #f1f5f9;font-weight: bold; border: 2px solid #e3f2fd;color: #1976D2; border-radius: 8px; padding: 15px; font-size: 14px; line-height: 1.5;"  class="form-control-enhanced" id="ap" placeholder="" name="ap">
                         <span class="input-icon"><i class="fas fa-user-circle"></i></span>
                     </div>
                 </div>
             </th>
 
-            <td style="vertical-align: top; width: 45%;">
+             <td style="vertical-align: top; width: 45%;">
                 <div style="margin: 10px;">
-                    <label for="cp" style="font-weight: bold; color: #1976D2; display: block; margin-bottom: 10px;">
+                    <label for="cp"  class="form-label-enhanced">
                         <i class="fas fa-comments"></i> Customer Details
                     </label>
-                    <textarea style="background: #f1f5f9; border: 2px solid #e3f2fd; border-radius: 8px; padding: 15px; font-size: 14px; line-height: 1.5;" 
+                    <textarea style="background: #f1f5f9;font-weight: bold; border: 2px solid #e3f2fd;color: #1976D2; border-radius: 8px; padding: 15px; font-size: 14px; line-height: 1.5;" 
                               class="form-control" id="cp" rows="35" name="cp" 
                               placeholder="Enter call details, customer concerns, resolution steps, follow-up actions..."></textarea>
                 </div>
@@ -705,17 +721,14 @@ footer.container-fluid p {
                 <div style="margin: 10px;">
                     <!-- Notes Section -->
                     <div style="margin-bottom: 20px;">
-                        <label for="notesArea" style="font-weight: bold; color: #1976D2; display: block; margin-bottom: 8px;">
+                        <label for="callNotesBox"  class="form-label-enhanced">
                             <i class="fas fa-sticky-note"></i> Agent Notes
                         </label>
-                        <textarea class="form-control" id="notesArea" rows="4" 
+                        <textarea class="form-control" id="callNotesBox" rows="4" 
                                   placeholder="Quick notes, reminders, follow-up tasks..." 
-                                  style="background: #f1f5f9; border: 2px solid #e3f2fd; border-radius: 8px; padding: 12px; font-size: 13px;"></textarea>
-                        <div class="autosave-indicator" id="autosaveIndicator">Auto-saved</div>
+                                 style="background: #f1f5f9;font-weight: bold; border: 2px solid #e3f2fd;color: #1976D2; border-radius: 8px; padding: 15px; font-size: 14px; line-height: 1.5;" ></textarea>
                         
-                        <button class="save-button" onclick="saveNotes()">
-                            <i class="fas fa-save"></i> Save Notes
-                        </button>
+                        
                         
                         <div class="save-status" id="saveStatus"></div>
                     </div>
@@ -759,56 +772,7 @@ footer.container-fluid p {
 
 
 <script>
-// Notes functionality
-let notesSaveTimeout;
-let currentClientId = "<?php echo isset($id) ? $id : 'default'; ?>";
-let currentAgent = "<?php echo $nam; ?>";
 
-function saveNotes() {
-    const notesText = document.getElementById('notesArea').value;
-    
-    const formData = new FormData();
-    formData.append('client_id', currentClientId);
-    formData.append('agent', currentAgent);
-    formData.append('notes', notesText);
-    formData.append('action', 'save_notes');
-    
-    fetch('save_notes.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success && data.notes) {
-            document.getElementById('notesArea').value = data.notes;
-        }
-    })
-    .catch(error => {
-        console.error('Error loading notes:', error);
-    });
-}
-
-function setupAutoSave() {
-    const notesArea = document.getElementById('notesArea');
-    const autosaveIndicator = document.getElementById('autosaveIndicator');
-    
-    notesArea.addEventListener('input', function() {
-        clearTimeout(notesSaveTimeout);
-        
-        notesSaveTimeout = setTimeout(function() {
-            saveNotes();
-            
-            autosaveIndicator.style.display = 'block';
-            setTimeout(() => {
-                autosaveIndicator.style.display = 'none';
-            }, 2000);
-        }, 5000);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    setupAutoSave();
-});
 
 window.addEventListener('beforeunload', function() {
     const notesText = document.getElementById('notesArea').value;

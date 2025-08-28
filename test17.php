@@ -11,13 +11,28 @@ $inc="0";
  $opic=   "c".":"."\\"."Mdr"."\\"."CallerID".date("Y")."-". date("m")."."."txt" ;
 
 
-$fichier="CaCallStatus.dat";
-$xml=simplexml_load_file($fichier);
-foreach($xml as $CallRecord){
-    $ext=$show->ext;
-    $inc=$CallRecord->CallerID;;
-    
-}  
+// Initialize variables for the form
+$inc = ""; // Initialize caller ID variable
+
+$fichier = "CaCallStatus.dat";
+if (file_exists($fichier)) {
+    $xml = simplexml_load_file($fichier);
+    if ($xml) {
+        foreach ($xml as $CallRecord) {
+            if (isset($CallRecord->ext)) {
+                $ext = $CallRecord->ext;
+            }
+            if (isset($CallRecord->CallerID)) {
+                $inc = (string)$CallRecord->CallerID;
+            }
+        }
+    }
+}
+
+// If no caller ID from XML, try to get from session
+if (empty($inc) && isset($_SESSION["userinc"])) {
+    $inc = $_SESSION["userinc"];
+}
 /*
 $line = '';
 //$f = fopen("c:\MDR\CallerID2022-04.txt", 'r');
@@ -42,12 +57,12 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
  fclose($f);
 
 
-
- 
- $inc = $_SESSION["userinc"];
-
-
 */
+ 
+
+
+
+
 
 
 
@@ -168,7 +183,7 @@ if (mysqli_connect_errno()) {
             if( $idx==$i){
              
               
-            echo "Salesman:".$idx=$_SESSION["$i"]." \r\n   ";;
+            echo "Driver:".$idx=$_SESSION["$i"]." \r\n   ";;
             echo " \r\n  ";   
             }
 

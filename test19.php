@@ -13,6 +13,8 @@ $o = isset($_GET['page']) ? urldecode($_GET['page']) : "";
 $p = isset($_GET['page1']) ? urldecode($_GET['page1']) : "";
 $n = isset($_GET['page2']) ? urldecode($_GET['page2']) : "";
 
+
+ $_SESSION["q"]=$n;
 $_SESSION["o"] = $o;
 $_SESSION["p"] = $p;
 $_SESSION["sos"] = $s;
@@ -85,7 +87,7 @@ function submitForm() {
 <table>
 <form method="post" action="<?php echo htmlspecialchars("test20.php");?>" onsubmit="" enctype="multipart/form-data">
 <tr><td valign="top">  
-  <p>Tel <input class="form-control" type="text" value="<?php echo htmlspecialchars($inc); ?>" name="nu" id="bp" size="32" onclick="test()"><p><br/> 
+  <p>Tel <input class="form-control" type="text" value="<?php echo htmlspecialchars($n); ?>" name="nu" id="bp" size="32" onclick="test()"><p><br/> 
   <p>Tel(Office) <input class="form-control" type="text" name="inu" id="ibp" size="32"><p><br/>
   <p>Tel(Mobile) <input class="form-control" type="text" name="tel" id="tel" size="32"><p><br/> 
   <p>Tel(Other) <input class="form-control" type="text" name="oth" id="oth" size="32"><p><br/>    

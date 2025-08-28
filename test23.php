@@ -11,20 +11,38 @@ session_start();
 <?php $opic=   "c".":"."\\"."Mdr"."\\"."CallerID".date("Y")."-". date("m")."."."txt" ?>
 
 <?php
-$fichier="CaCallStatus.dat";
-$xml=simplexml_load_file($fichier);
-foreach($xml as $CallRecord){
-    $ext=$show->ext;
-    $inc=$CallRecord->CallerID;;
-	$_SESSION["bta"]=$inc;
-	$cookie_name = "bta";
-$cookie_value = $inc;
-setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/"); 
-	
+
 	
 	
     
-} 
+
+
+// Initialize variables for the form
+$inc = ""; // Initialize caller ID variable
+
+$fichier = "CaCallStatus.dat";
+if (file_exists($fichier)) {
+    $xml = simplexml_load_file($fichier);
+    if ($xml) {
+        foreach ($xml as $CallRecord) {
+            if (isset($CallRecord->ext)) {
+                $ext = $CallRecord->ext;
+            }
+            if (isset($CallRecord->CallerID)) {
+                $inc = (string)$CallRecord->CallerID;
+                $_SESSION["bta"]=$inc;
+                $cookie_name = "bta";
+                $cookie_value = $inc;
+                setcookie($cookie_name, $cookie_value, time() + (86400 * 360), "/"); 
+            }
+        }
+    }
+}
+
+// If no caller ID from XML, try to get from session
+if (empty($inc) && isset($_SESSION["userinc"])) {
+    $inc = $_SESSION["userinc"];
+}
 
 /*
 $line = '';
@@ -54,6 +72,8 @@ while ($char !== false && $char !== "\n" && $char !== "\r") {
 
 $inc = $_SESSION["userinc"];
   */  
+
+
 	 $idr = mysqli_connect("192.168.16.103", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();

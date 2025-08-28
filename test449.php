@@ -14,7 +14,7 @@ $fields = '{
 
 
 
-$curlHandle = curl_init('https://192.168.20.216:8089/api');
+$curlHandle = curl_init('https://192.168.22.216:8089/api');
 
 
 $headers = [
@@ -109,7 +109,14 @@ curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
 
  curl_close($curlHandle);
 
+?>
 
+<?php
+session_start();
+$inc="81721326";
+ $_SESSION['userinc'] = $inc;
+
+ ?>
 
 
  

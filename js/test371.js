@@ -1,4 +1,29 @@
 
+function callNotes(){
+  
+var xhttp;
+  if (window.XMLHttpRequest) {
+    // code for modern browsers
+    xhttp = new XMLHttpRequest();
+    } else {
+    // code for IE6, IE5
+    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("callNotesBox").value = this.responseText;
+      
+    }
+  };
+  xhttp.open("GET","shownotes.php", true);
+  xhttp.send();
+}
+
+
+
+
+
+
 function ai(){
 	
   window.open ("http://192.168.16.103//ai.html","","menubar=0,resizable=1,width=650,height=680");
@@ -21,7 +46,7 @@ function ai(){
    
    function prev(){
      
-   addre()+inc()+tac()+lac()+lcde()+stat()+  comp()+show()+address()+loadDoc();
+   addre()+inc()+tac()+lac()+lcde()+stat()+  comp()+show()+address()+loadDoc()+callNotes();;
    }
    function on(){
      y=setInterval("prev()",1000);

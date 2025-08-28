@@ -526,7 +526,7 @@ $analytics = getAnalyticsData($idr);
                     <button class="nav-link" id="trends-tab" data-bs-toggle="tab" data-bs-target="#trends" type="button">Trends</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="dispatchers-tab" data-bs-toggle="tab" data-bs-target="#dispatchers" type="button">Dispatchers</button>
+                    <button class="nav-link" id="dispatchers-tab" data-bs-toggle="tab" data-bs-target="#dispatchers" type="button">Drivers</button>
                 </li>
             </ul>
         </div>
@@ -564,12 +564,12 @@ $analytics = getAnalyticsData($idr);
 
                 <!-- Dispatchers Tab -->
                 <div class="tab-pane fade" id="dispatchers" role="tabpanel">
-                    <h6>Top Performing Dispatchers (Last 30 Days)</h6>
+                    <h6>Top Performing Drivers (Last 30 Days)</h6>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Dispatcher</th>
+                                    <th>Driver</th>
                                     <th>Total Assignments</th>
                                     <th>Successful</th>
                                     <th>Success Rate</th>
@@ -613,7 +613,7 @@ $analytics = getAnalyticsData($idr);
     <!-- Create New Assignment -->
     <div class="card">
         <div class="card-header">
-            <h5>Create New Dispatcher Assignment</h5>
+            <h5>Create New Driver Assignment</h5>
         </div>
         <div class="card-body">
             <form method="POST">
@@ -635,9 +635,9 @@ $analytics = getAnalyticsData($idr);
                         <input type="number" name="order_id" class="form-control">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Dispatcher</label>
+                        <label class="form-label">Driver</label>
                         <select name="dispatcher_id" class="form-select" required>
-                            <option value="">Select Dispatcher</option>
+                            <option value="">Select Driver</option>
                             <?php
                             $dispatchers = mysqli_query($idr, "SELECT idx, name_d FROM drivers ORDER BY name_d");
                             while ($dispatcher = mysqli_fetch_assoc($dispatchers)) {
@@ -831,9 +831,9 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label">Dispatcher</label>
+                        <label class="form-label">Driver</label>
                         <select name="dispatcher_id" class="form-select">
-                            <option value="">All Dispatchers</option>
+                            <option value="">All Drivers</option>
                             <?php
                             $dispatchers = mysqli_query($idr, "SELECT idx, name_d FROM drivers ORDER BY name_d");
                             while ($dispatcher = mysqli_fetch_assoc($dispatchers)) {
@@ -867,7 +867,7 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
     <!-- Assignments List -->
     <div class="card">
         <div class="card-header d-flex justify-content-between">
-            <h5>Dispatcher Assignments</h5>
+            <h5>Delivery Assignments</h5>
             <button onclick="exportToCSV()" class="btn btn-success btn-sm">Export to CSV</button>
         </div>
         <div class="card-body">
@@ -878,7 +878,7 @@ if (isset($success_msg) && strpos($success_msg, 'Assignment created') !== false)
                             <th>ID</th>
                             <th>Client</th>
                             <th>Phone</th>
-                            <th>Dispatcher</th>
+                            <th>Driver</th>
                             <th>Order</th>
                             <th>Instructions</th>
                             <th>Status</th>

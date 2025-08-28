@@ -589,15 +589,15 @@ footer.container-fluid p {
                     </ul>
                 </li>
 
-                <li class="dropdown">
+                <!--li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fas fa-tasks"></i> Dispatcher <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="javascript:dispatch()"><i class="fas fa-plus-circle"></i> New Assignment</a></li>
+                        <li><a href="#" onclick="javascript:dispatch()"><i class="fas fa-plus-circle"></i> Assignment</a></li>
                     </ul>
-                </li>
-
+                </li-->
+                <li><a href="#" onclick="javascript:dispatch()"><i class="fas fa-plus-circle"></i> Assignment</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fas fa-chart-bar"></i> Reports <span class="caret"></span>

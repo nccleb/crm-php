@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 echo "=== LOCATION TRACKING DIAGNOSTIC ===\n";
 echo "Date: " . date('Y-m-d H:i:s') . "\n\n";
 
-$idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
     die("Database connection FAILED: " . mysqli_connect_error());
 }

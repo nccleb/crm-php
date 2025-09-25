@@ -13,7 +13,7 @@ $_SESSION["oop"] = $nam ;
 
 // Handle clear assignments action
 
- $idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+ $idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
         if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
@@ -64,7 +64,7 @@ function getCurrentTrackingUrl() {
 $current_tracking_url = getCurrentTrackingUrl();
 ?>
 <?php
-            $idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+            $idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
         if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();
@@ -113,7 +113,7 @@ $current_tracking_url = getCurrentTrackingUrl();
 
 
 <?php
-         $idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+         $idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -208,7 +208,7 @@ if(isset($address2) && $address2) $simple_address .= "address2 " . $address2;
 // dispatcher_assignments.php - Main management interface
 session_start();
 
-$idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
     exit();
@@ -925,7 +925,7 @@ function setupWhatsAppForDriver(driverId, driverName) {
     const host = window.location.host;
     if (host.includes('localhost') || host.includes('127.0.0.1')) {
         const path = window.location.pathname.replace('dispatcher_assignments.php', '');
-        trackingUrl = 'https://192.168.16.104' + path + 'driver_mobile.php?driver_id=' + driverId;
+        trackingUrl = 'https://192.168.22.107' + path + 'driver_mobile.php?driver_id=' + driverId;
     }
     
     // Update tracking URL field

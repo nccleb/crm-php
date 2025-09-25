@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($missing_required) {
         echo "<script>
         if (confirm('Missing required fields! Please fill in all required fields.')) {
-            myw = window.open('http://192.168.16.104/test19.php?page=$os&page1=$ps&page2=$inc', '', 'menubar=0,resizable=1,width=600,height=800');
+            myw = window.open('http://192.168.22.107/test19.php?page=$os&page1=$ps&page2=$inc', '', 'menubar=0,resizable=1,width=600,height=800');
             setTimeout(function() { window.close(); }, 100);
         } else {
             setTimeout(function() { window.close(); }, 100);
@@ -184,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Database connection
-    $idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+    $idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
     if (mysqli_connect_errno()) {
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
         exit();

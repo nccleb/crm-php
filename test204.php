@@ -31,7 +31,7 @@ if (empty($inc) && isset($_SESSION["userinc"])) {
 }
 //$inc = "81721326";
 
-$idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

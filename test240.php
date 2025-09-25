@@ -40,7 +40,7 @@ if(!isset($_COOKIE['user1'])) {
 if($inc!="" ){
 
 //echo "<a  id=\"hej\"   href=\"http://212.98.135.34:15711/QTS_SADCO/en/Clients/IncomingCall?phone= $inc\"></a>";  
- echo " <script> var url = 'http://192.168.16.104/test204.php?pag= $nam &pag1= $idf ';</script>   ";
+ echo " <script> var url = 'http://192.168.22.107/test204.php?pag= $nam &pag1= $idf ';</script>   ";
  echo " <script> var pw = 400;	</script>   ";
  echo " <script> var ph = 750;	</script>   ";
  echo " <script>var left   = (screen.width  - pw)/2;</script>   ";
@@ -168,7 +168,7 @@ function openPopupWin()
 			
 				
 				
-		var url = 'http://192.168.16.104/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>';
+		var url = 'http://192.168.22.107/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>';
 		var pw = 400;		// pixels - change for your desired popup width
 		var ph = 750;		// pixels - change for your popup height
 		var left   = (screen.width  - pw)/2;
@@ -234,7 +234,7 @@ function on(){
 <script>
 function refresh(){
 	
- location.replace ("http://192.168.16.104/test240.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>","","menubar=0,resizable=1,width=950,height=750");
+ location.replace ("http://192.168.22.107/test240.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>","","menubar=0,resizable=1,width=950,height=750");
 	
 }
 </script>
@@ -243,7 +243,7 @@ function refresh(){
 <script>
 function crm(){
 	
- window.open("http://192.168.16.104/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>","","menubar=0,resizable=1,width=650,height=950");
+ window.open("http://192.168.22.107/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>","","menubar=0,resizable=1,width=650,height=950");
 	
 }
 </script>

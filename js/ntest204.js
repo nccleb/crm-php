@@ -72,7 +72,7 @@ function openPopupWin()
 			
 				
 				
-		var url = 'http://192.168.16.104/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>';
+		var url = 'http://192.168.22.107/test204.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>';
 		var pw = 400;		// pixels - change for your desired popup width
 		var ph = 750;		// pixels - change for your popup height
 		var left   = (screen.width  - pw)/2;
@@ -163,33 +163,33 @@ function showdate() {
 
 
 function myFunction2() {
-    window.open ("http://192.168.16.104//test154.php","","menubar=0,resizable=1,width=900,height=500");
+    window.open ("http://192.168.22.107//test154.php","","menubar=0,resizable=1,width=900,height=500");
 }
   
 
  
 function myFunction3() {
-   window.open ("http://192.168.16.104/test168.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=2000,height=2000");
+   window.open ("http://192.168.22.107/test168.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=2000,height=2000");
 }
 
 
 
 
 function myCalendar() {
-   window.open ("http://192.168.16.104/test300.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=2000,height=2000");
+   window.open ("http://192.168.22.107/test300.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=2000,height=2000");
 }
 
 
 
 
 function myCalendar() {
-   window.open ("http://192.168.16.104/test300.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=2000,height=2000");
+   window.open ("http://192.168.22.107/test300.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=2000,height=2000");
 }
 
 
 
 function myFunction4() {
-   window.open ("http://192.168.16.104//test237.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>","","menubar=0,resizable=1,width=1450,height=800");
+   window.open ("http://192.168.22.107//test237.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>","","menubar=0,resizable=1,width=1450,height=800");
 }
 
  
@@ -197,7 +197,7 @@ function myFunction4() {
  
 
 function collect() {
-   window.open ("http://192.168.16.104//test15.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>","","menubar=0,resizable=1,width=1450,height=800");
+   window.open ("http://192.168.22.107//test15.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>","","menubar=0,resizable=1,width=1450,height=800");
 }
 
  
@@ -286,7 +286,7 @@ function quit(){
 
 
 function search5(){
-myw=window.open ("http://192.168.16.104//search.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=1000,height=950");	
+myw=window.open ("http://192.168.22.107//search.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=1000,height=950");	
 
 	
 }
@@ -334,7 +334,7 @@ myw=window.open ("http://192.168.16.104//search.php?page=<?php echo urlencode($n
 
 function list(){
 	
- window.open ("http://192.168.16.104//test265.php","","menubar=0,resizable=1,width=1400,height=680");
+ window.open ("http://192.168.22.107//test265.php","","menubar=0,resizable=1,width=1400,height=680");
 	
 }
 
@@ -375,7 +375,7 @@ function list(){
 
 
 function crr(){
-myw=window.open ("http://192.168.16.104//test240.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>&page2=<?php echo $inc ?>","","menubar=0,resizable=1,width=1050,height=1000");	
+myw=window.open ("http://192.168.22.107//test240.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>&page2=<?php echo $inc ?>","","menubar=0,resizable=1,width=1050,height=1000");	
 
 	
 }
@@ -385,7 +385,7 @@ myw=window.open ("http://192.168.16.104//test240.php?pag=<?php echo $nam ?>&pag1
 
 
 function number(){
-myw=window.open ("http://192.168.16.104//numbersearch.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=1050,height=1000");	
+myw=window.open ("http://192.168.22.107//numbersearch.php?page=<?php echo urlencode($nam) ?>&page1=<?php echo urlencode($idf)?>&page2=<?php echo urlencode($inc)?>","","menubar=0,resizable=1,width=1050,height=1000");	
 
 	
 }
@@ -410,7 +410,7 @@ myw=window.open ("http://192.168.16.104//numbersearch.php?page=<?php echo urlenc
 
 function ImportC(){
 	
- window.open ("http://192.168.16.104//test73.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.22.107//test73.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -419,7 +419,7 @@ function ImportC(){
 
 function ExporCt(){
 	
- window.open ("http://192.168.16.104//test72.php","","menubar=0,resizable=1,width=480,height=300");
+ window.open ("http://192.168.22.107//test72.php","","menubar=0,resizable=1,width=480,height=300");
 	
 }
 
@@ -442,7 +442,7 @@ function ExporCt(){
 
 function search3(){
 	
- window.open ("http://192.168.16.104//test184.php","","menubar=0,resizable=1,width=480,height=620");
+ window.open ("http://192.168.22.107//test184.php","","menubar=0,resizable=1,width=480,height=620");
 	
 }
 
@@ -453,7 +453,7 @@ function search3(){
 
 function search4(){
 	
- window.open ("http://192.168.16.104//test189.php","","menubar=0,resizable=1,width=480,height=620");
+ window.open ("http://192.168.22.107//test189.php","","menubar=0,resizable=1,width=480,height=620");
 	
 }
 
@@ -471,7 +471,7 @@ function backup(){
 
 function history(){
 	
- window.open ("http://192.168.16.104//test29.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.22.107//test29.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
@@ -485,7 +485,7 @@ function history(){
 
 function deldriver(){
 	
- window.open ("http://192.168.16.104//test206.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.22.107//test206.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
@@ -511,7 +511,7 @@ function deldriver(){
 
 function delAll3(){
 	
- window.open ("http://192.168.16.104//test366.php","","menubar=0,resizable=1,width=480,height=350");
+ window.open ("http://192.168.22.107//test366.php","","menubar=0,resizable=1,width=480,height=350");
 	
 }
 
@@ -522,7 +522,7 @@ function delAll3(){
 
 function list81(){
 	
- window.open ("http://192.168.16.104//test360.php","","menubar=0,resizable=1,width=1400,height=680");
+ window.open ("http://192.168.22.107//test360.php","","menubar=0,resizable=1,width=1400,height=680");
 	
 }
 
@@ -552,7 +552,7 @@ function quit(){
 function update(){
 	var myw;
 	
-   myw=window.open ("http://192.168.16.104//test27.php","","menubar=0,resizable=1,width=480,height=750");
+   myw=window.open ("http://192.168.22.107//test27.php","","menubar=0,resizable=1,width=480,height=750");
 	
 }
  
@@ -563,7 +563,7 @@ function addCrm(){
 	var myw;
 	
    
-	myw=window.open ("http://192.168.16.104//test56.php?page=<?php echo $nam ?>&page1=<?php echo $idf ?>&page2=<?php echo $inc ?>","","menubar=0,resizable=1,width=450,height=800");
+	myw=window.open ("http://192.168.22.107//test56.php?page=<?php echo $nam ?>&page1=<?php echo $idf ?>&page2=<?php echo $inc ?>","","menubar=0,resizable=1,width=450,height=800");
 }
 
 
@@ -573,7 +573,7 @@ function updateCrm(){
 	var myw;
 	
    
-	myw=window.open ("http://192.168.16.104//before.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>&pag2=<?php echo $inc ?>","","menubar=0,resizable=1,width=500,height=800");
+	myw=window.open ("http://192.168.22.107//before.php?pag=<?php echo $nam ?>&pag1=<?php echo $idf ?>&pag2=<?php echo $inc ?>","","menubar=0,resizable=1,width=500,height=800");
 }
 
 

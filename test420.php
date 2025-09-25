@@ -12,7 +12,7 @@ function quit(){
 <script>
 function deldealagain(){
 	
-    window.open ("http://192.168.16.104//test419.php","","menubar=0,resizable=1,width=650,height=680");
+    window.open ("http://192.168.22.107//test419.php","","menubar=0,resizable=1,width=650,height=680");
        
    }
 
@@ -67,7 +67,7 @@ if (!preg_match("/^[0-9]*$/",$nu)) {
 	
 	
 	
-$idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+$idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();
@@ -99,7 +99,7 @@ if($test == 0  ){
 
 var r = confirm(\"Missing Entry! Press OK to retry \");
 if (r == true) {
-location.replace (\"http://192.168.16.104//test419.php?page=$naa&page1=$idf&page2=$incc\",\"menubar=0,resizable=1,width=1000,height=950\");
+location.replace (\"http://192.168.22.107//test419.php?page=$naa&page1=$idf&page2=$incc\",\"menubar=0,resizable=1,width=1000,height=950\");
 } else {
 window.close()
 }

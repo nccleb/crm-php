@@ -39,13 +39,13 @@ function quit(){
 
 
 <?php
-backup_tables('192.168.16.104','username','password','blog');
+backup_tables('192.168.22.107','username','password','blog');
 
 
 function backup_tables($host,$user,$pass,$name,$tables = '*')
 {
 	
-	$idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+	$idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
 if (mysqli_connect_errno()) {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   exit();

@@ -63,7 +63,7 @@
     
     <?php
     
-     $idr = mysqli_connect("192.168.16.104", "root", "1Sys9Admeen72", "nccleb_test");
+     $idr = mysqli_connect("192.168.22.107", "root", "1Sys9Admeen72", "nccleb_test");
     if (mysqli_connect_errno()) {
       echo "Failed to connect to MySQL: " . mysqli_connect_error();
       exit();
@@ -104,7 +104,7 @@
    
 	
 	  echo"<script>if (confirm(\"Missing Entry!\") == true) {
-  //myw=window.open (\"http://192.168.16.104//test436.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
+  //myw=window.open (\"http://192.168.22.107//test436.php?page=$os&page1=$ps&page2=$inc \",\"\",\"menubar=0,resizable=1,width=600,height=800\");
  // quit();
 } else {
  // quit();

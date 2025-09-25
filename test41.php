@@ -12,7 +12,7 @@
 <div class="jumbotron">
 <?php
 
-backup_tables('192.168.16.104', 'root', '1Sys9Admeen72', 'nccleb_test');
+backup_tables('192.168.22.107', 'root', '1Sys9Admeen72', 'nccleb_test');
 
 function backup_tables($host, $user, $pass, $name, $tables = [])
 {

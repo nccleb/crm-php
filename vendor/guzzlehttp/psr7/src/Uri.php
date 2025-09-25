@@ -19,7 +19,7 @@ class Uri implements UriInterface
      * we apply this default host when no host is given yet to form a
      * valid URI.
      */
-    const HTTP_DEFAULT_HOST = '192.168.16.104';
+    const HTTP_DEFAULT_HOST = '192.168.22.107';
 
     private static $defaultPorts = [
         'http'  => 80,

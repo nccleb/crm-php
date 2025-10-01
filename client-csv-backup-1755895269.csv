@@ -1,0 +1,4 @@
+id,con_date,nom,prenom,filename,category,source,company,job,number,inumber,email,url,business,grade,payment,card,community,telmobile,telother,city,street,apartment,building,zone,floor,near,remark,address,address_two,idf,idx,delivery_instructions,access_code,best_delivery_time,location_type,parking_notes,delivery_contact
+"1","2025-08-17 21:47:59","charbel","nahed","","","","","","81721326","","","","","regular","","","","","","hazmieh","new municipality","","rahal","","3","","","hazmieh","deir el qamar","0","1","","","Evening (6PM-10PM)","","",""
+"5","2025-08-19 01:00:17","george","nahed","","","","","","306","","","","","regular","","","","","","","","","","","0","","","St.ROCK","deir el qamar","1","0","","","","","",""
+"6","2025-08-19 01:24:12","george","nahed","","","","","","03205818","","","","","regular","","","","","","BEIRUT","St.ROCK","nahed","rahal","blue","3","municipality","","St.ROCK","deir el qamar","1","0","","","","","",""

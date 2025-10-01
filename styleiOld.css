@@ -1,0 +1,128 @@
+
+* {
+    box-sizing: border-box;
+}
+@media only screen and (max-width: 2400px) {
+    body {
+        background-color: lightblue;
+		
+	}
+	
+	
+}
+#form2{
+	color:red;
+	font-size:2vw;
+}
+
+#form{
+	color:blue;
+
+}
+
+#for{
+	color:red;
+	
+}
+
+.form{
+	color:blue;
+	
+}
+	
+
+
+
+
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+ 
+   
+   
+   
+   
+   
+   
+
+
+
+
+
+#id{
+
+color:blue;
+border-color:lightblue
+}
+#submit{
+background:Lightgrey;
+color:blue;
+	
+}
+
+#av{
+
+color:blue;
+border-color:lightblue;
+
+
+	
+	
+}
+
+#in1{
+
+ color:blue; 
+ 
+background:#A9A9A9;
+	
+}
+
+#in3{
+ 
+ color:blue; 
+  
+background:#A9A9A9;
+	
+}
+
+#in4{
+
+ color:blue; 
+ 
+background:#A9A9A9;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+

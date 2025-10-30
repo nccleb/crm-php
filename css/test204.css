@@ -1,0 +1,111 @@
+
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+    
+  .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      margin: auto;
+      min-height:200px;
+  }
+
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+ 
+
+
+
+
+
+
+#id{
+background:lightgrey;
+color:#303030;
+border-color:lightblue;
+}
+
+
+#id1{
+color:green;
+	
+}
+
+
+#form{
+	color:#303030;
+
+}
+
+#fo{
+	color:#303030;
+	
+}
+
+
+
+#zp{
+	color:red;
+	
+}
+
+
+
+
+#uv {
+ 
+  
+font-family: Verdana, Geneva, sans-serif;
+color: white;
+border-style: none;
+vertical-align: center;
+text-align: center;
+
+}
+
+
+
+#uv1 {
+
+    
+font-family: Verdana, Geneva, sans-serif;
+color: blue;
+border-style: none;
+vertical-align: center;
+text-align: center;
+
+}
+
+#av{
+
+  color:white;
+  
+
+background:#A9A9A9;
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+	
+        

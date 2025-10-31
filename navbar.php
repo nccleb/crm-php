@@ -44,7 +44,7 @@ $isDispatcherPage = ($currentPage === 'dispatcher_assignments.php');
                         <li><a class="dropdown-item" href="#" onclick="list1()"><i class="fas fa-list"></i> Simple List(Clients)</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li class="dropdown-header">Tickets</li>
-                        <li><a class="dropdown-item" href="#" onclick="list79()"><i class="fas fa-ticket-alt"></i> Simple List(Tickets)</a></li>
+                        <!--li><a class="dropdown-item" href="#" onclick="list79()"><i class="fas fa-ticket-alt"></i> Simple List(Tickets)</a></li-->
                         <li><a class="dropdown-item" href="#" onclick="tick79()"><i class="fas fa-folder-open"></i> Open Tickets</a></li>
                         <li><a class="dropdown-item" href="#" onclick="incidents()"><i class="fas fa-info-circle"></i> Tickets Details</a></li>
                         <li><a class="dropdown-item" href="#" onclick="incidents2()"><i class="fas fa-chart-pie"></i> Statistics(Tickets)</a></li>

@@ -236,7 +236,7 @@ while($row=$result->fetch_assoc()){
         $community=$row['community'];
 			  $address=$row['address'];
 			  $address2=$row['address_two'];
-			  $url=$row['url'];
+			  $url=$row['google_maps_url'];
 			  $idf=$row['idf'];
 		     $city=$row['city'];
 			  $street=$row['street'];
@@ -445,7 +445,7 @@ function newassignment(){
 
 <label for="exampleFormControlInput1" class="form-label">Grade</label>
 <select class="form-control" name="grad" id="grad">
-<option selected></option>
+<option selected> <?php echo $grade?>      </option>
 <option>regular</option>
 <option>gold</option>
 <option>platinum</option>
@@ -454,7 +454,7 @@ function newassignment(){
 
 <label for="exampleFormControlInput1" class="form-label">Type of payment</label>
 <select class="form-control" name="pay" id="pay">
-<option></option>
+<option><?php echo $pay ?></option>
 <option>Cash</option>
 <option>Visa</option>
 </select><p></br>
@@ -462,7 +462,7 @@ function newassignment(){
 <div class="mb-3 printPageButton">
   <label for="exampleFormControlInput1" class="form-label">Loyalty card</label>
  <select class="form-control" name="loy" id="loy">
-<option></option>
+<option><?php echo $loy?></option>
 <option>Yes</option>
 <option>No</option>
 </select>
@@ -644,8 +644,8 @@ for ($i=1;$i<=$lig["arr"];$i++){
    <td>
 
 <div id="printDiv">
-   <input class="whatsappbutton no-print" name="upload" type="submit" value="U" id="form">
-   <input class="whatsappbutton no-print" name="upload" type="submit" value="Update" id="form">
+   <!--input class="whatsappbutton no-print" name="upload" type="submit" value="U" id="form">
+   <input class="whatsappbutton no-print" name="upload" type="submit" value="Update" id="form"-->
    
    <!-- Modified print button that prints only address -->
    <button type="button" id="form" class="whatsappbutton no-print" onclick="printAddressOnly()">Print Address</button>

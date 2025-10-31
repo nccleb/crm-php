@@ -59,7 +59,7 @@ if (mysqli_connect_errno()) {
 			  $loy=$row['card'];
 			  $address=$row['address'];
 			  $address2=$row['address_two'];
-			  $url=$row['url'];
+			  $url=$row['google_maps_url'];
 			  $idf=$row['idf'];
 			  $city=$row['city'];
 			  $street=$row['street'];
@@ -380,7 +380,7 @@ fieldval = document.getElementById("nea").value;
 <input class="form-control" value="<?php echo $email?>" type="text" name="em" id="email" size="32" >
 </div><br>
 <div class="mb-3 "  >
- <label for="exampleFormControlInput1" class="form-label">URL</label>
+ <label for="exampleFormControlInput1" class="form-label">Google Maps URL</label>
 <input class="form-control" type="text" value="<?php echo $url?>" name="ur" id="url" size="32" >
 </div><br>
 <div class="mb-3 "  >
@@ -393,16 +393,16 @@ fieldval = document.getElementById("nea").value;
 </div><br>
 <div class="mb-3 "  >
  <label for="exampleFormControlInput1" class="form-label">Payment</label>
- <input class="form-control" type="text" name="pay"  id="pay" size="33" >
+ <input   value="<?php echo $pay?>"         class="form-control" type="text" name="pay"  id="pay" size="33" >
 </div><br>
 <div class="mb-3 "  >
  <label for="exampleFormControlInput1" class="form-label">Loyalty card   </label>
 <input class="form-control" type="text" name="loy"  id="loy" size="33" >
 </div><br>
-<div class="mb-3 "  >
+<!--div class="mb-3 "  >
  <label for="exampleFormControlInput1" class="form-label">Dispatcher</label>
 <input class="form-control" type="text" name="driver"  id="driver" size="33" >
-</div><br>
+</div><br-->
 
 <label for="exampleFormControlInput1" class="form-label">Best Delivery Time  </label>
 <select class="form-control" name="delti" id="delti"   >

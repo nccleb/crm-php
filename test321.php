@@ -108,6 +108,26 @@ $_SESSION["os"] = $os;
       transform: translateY(-2px);
     }
     
+    .btn-print {
+      background: #007bff;
+      color: white;
+    }
+    
+    .btn-print:hover {
+      background: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+    
+    .btn-success {
+      background: #28a745;
+      color: white;
+    }
+    
+    .btn-success:hover {
+      background: #218838;
+    }
+    
     .table-wrapper {
       overflow-x: auto;
       border-radius: 8px;
@@ -246,6 +266,80 @@ $_SESSION["os"] = $os;
       cursor: not-allowed;
     }
     
+    /* Print Styles */
+    @media print {
+      body {
+        background: white !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      
+      .container {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 10px !important;
+      }
+      
+      .header-section, .stats, .pagination, .action-buttons, .controls {
+        display: none !important;
+      }
+      
+      .table-wrapper {
+        border: none !important;
+        overflow: visible !important;
+      }
+      
+      .table {
+        font-size: 10px !important;
+      }
+      
+      .table th {
+        background: #f8f9fa !important;
+        color: #2c3e50 !important;
+        border-bottom: 2px solid #dee2e6 !important;
+      }
+      
+      .table td {
+        border-bottom: 1px solid #dee2e6 !important;
+      }
+      
+      .badge {
+        border: 1px solid #ccc !important;
+      }
+      
+      /* Ensure all rows are visible when printing */
+      .table tbody tr {
+        display: table-row !important;
+        break-inside: avoid;
+      }
+      
+      /* Print header */
+      .print-header {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+      }
+      
+      .print-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0;
+      }
+      
+      .print-date {
+        font-size: 14px;
+        color: #666;
+        margin: 5px 0 0 0;
+      }
+    }
+    
+    .print-header {
+      display: none;
+    }
+
     /* Import Modal Styles */
     .modal {
       display: none;
@@ -263,6 +357,11 @@ $_SESSION["os"] = $os;
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
     }
     
     .modal-content {
@@ -475,6 +574,208 @@ $_SESSION["os"] = $os;
       border: 1px solid #f5c6cb;
     }
     
+    /* Edit Modal Styles */
+    .edit-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.3s;
+    }
+    
+    .edit-modal-content {
+      background: white;
+      margin: 2% auto;
+      padding: 0;
+      border-radius: 20px;
+      width: 95%;
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      animation: slideUp 0.3s;
+    }
+    
+    .edit-modal-header {
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      color: white;
+      padding: 25px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .edit-modal-header h2 {
+      margin: 0;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .edit-close {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+    
+    .edit-close:hover {
+      transform: scale(1.2) rotate(90deg);
+    }
+    
+    .edit-modal-body {
+      padding: 30px;
+      max-height: calc(90vh - 180px);
+      overflow-y: auto;
+    }
+    
+    .edit-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .form-group label:after {
+      content: ':';
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s;
+      background: white;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+    }
+    
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .form-section {
+      grid-column: 1 / -1;
+      margin: 20px 0 10px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #007bff;
+      color: #007bff;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    .edit-modal-footer {
+      padding: 20px 30px;
+      background: #f8f9fa;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 15px;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    
+    /* Responsive design for edit modal */
+    @media (max-width: 768px) {
+      .edit-modal-content {
+        margin: 5% auto;
+        width: 98%;
+        border-radius: 15px;
+      }
+      
+      .edit-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group.full-width {
+        grid-column: 1;
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+    }
+    
+    .btn-icon {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+      background: white;
+      border: 2px solid #e0e0e0;
+    }
+    
+    .btn-icon:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    
+    .btn-edit {
+      color: #0066cc;
+      border-color: #0066cc;
+    }
+    
+    .btn-edit:hover {
+      background: #0066cc;
+      color: white;
+    }
+    
+    .btn-delete {
+      color: #dc3545;
+      border-color: #dc3545;
+    }
+    
+    .btn-delete:hover {
+      background: #dc3545;
+      color: white;
+    }
+    
     .stats {
       display: flex;
       gap: 20px;
@@ -567,7 +868,399 @@ $_SESSION["os"] = $os;
       setupSearch();
       setupSort();
       setupPagination();
+      setupActionButtons();
       updateDisplay();
+    }
+    
+    function setupActionButtons() {
+      const tbody = document.querySelector('.table tbody');
+      if (!tbody) {
+        console.error('Table body not found!');
+        return;
+      }
+      
+      tbody.addEventListener('click', function(e) {
+        const target = e.target;
+        const button = target.closest('button');
+        
+        if (!button) return;
+        
+        if (button.classList.contains('btn-edit')) {
+          const id = button.getAttribute('data-id');
+          editRow(button, id);
+        } else if (button.classList.contains('btn-delete')) {
+          const id = button.getAttribute('data-id');
+          deleteRow(id);
+        }
+      });
+    }
+    
+    function editRow(button, id) {
+    // Find the row and get current data
+    const row = button.closest('tr');
+    const cells = row.cells;
+    
+    // Get all headers for mapping
+    const headers = Array.from(document.querySelectorAll('.table thead th')).map(th => 
+        th.textContent.trim().toLowerCase()
+    );
+    
+    // Map header names to database field names
+    const headerToFieldMap = {
+        'first name': 'nom',
+        'last name': 'prenom',
+        'category': 'category',
+        'source': 'source',
+        'grade': 'grade',
+        'payment': 'payment',
+        'card': 'card',
+        'community': 'community',
+        'company': 'company',
+        'job': 'job',
+        'number': 'number',
+        'number 2': 'inumber',
+        'tel mobile': 'telmobile',
+        'tel other': 'telother',
+        'email': 'email',
+        'google maps': 'google_maps_url',
+        'business': 'business',
+        'city': 'city',
+        'street': 'street',
+        'floor': 'floor',
+        'apartment': 'apartment',
+        'building': 'building',
+        'zone': 'zone',
+        'near': 'near',
+        'notes': 'remark',
+        'address': 'address',
+        'address 2': 'address_two',
+        'delivery time': 'best_delivery_time'
+    };
+    
+    // Collect current data
+    const currentData = { id: id };
+    for (let i = 1; i < cells.length - 1; i++) {
+        const headerName = headers[i];
+        const fieldName = headerToFieldMap[headerName];
+        if (fieldName) {
+            let text = cells[i].textContent.trim();
+            
+            // Special handling for Google Maps column
+            if (fieldName === 'google_maps_url') {
+                // Check if there's a link and get the actual URL
+                const link = cells[i].querySelector('a');
+                if (link) {
+                    text = link.getAttribute('href') || '';
+                }
+            }
+            
+            // Special handling for Grade column - get the actual grade value from data attribute
+            if (fieldName === 'grade') {
+                const badge = cells[i].querySelector('.badge');
+                if (badge) {
+                    // Get the actual grade value from a data attribute or text content
+                    const badgeClass = badge.className;
+                    if (badgeClass.includes('badge-vip')) {
+                        text = 'vip';
+                    } else if (badgeClass.includes('badge-regular')) {
+                        // Check if it's showing "Regular" or has a specific grade
+                        const badgeText = badge.textContent.trim().toLowerCase();
+                        if (badgeText === 'regular') {
+                            text = 'regular';
+                        } else {
+                            text = badgeText;
+                        }
+                    } else if (badgeClass.includes('badge-none')) {
+                        text = 'regular'; // Default to regular if none
+                    }
+                }
+            }
+            
+            currentData[fieldName] = text;
+        }
+    }
+    
+    openEditModal(currentData);
+}
+    function openEditModal(data) {
+      // Create modal HTML
+      const modalHTML = `
+          <div id="editModal" class="edit-modal">
+              <div class="edit-modal-content">
+                  <div class="edit-modal-header">
+                      <h2>✏️ Edit Client #${data.id}</h2>
+                      <span class="edit-close" onclick="closeEditModal()">&times;</span>
+                  </div>
+                  <div class="edit-modal-body">
+                      <form id="editForm" class="edit-form">
+                          <div class="form-section">Personal Information</div>
+                          
+                          <div class="form-group">
+                              <label>First Name</label>
+                              <input type="text" name="nom" value="${data.nom || ''}" required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Last Name</label>
+                              <input type="text" name="prenom" value="${data.prenom || ''}" required>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Category</label>
+                              <input type="text" name="category" value="${data.category || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Source</label>
+                              <input type="text" name="source" value="${data.source || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Grade</label>
+                              <select name="grade">
+                                  <option value="regular" ${data.grade === 'regular' ? 'selected' : ''}>Regular</option>
+                                  <option value="vip" ${data.grade === 'vip' ? 'selected' : ''}>VIP</option>
+                                  <option value="premium" ${data.grade === 'premium' ? 'selected' : ''}>Premium</option>
+                              </select>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Payment</label>
+                              <select name="payment">
+                                  <option value="cash" ${data.payment === 'cash' ? 'selected' : ''}>Cash</option>
+                                  <option value="credit" ${data.payment === 'credit' ? 'selected' : ''}>Credit</option>
+                                  <option value="check" ${data.payment === 'check' ? 'selected' : ''}>Check</option>
+                                  <option value="transfer" ${data.payment === 'transfer' ? 'selected' : ''}>Transfer</option>
+                                  <option value="" ${!data.payment ? 'selected' : ''}>Not Specified</option>
+                              </select>
+                          </div>
+                          
+                          <div class="form-section">Contact Information</div>
+                          
+                          <div class="form-group">
+                              <label>Mobile Number</label>
+                              <input type="tel" name="telmobile" value="${data.telmobile || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Other Phone</label>
+                              <input type="tel" name="telother" value="${data.telother || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Email</label>
+                              <input type="email" name="email" value="${data.email || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Google Maps URL</label>
+                              <input type="url" name="google_maps_url" value="${data.google_maps_url || ''}" placeholder="https://maps.google.com/?q=...">
+                          </div>
+                          
+                          <div class="form-section">Business Information</div>
+                          
+                          <div class="form-group">
+                              <label>Company</label>
+                              <input type="text" name="company" value="${data.company || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Job Title</label>
+                              <input type="text" name="job" value="${data.job || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Business Type</label>
+                              <input type="text" name="business" value="${data.business || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Community</label>
+                              <input type="text" name="community" value="${data.community || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Loyalty Card</label>
+                              <input type="text" name="card" value="${data.card || ''}">
+                          </div>
+                          
+                          <div class="form-section">Address Information</div>
+                          
+                          <div class="form-group">
+                              <label>City</label>
+                              <input type="text" name="city" value="${data.city || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Street</label>
+                              <input type="text" name="street" value="${data.street || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Zone</label>
+                              <input type="text" name="zone" value="${data.zone || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Building</label>
+                              <input type="text" name="building" value="${data.building || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Floor</label>
+                              <input type="text" name="floor" value="${data.floor || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Apartment</label>
+                              <input type="text" name="apartment" value="${data.apartment || ''}">
+                          </div>
+                          
+                          <div class="form-group full-width">
+                              <label>Full Address</label>
+                              <textarea name="address">${data.address || ''}</textarea>
+                          </div>
+                          
+                          <div class="form-group full-width">
+                              <label>Address Line 2</label>
+                              <textarea name="address_two">${data.address_two || ''}</textarea>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Near Landmark</label>
+                              <input type="text" name="near" value="${data.near || ''}">
+                          </div>
+                          
+                          <div class="form-section">Additional Information</div>
+                          
+                          <div class="form-group full-width">
+                              <label>Notes & Remarks</label>
+                              <textarea name="remark" placeholder="Enter any additional notes or remarks...">${data.remark || ''}</textarea>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Best Delivery Time</label>
+                              <input type="text" name="best_delivery_time" value="${data.best_delivery_time || ''}" placeholder="e.g., 9AM-5PM, Weekdays">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Primary Number</label>
+                              <input type="text" name="number" value="${data.number || ''}">
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Secondary Number</label>
+                              <input type="text" name="inumber" value="${data.inumber || ''}">
+                          </div>
+                      </form>
+                  </div>
+                  <div class="edit-modal-footer">
+                      <button class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                      <button class="btn btn-success" onclick="saveEditForm(${data.id})">💾 Save Changes</button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      // Add modal to page
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+      
+      // Show modal with animation
+      setTimeout(() => {
+          document.getElementById('editModal').style.display = 'block';
+      }, 10);
+      
+      // Focus on first input
+      setTimeout(() => {
+          const firstInput = document.querySelector('#editForm input, #editForm select, #editForm textarea');
+          if (firstInput) firstInput.focus();
+      }, 100);
+    }
+    
+    function closeEditModal() {
+      const modal = document.getElementById('editModal');
+      if (modal) {
+          modal.style.animation = 'fadeOut 0.3s';
+          setTimeout(() => {
+              modal.remove();
+          }, 300);
+      }
+    }
+    
+    function saveEditForm(id) {
+      const form = document.getElementById('editForm');
+      const formData = new FormData(form);
+      const data = { id: id };
+      
+      // Convert FormData to object
+      for (let [key, value] of formData.entries()) {
+          data[key] = value;
+      }
+      
+      // Show loading state
+      const saveBtn = document.querySelector('.edit-modal-footer .btn-success');
+      const originalText = saveBtn.innerHTML;
+      saveBtn.innerHTML = '⏳ Saving...';
+      saveBtn.classList.add('loading');
+      
+      // Send update request
+      fetch('update_handler.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+              action: 'update',
+              data: JSON.stringify(data)
+          })
+      })
+      .then(response => response.json())
+      .then(result => {
+          if (result.success) {
+              // Show success message
+              saveBtn.innerHTML = '✅ Saved!';
+              setTimeout(() => {
+                  closeEditModal();
+                  refresh();
+              }, 1000);
+          } else {
+              alert('Error: ' + result.message);
+              saveBtn.innerHTML = originalText;
+              saveBtn.classList.remove('loading');
+          }
+      })
+      .catch(error => {
+          alert('Network error: ' + error.message);
+          saveBtn.innerHTML = originalText;
+          saveBtn.classList.remove('loading');
+      });
+    }
+    
+    function deleteRow(id) {
+      if (!confirm('Are you sure you want to delete this record? This action cannot be undone.')) {
+        return;
+      }
+      
+      const formData = new FormData();
+      formData.append('action', 'delete');
+      formData.append('id', id);
+      
+      fetch('update_handler.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Record deleted successfully');
+          refresh();
+        } else {
+          alert('Error: ' + data.message);
+        }
+      })
+      .catch(error => {
+        alert('Network error: ' + error.message);
+      });
     }
     
     function setupSearch() {
@@ -642,7 +1335,7 @@ $_SESSION["os"] = $os;
       if (filteredRows.length === 0) {
         const tr = document.createElement('tr');
         const td = document.createElement('td');
-        td.colSpan = 29;
+        td.colSpan = 30;
         td.className = 'no-results';
         td.textContent = 'No results found';
         tr.appendChild(td);
@@ -740,13 +1433,45 @@ $_SESSION["os"] = $os;
     
     function exportToCSV() {
       const filteredRows = getFilteredRows();
-      const headers = Array.from(document.querySelectorAll('.table th')).map(th => th.textContent.trim());
+      
+      // Get headers excluding the "Actions" column (last column)
+      const headers = Array.from(document.querySelectorAll('.table th'))
+        .slice(0, -1) // Remove the last column (Actions)
+        .map(th => th.textContent.trim());
       
       let csv = headers.join(',') + '\n';
       
       filteredRows.forEach(row => {
-        const values = Array.from(row.cells).map(cell => {
+        // Get all cells except the last one (Actions column)
+        const cells = Array.from(row.cells).slice(0, -1);
+        const values = cells.map((cell, index) => {
           let text = cell.textContent.trim();
+          
+          // Get header name for this column
+          const headerName = headers[index].toLowerCase();
+          
+          // Add ="value" format for phone number columns to preserve leading zeros
+          if (headerName.includes('number') || headerName.includes('tel') || headerName.includes('mobile')) {
+            if (text && text !== '-' && text !== '') {
+              // Remove any non-numeric characters except +
+              const cleanNumber = text.replace(/[^\d+]/g, '');
+              if (cleanNumber) {
+                // Use ="number" format which Excel recognizes as text
+                return `="${cleanNumber}"`;
+              }
+            }
+          }
+          
+          // Handle badge HTML content for grade column
+          if (headerName.includes('grade')) {
+            // Extract text from badge if it exists
+            const badge = cell.querySelector('.badge');
+            if (badge) {
+              text = badge.textContent.trim();
+            }
+          }
+          
+          // Regular CSV escaping for other fields
           if (text.includes(',') || text.includes('"') || text.includes('\n')) {
             text = '"' + text.replace(/"/g, '""') + '"';
           }
@@ -755,13 +1480,37 @@ $_SESSION["os"] = $os;
         csv += values.join(',') + '\n';
       });
       
-      const blob = new Blob([csv], { type: 'text/csv' });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       a.download = 'clients_export_' + new Date().toISOString().split('T')[0] + '.csv';
       a.click();
       window.URL.revokeObjectURL(url);
+    }
+    
+    function printPage() {
+      // Create print header
+      const printHeader = document.createElement('div');
+      printHeader.className = 'print-header';
+      printHeader.innerHTML = `
+        <h1 class="print-title">Client Database Report</h1>
+        <p class="print-date">Generated on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</p>
+        <p class="print-info">Total Records: ${document.getElementById('totalCount').textContent} | Filtered Records: ${document.getElementById('visibleCount').textContent}</p>
+      `;
+      
+      document.body.insertBefore(printHeader, document.body.firstChild);
+      
+      // Trigger print
+      window.print();
+      
+      // Remove print header after printing
+      setTimeout(() => {
+        const header = document.querySelector('.print-header');
+        if (header) {
+          header.remove();
+        }
+      }, 100);
     }
     
     function quit() {
@@ -813,7 +1562,6 @@ $_SESSION["os"] = $os;
     }
     
     function parseCSV(text) {
-      // Proper CSV parsing that handles quotes and multiline fields
       const rows = [];
       let currentRow = [];
       let currentField = '';
@@ -825,19 +1573,15 @@ $_SESSION["os"] = $os;
         
         if (char === '"') {
           if (insideQuotes && nextChar === '"') {
-            // Escaped quote
             currentField += '"';
-            i++; // Skip next quote
+            i++;
           } else {
-            // Toggle quote state
             insideQuotes = !insideQuotes;
           }
         } else if (char === ',' && !insideQuotes) {
-          // End of field
           currentRow.push(currentField.trim());
           currentField = '';
         } else if ((char === '\n' || char === '\r') && !insideQuotes) {
-          // End of row
           if (currentField || currentRow.length > 0) {
             currentRow.push(currentField.trim());
             if (currentRow.some(field => field !== '')) {
@@ -846,17 +1590,14 @@ $_SESSION["os"] = $os;
             currentRow = [];
             currentField = '';
           }
-          // Skip \r\n combination
           if (char === '\r' && nextChar === '\n') {
             i++;
           }
         } else {
-          // Regular character
           currentField += char;
         }
       }
       
-      // Add last field and row if exists
       if (currentField || currentRow.length > 0) {
         currentRow.push(currentField.trim());
         if (currentRow.some(field => field !== '')) {
@@ -875,12 +1616,19 @@ $_SESSION["os"] = $os;
       for (let i = 1; i < rows.length; i++) {
         const row = {};
         csvHeaders.forEach((header, index) => {
-          row[header] = rows[i][index] || '';
+          let value = rows[i][index] || '';
+          
+          if (value.startsWith('="') && value.endsWith('"')) {
+            value = value.substring(2, value.length - 1);
+          } else if (value.startsWith('=') && value.includes('"')) {
+            value = value.replace(/^=["']?|["']?$/g, '');
+          }
+          
+          row[header] = value;
         });
         csvData.push(row);
       }
       
-      console.log('Parsed CSV data:', csvData);
       showMappingSection();
     }
     
@@ -891,7 +1639,8 @@ $_SESSION["os"] = $os;
       const dbFields = [
         'nom', 'prenom', 'category', 'source', 'grade', 'payment', 'card', 
         'community', 'company', 'job', 'number', 'inumber', 'telmobile', 
-        'telother', 'email', 'url', 'business', 'city', 'street', 'floor', 
+        'telother', 'email', 'google_maps_url',
+        'business', 'city', 'street', 'floor', 
         'apartment', 'building', 'zone', 'near', 'remark', 'address', 
         'address_two', 'best_delivery_time'
       ];
@@ -915,6 +1664,10 @@ $_SESSION["os"] = $os;
         select.appendChild(optionNone);
         
         csvHeaders.forEach(header => {
+          if (header.toLowerCase().includes('action')) {
+            return;
+          }
+          
           const option = document.createElement('option');
           option.value = header;
           option.textContent = header;
@@ -942,12 +1695,14 @@ $_SESSION["os"] = $os;
       const previewHeader = document.getElementById('previewHeader');
       const previewBody = document.getElementById('previewBody');
       
-      // Update header
+      // Update header (exclude any action-related columns)
       previewHeader.innerHTML = '';
       csvHeaders.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        previewHeader.appendChild(th);
+        if (!header.toLowerCase().includes('action')) {
+          const th = document.createElement('th');
+          th.textContent = header;
+          previewHeader.appendChild(th);
+        }
       });
       
       // Update body
@@ -957,9 +1712,11 @@ $_SESSION["os"] = $os;
       previewData.forEach(row => {
         const tr = document.createElement('tr');
         csvHeaders.forEach(header => {
-          const td = document.createElement('td');
-          td.textContent = row[header] || '-';
-          tr.appendChild(td);
+          if (!header.toLowerCase().includes('action')) {
+            const td = document.createElement('td');
+            td.textContent = row[header] || '-';
+            tr.appendChild(td);
+          }
         });
         previewBody.appendChild(tr);
       });
@@ -972,7 +1729,8 @@ $_SESSION["os"] = $os;
       const dbFields = [
         'nom', 'prenom', 'category', 'source', 'grade', 'payment', 'card', 
         'community', 'company', 'job', 'number', 'inumber', 'telmobile', 
-        'telother', 'email', 'url', 'business', 'city', 'street', 'floor', 
+        'telother', 'email', 'google_maps_url',
+        'business', 'city', 'street', 'floor', 
         'apartment', 'building', 'zone', 'near', 'remark', 'address', 
         'address_two', 'best_delivery_time'
       ];
@@ -1058,6 +1816,20 @@ $_SESSION["os"] = $os;
         }
       });
     }
+    
+    // Close modal when clicking outside
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('edit-modal')) {
+        closeEditModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('editModal')) {
+        closeEditModal();
+      }
+    });
   </script>
 </head>
 
@@ -1075,6 +1847,7 @@ $_SESSION["os"] = $os;
         </select>
         <button class="btn btn-primary" onclick="openImportModal()">📤 Import CSV</button>
         <button class="btn btn-primary" onclick="exportToCSV()">📥 Export CSV</button>
+        <!--button class="btn btn-print" onclick="printPage()">🖨️ Print</button-->
         <button class="btn btn-secondary" onclick="refresh()">🔄 Reload</button>
         <button class="btn btn-secondary" onclick="quit()">✖ Quit</button>
       </div>
@@ -1088,7 +1861,7 @@ $_SESSION["os"] = $os;
       <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
         <h3 id="totalCount">
           <?php 
-          $idr_count = mysqli_connect("localhost", "root", "1Sys9Admeen72", "nccleb_test");
+          $idr_count = mysqli_connect("192.168.16.103", "root", "1Sys9Admeen72", "nccleb_test");
           if ($idr_count) {
             $result_count = mysqli_query($idr_count, "SELECT COUNT(*) as total FROM client");
             if ($result_count) {
@@ -1123,7 +1896,7 @@ $_SESSION["os"] = $os;
             <th>Tel Mobile</th>
             <th>Tel Other</th>
             <th>Email</th>
-            <th>URL</th>
+            <th>Google Maps</th>
             <th>Business</th>
             <th class="sortable">City</th>
             <th>Street</th>
@@ -1136,11 +1909,12 @@ $_SESSION["os"] = $os;
             <th>Address</th>
             <th>Address 2</th>
             <th>Delivery Time</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <?php 
-          $host = "localhost";
+          $host = "192.168.16.103";
           $user = "root";
           $pass = "1Sys9Admeen72";
           $db = "nccleb_test";
@@ -1148,7 +1922,7 @@ $_SESSION["os"] = $os;
           $idr = mysqli_connect($host, $user, $pass, $db);
           
           if (mysqli_connect_errno()) {
-            echo "<tr><td colspan='29' style='color:red; padding:20px;'>";
+            echo "<tr><td colspan='30' style='color:red; padding:20px;'>";
             echo "Failed to connect to MySQL at $host: " . mysqli_connect_error();
             echo "</td></tr>";
             exit();
@@ -1157,7 +1931,7 @@ $_SESSION["os"] = $os;
           $result = mysqli_query($idr, "SELECT * FROM client ORDER BY id DESC");
           
           if (!$result) {
-            echo "<tr><td colspan='29' style='color:red; padding:20px;'>Query failed: " . mysqli_error($idr) . "</td></tr>";
+            echo "<tr><td colspan='30' style='color:red; padding:20px;'>Query failed: " . mysqli_error($idr) . "</td></tr>";
             mysqli_close($idr);
             exit();
           }
@@ -1165,7 +1939,7 @@ $_SESSION["os"] = $os;
           $count = mysqli_num_rows($result);
           
           if ($count == 0) {
-            echo "<tr><td colspan='29' style='padding:20px; text-align:center;'>No records found in database</td></tr>";
+            echo "<tr><td colspan='30' style='padding:20px; text-align:center;'>No records found in database</td></tr>";
           }
           
           while($row = mysqli_fetch_assoc($result)){ 
@@ -1181,7 +1955,7 @@ $_SESSION["os"] = $os;
             $number = htmlspecialchars($row['number'] ?? '');
             $inumber = htmlspecialchars($row['inumber'] ?? ''); 
             $email = htmlspecialchars($row['email'] ?? ''); 
-            $url = htmlspecialchars($row['url'] ?? '');
+            $google_maps_url = htmlspecialchars($row['google_maps_url'] ?? '');
             $business = htmlspecialchars($row['business'] ?? ''); 
             $telmobile = htmlspecialchars($row['telmobile'] ?? ''); 
             $telother = htmlspecialchars($row['telother'] ?? '');
@@ -1207,6 +1981,12 @@ $_SESSION["os"] = $os;
             } else {
               $gradeBadge = '<span class="badge badge-none">Regular</span>';
             }
+
+            // Make Google Maps URL clickable
+            $google_maps_display = $google_maps_url;
+            if (!empty($google_maps_url)) {
+                $google_maps_display = '<a href="' . $google_maps_url . '" target="_blank" title="Open in Google Maps" style="color: #007bff; text-decoration: none; font-weight: 500;">📍 View Map</a>';
+            }
             
             echo "<tr>";
             echo "<td><strong>$id</strong></td>";
@@ -1225,7 +2005,7 @@ $_SESSION["os"] = $os;
             echo "<td>$telmobile</td>";
             echo "<td>$telother</td>";
             echo "<td>$email</td>";
-            echo "<td>$url</td>";
+            echo "<td>$google_maps_display</td>";
             echo "<td>$business</td>";
             echo "<td>$city</td>";
             echo "<td>$street</td>";
@@ -1238,6 +2018,10 @@ $_SESSION["os"] = $os;
             echo "<td>$address</td>";
             echo "<td>$address_two</td>";
             echo "<td>$delti</td>";
+            echo "<td class='action-buttons'>";
+            echo "<button class='btn-icon btn-edit' data-id='$id' title='Edit'>✏️</button>";
+            echo "<button class='btn-icon btn-delete' data-id='$id' title='Delete'>🗑️</button>";
+            echo "</td>";
             echo "</tr>";
           }
           
